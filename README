@@ -1,0 +1,1 @@
+This version of VIC replaces the baseflow routing in runoff.c with a recharge calculation after Niu et al. 2007. This recharge then feeds into the groundwater model AMBHAS that will calculate groundwater flow and baseflow. 

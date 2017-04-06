@@ -1,0 +1,23 @@
+name: vic_test_env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.5
+  - numpy
+  - scipy
+  - pytest
+  - netCDF4
+  - cffi
+  - pandas
+  - configobj
+  - xarray
+  - bottleneck
+  - matplotlib
+  - seaborn
+  - psutil
+  - pip:
+    - git+https://github.com/UW-Hydro/tonic.git
+    - engarde
+    - pytest-faulthandler
+    - pytest-xdist
+    - gprof2dot
