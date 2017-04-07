@@ -104,12 +104,9 @@
 	 * Function prototypes for the groundwater model
 	 *  
 	 *****************************************************************************/
-	int GW_initialise(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts);
+	
 	int calculateGwInit(const gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *p);
 	float calculateGwFlow(const gw_global_data_struct *g, const gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts, int n_time_step);//returns the global balance
-	//calculate SS GW flow
-	int calculateGwSS(const gw_global_data_struct *g, const gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts);
-	int calculateDynamicGwSS(const gw_global_data_struct *g,  gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts);
 	//int getGWData(gw_data_struct *p_gw_data );
 	int GW_read_data(const gw_global_data_struct *g, gw_data_struct *d);
 	int GW_read_h_ini(const gw_global_data_struct *g, gw_param_struct *p);

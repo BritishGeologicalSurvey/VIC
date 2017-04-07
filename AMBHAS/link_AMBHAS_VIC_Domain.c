@@ -1,6 +1,6 @@
 /******************************************************************************
 * link_AMBHAS_VIC_Domain.c
-* find nrow ncol for each VIC cell and find VIC ncell for each nrow/ncol 
+* find AMBHAS nrow ncol for each VIC cell and find VIC ncell for each AMBHAS nrow/ncol 
 * 
 *****************************************************************************/
 

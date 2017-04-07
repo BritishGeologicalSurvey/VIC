@@ -1,5 +1,5 @@
-#include "GW_global_vars.h"
-#include <vic_def.h>
+#include "Link_AMBHAS_VIC.h"
+//#include <vic_def.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "netcdf.h"
@@ -11,7 +11,7 @@
 * Function to be called before the time loop
 *****************************************************************************/
 
-int GW_initialise(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts){
+int GW_initialise(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts, domain_struct *vic_domain){
 	int count; int crow; int ccol; int ctime;
 	int debug=0;
 	dmy_struct         *dmy = NULL;//to be passed into vic_image_run
@@ -77,16 +77,35 @@ int GW_initialise(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *
 		}
 	}
 	count=0;
+
+	//If option RESTART=0 set the initial h to DEM-10m
+	if(g->RESTART==0){
+		for (crow=0; crow<d->NROW; crow++){
+			for (ccol=0; ccol<d->NCOL; ccol ++){
+				p->h[crow][ccol]=d->dem[crow][ccol]-10.0;
+			
+			}
+			
+		}
+	}
+
 	
 	for(ctime=0;ctime<1;ctime++){
 
 		/** Do VIC run for the first time step **/
-      	 	 // read forcing data
-     		 vic_force();
+      	 	// read forcing data
+     		vic_force();
+
+		//stores the initial guess of the water table from AMBHAS into VIC
+		get_AMBHAS_Data_Into_VIC(d, p, &vic_domain, ctime);
 
        		// run vic over the domain
         	vic_image_run(&(dmy[ctime]));
 
+    		//write recharge calculated in VIC into AMBHAS
+    		get_VIC_Data_Into_AMBHAS(d, &vic_domain);
+
+		//read pumping data		
 		GW_read_Ts(g, d, ctime);
 
 		if (debug==1){

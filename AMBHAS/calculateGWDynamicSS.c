@@ -3,15 +3,15 @@
 * This function calculates a dynamic steady state over the period as specified
 * in the gw_global_parameters.dat
 *****************************************************************************/
-#include "GW_global_vars.h"
-#include <vic_def.h>
+#include "Link_AMBHAS_VIC.h"
+//#include <vic_def.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "netcdf.h"
 #include <string.h>
 #include <math.h>
 
-int calculateDynamicGwSS(const gw_global_data_struct *g,  gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts){
+int calculateDynamicGwSS(const gw_global_data_struct *g,  gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts, domain_struct *vic_domain){
 
 //printf("function is called \n");
 	float balance;
@@ -37,14 +37,18 @@ int calculateDynamicGwSS(const gw_global_data_struct *g,  gw_data_struct *d, gw_
 
 			/** Do VIC run for the first time step **/
 	      	 	 // read forcing data
-	     		 vic_force();
+	     		vic_force();
 
 	       		// run vic over the domain
 			vic_image_run(&(dmy[ctime]));
 
+			get_VIC_Data_Into_AMBHAS(d, vic_domain);
+
 			GW_read_Ts(g, d, ctime);
 
 			balance=calculateGwFlow(g,d, p, ts, ctime);
+
+			get_AMBHAS_Data_Into_VIC(d, p, vic_domain, ctime);
 
 		}
 	

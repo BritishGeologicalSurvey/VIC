@@ -51,8 +51,6 @@ vic_image_run(dmy_struct *dmy_current)
     size_t                     i;
     timer_struct               timer;
 
-    //JS: add a pointer to the locations that will be passed into vic_run, surface_fluxes, and runoff
-    //location_struct *p_locations;
 
     // Print the current timestep info before running vic_run
     sprint_dmy(dmy_str, dmy_current);

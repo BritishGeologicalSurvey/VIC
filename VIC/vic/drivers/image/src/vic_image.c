@@ -23,7 +23,11 @@
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *****************************************************************************/
+
+/************************ AMBHAS code ************************/
 #include "GW_global_vars.h"
+/************************ end AMBHAS code ************************/
+
 #include <vic_driver_image.h>
 
 size_t              NF, NR;
@@ -185,7 +189,7 @@ main(int    argc,
 	link_AMBHAS_VIC_Domain(g, &global_domain);
 
 	//initialise h: read in GW_data, set initial conditions and calculate steady state if requested
-	GW_initialise(g, d, p, ts);
+	GW_initialise(g, d, p, ts, &global_domain);
 
 
     /************************ end AMBHAS code ************************/
@@ -194,7 +198,7 @@ main(int    argc,
     for (current = 0; current < global_param.nrecs; current++) {
 
 	/************************ AMBHAS code ****************************/
-	get_AMBHAS_Data_Into_VIC(d, p, &global_domain, current);
+	get_AMBHAS_Data_Into_VIC(d, p, &global_domain,(int)current);
     	/************************ end AMBHAS code ************************/
         // read forcing data
         vic_force();
@@ -202,15 +206,7 @@ main(int    argc,
         // run vic over the domain
         vic_image_run(&(dmy[current]));
 
-        // Write history files
-        vic_write_output(&(dmy[current]));
 
-        // Write state file
-        if (check_save_state_flag(current)) {
-            debug("writing state file for timestep %zu", current);
-            vic_store(&(dmy[current]), state_filename);
-            debug("finished storing state file: %s", state_filename)
-        }
     /************************ AMBHAS code ************************/
 	
     //write recharge calculated in VIC into AMBHAS
@@ -221,23 +217,33 @@ main(int    argc,
         GW_read_Ts(g,d, current);
 	
 	 //calculate gw flow for one time step
-         balance=calculateGwFlow(g,d,p,ts, current);
+         balance=calculateGwFlow(g,d,p,ts, (int)current);
 
          if(g->OUT_OPTION==0){
 		//write out head at every time step
-                GW_write_output(g,d,p, current);
+                GW_write_output(g,d,p,(int)current);
             }
          if(g->OUT_OPTION>1){              
                 if((int)ctime % g->OUT_OPTION==0)
 		//write out head at every OUT_OPTION time step
                 {
-                    GW_write_output(g,d,p, current);
+                    GW_write_output(g,d,p, (int)current);
 
                 }
             }
 	}
 	get_AMBHAS_Output_Into_VIC(d, p, &global_domain);
     /************************ end AMBHAS code ************************/
+
+        // Write history files
+        vic_write_output(&(dmy[current]));
+
+        // Write state file
+        if (check_save_state_flag(current)) {
+            debug("writing state file for timestep %zu", current);
+            vic_store(&(dmy[current]), state_filename);
+            debug("finished storing state file: %s", state_filename)
+        }
 
     }//end for eac time step loop
     /************************ AMBHAS code ************************/
