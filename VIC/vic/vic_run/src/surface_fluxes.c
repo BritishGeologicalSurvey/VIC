@@ -67,7 +67,7 @@ surface_fluxes(bool                 overstory,
                double               lag_one,
                double               sigma_slope,
                double               fetch,
-               double              *CanopLayerBnd
+               double              *CanopLayerBnd,
 	       location_struct     *location)
 {
     extern veg_lib_struct   *vic_run_veg_lib;

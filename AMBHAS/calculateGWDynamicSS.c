@@ -4,6 +4,7 @@
 * in the gw_global_parameters.dat
 *****************************************************************************/
 #include "GW_global_vars.h"
+#include <vic_def.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "netcdf.h"
@@ -19,6 +20,7 @@ int calculateDynamicGwSS(const gw_global_data_struct *g,  gw_data_struct *d, gw_
 	balance = 1.0;
 	sumdiff=1.0;
 	iter=0;
+	dmy_struct         *dmy = NULL;//to be passed into vic_image_run
 	//while (iter<6){
 	while (sumdiff> g->GLOBAL_ERROR){
 
@@ -31,6 +33,15 @@ int calculateDynamicGwSS(const gw_global_data_struct *g,  gw_data_struct *d, gw_
 		}
 
 		for(ctime=0; ctime<g->PERIOD;ctime++){
+			GW_read_Ts(g, d, ctime);
+
+			/** Do VIC run for the first time step **/
+	      	 	 // read forcing data
+	     		 vic_force();
+
+	       		// run vic over the domain
+			vic_image_run(&(dmy[ctime]));
+
 			GW_read_Ts(g, d, ctime);
 
 			balance=calculateGwFlow(g,d, p, ts, ctime);

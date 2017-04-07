@@ -23,7 +23,7 @@
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *****************************************************************************/
-
+#include "GW_global_vars.h"
 #include <vic_driver_image.h>
 
 size_t              NF, NR;
@@ -216,19 +216,19 @@ main(int    argc,
     //write recharge calculated in VIC into AMBHAS
     get_VIC_Data_Into_AMBHAS(d, &global_domain);
 
-    if(SIM_MODE==1||SIM_MODE==2||SIM_MODE==4){
+    if(g->SIM_MODE==1||g->SIM_MODE==2||g->SIM_MODE==4){
 	//read in time series for pumping	
         GW_read_Ts(g,d, current);
 	
 	 //calculate gw flow for one time step
-         balance[current]=calculateGwFlow(g,d,p,ts, current);
+         balance=calculateGwFlow(g,d,p,ts, current);
 
-         if(OUT_OPTION==0){
+         if(g->OUT_OPTION==0){
 		//write out head at every time step
                 GW_write_output(g,d,p, current);
             }
-         if(OUT_OPTION>1){              
-                if(ctime % OUT_OPTION==0)
+         if(g->OUT_OPTION>1){              
+                if((int)ctime % g->OUT_OPTION==0)
 		//write out head at every OUT_OPTION time step
                 {
                     GW_write_output(g,d,p, current);
@@ -236,13 +236,14 @@ main(int    argc,
                 }
             }
 	}
+	get_AMBHAS_Output_Into_VIC(d, p, &global_domain);
     /************************ end AMBHAS code ************************/
 
     }//end for eac time step loop
     /************************ AMBHAS code ************************/
 	//write out final head
-	writeObsBH(g,ts, 0, NTIME, 1);
- 	if(OUT_OPTION==1)
+	writeObsBH(g,ts, 0, g->NTIME, 1);
+ 	if(g->OUT_OPTION==1)
    	 {
         	GW_write_output(g,d,p, current);
     	}

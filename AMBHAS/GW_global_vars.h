@@ -1,5 +1,5 @@
 	
-#include "vic_structs.h"
+
 
 	/******************************************************************************
 	* structure to store global variables for GW model
@@ -100,7 +100,6 @@
 
 
 
-
 	/******************************************************************************
 	 * Function prototypes for the groundwater model
 	 *  
@@ -124,15 +123,3 @@
 	void free2DArray(double ** a, int nrow);
 	void allocate_structs(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts);
 	void free_structs(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts);
-
-
-	/******************************************************************************
-	 * Function prototypes for linking VIC and AMBHAS
-	 *  
-	 *****************************************************************************/
-
-	int link_AMBHAS_VIC_Domain(gw_data_struct *g, domain_struct *vic_domain);
-	int get_AMBHAS_Data_Into_VIC(const gw_data_struct *g,  const gw_param_struct *p, domain_struct *vic_domain, size_t time_step);
-	int get_AMBHAS_Output_Into_VIC(gw_data_struct *g, domain_struct *vic_domain);
-	int get_VIC_Data_Into_AMBHAS(gw_data_struct *g, domain_struct *vic_domain);
-

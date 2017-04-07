@@ -310,7 +310,7 @@ set_output_met_data_info()
     strcpy(out_metadata[OUT_RECHARGE].varname, "OUT_RECHARGE");
     strcpy(out_metadata[OUT_RECHARGE].long_name, "recharge");
     strcpy(out_metadata[OUT_RECHARGE].standard_name, "recharge_amount");
-    strcpy(out_metadata[OUT_BRECHARGE].units, "m/d");
+    strcpy(out_metadata[OUT_RECHARGE].units, "m/d");
     strcpy(out_metadata[OUT_RECHARGE].description,
            "recharge out of the bottom layer");
 

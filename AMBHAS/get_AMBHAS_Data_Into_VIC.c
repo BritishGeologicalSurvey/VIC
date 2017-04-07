@@ -3,11 +3,8 @@
 * save water table depth calculated in AMBHAS for every time step into VIC
 * 
 *****************************************************************************/
-#include "GW_global_vars.h"
+#include "Link_AMBHAS_VIC.h"
 
-//#include <vic_run.h>
-//#include "vic_driver_shared_image.h"
-//#include "vic_structs.h"//just for testing, vic_run.h is for running
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

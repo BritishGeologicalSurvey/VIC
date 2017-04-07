@@ -52,7 +52,7 @@ vic_image_run(dmy_struct *dmy_current)
     timer_struct               timer;
 
     //JS: add a pointer to the locations that will be passed into vic_run, surface_fluxes, and runoff
-    location_struct *p_locations;
+    //location_struct *p_locations;
 
     // Print the current timestep info before running vic_run
     sprint_dmy(dmy_str, dmy_current);
@@ -67,7 +67,7 @@ vic_image_run(dmy_struct *dmy_current)
 
         timer_start(&timer);
         vic_run(&(force[i]), &(all_vars[i]), dmy_current, &global_param,
-                &lake_con, &(soil_con[i]), veg_con[i], veg_lib[i], (p_locations+i));
+                &lake_con, &(soil_con[i]), veg_con[i], veg_lib[i], &local_domain.locations[i]);
         timer_stop(&timer);
 
         put_data(&(all_vars[i]), &(force[i]), &(soil_con[i]), veg_con[i],

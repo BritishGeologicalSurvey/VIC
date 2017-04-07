@@ -38,6 +38,9 @@ SHAREDIMAGEPATH = ../shared_image
 # VIC RUN PATH
 VICPATH = ../../vic_run
 
+# AMBHAS PATH
+AMBHASPATH=../../../../AMBHAS
+
 ifndef NC_LIBS
 NC_LIBS = $(shell nc-config --libs)
 endif
@@ -71,7 +74,8 @@ LOG_LVL = 5
 INCLUDES = -I ${DRIVERPATH}/include \
 		   -I ${VICPATH}/include \
 		   -I ${SHAREDPATH}/include \
-		   -I ${SHAREDIMAGEPATH}/include
+		   -I ${SHAREDIMAGEPATH}/include \
+		   -I ${AMBHASPATH}		
 
 # Uncomment to include debugging information
 CFLAGS  =  ${INCLUDES} ${NC_CFLAGS}  -ggdb -O0 -Wall -Wextra -std=c99 \
@@ -98,13 +102,15 @@ HDRS = \
 	$(wildcard ${VICPATH}/include/*.h) \
 	$(wildcard ${DRIVERPATH}/include/*.h) \
 	$(wildcard ${SHAREDPATH}/include/*.h) \
-	$(wildcard ${SHAREDIMAGEPATH}/include/*.h)
+	$(wildcard ${SHAREDIMAGEPATH}/include/*.h) \
+	$(wildcard ${AMBHASPATH}/*.h)
 
 SRCS = \
 	$(wildcard ${VICPATH}/src/*.c) \
 	$(wildcard ${DRIVERPATH}/src/*.c) \
 	$(wildcard ${SHAREDPATH}/src/*.c) \
-	$(wildcard ${SHAREDIMAGEPATH}/src/*.c)
+	$(wildcard ${SHAREDIMAGEPATH}/src/*.c) \
+	$(wildcard ${AMBHASPATH}/*.c)
 
 OBJS = $(SRCS:%.o=%.c)
 

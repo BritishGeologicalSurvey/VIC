@@ -326,7 +326,7 @@ initialize_location(location_struct *location)
     location->io_idx = MISSING_USI;
     location->local_idx = MISSING_USI;
     location->A_nlat = MISSING_USI;
-    location->A_nlon; = MISSING_USI; 
+    location->A_nlon = MISSING_USI; 
     location->Kaq = MISSING;
     location->z = MISSING;
 }

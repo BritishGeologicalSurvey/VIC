@@ -1,4 +1,5 @@
 #include "GW_global_vars.h"
+#include <vic_def.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "netcdf.h"
@@ -13,6 +14,7 @@
 int GW_initialise(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts){
 	int count; int crow; int ccol; int ctime;
 	int debug=0;
+	dmy_struct         *dmy = NULL;//to be passed into vic_image_run
 
 	//read observation points and global parameters
 	printf("Simulation mode %d \n", g->SIM_MODE);

@@ -41,8 +41,8 @@ vic_run(force_data_struct   *force,
         lake_con_struct     *lake_con,
         soil_con_struct     *soil_con,
         veg_con_struct      *veg_con,
-        veg_lib_struct      *veg_lib
-	locations_struct    *location)
+        veg_lib_struct      *veg_lib,
+	location_struct    *location)
 {
     extern option_struct     options;
     extern parameters_struct param;

@@ -1,15 +1,14 @@
 /******************************************************************************
- * @ JUST FOR TESTING!!! size_t and bool data types are replaced with int
+ * @ JUST FOR TESTING!
  *
 
  *****************************************************************************/
-#define MAXSTRING 30
-#define MAXDIMS 30
-//#include "vic_driver_shared_image.h"
+#define MAXSTRING    2048
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <stdbool.h>
 
 double           ***out_data;
 /******************************************************************************
@@ -204,17 +203,17 @@ enum
  *           identical. The model is run over a list of cells.
  *****************************************************************************/
 typedef struct {
-    int run; /**< TRUE: run grid cell. FALSE: do not run grid cell */
+    bool run; /**< TRUE: run grid cell. FALSE: do not run grid cell */
     double latitude; /**< latitude of grid cell center */
     double longitude; /**< longitude of grid cell center */
     double area; /**< area of grid cell */
     double frac; /**< fraction of grid cell that is active */
-    int nveg; /**< number of vegetation type according to parameter file */
-    int global_idx; /**< index of grid cell in global list of grid cells */
-    int io_idx; /**< index of cell in 1-D I/O arrays */
-    int local_idx; /**< index of grid cell in local list of grid cells */
+    size_t nveg; /**< number of vegetation type according to parameter file */
+    size_t global_idx; /**< index of grid cell in global list of grid cells */
+    size_t io_idx; /**< index of cell in 1-D I/O arrays */
+    size_t local_idx; /**< index of grid cell in local list of grid cells */
     size_t A_nlat; /**< counter in AMBHAS grid in lat or crow */
-    size_t A_nlon; /**< counter in AMBHAS grid in lon or ccol */
+    size_t  A_nlon; /**< counter in AMBHAS grid in lon or ccol */   
     double Kaq;	/**< aquifer hydraulic conductivity [m/day] from AMBHAS **/
     double z;	/**< depth to the water table: DEM-hydraulic head from AMBHAS **/
 } location_struct;
@@ -230,7 +229,7 @@ typedef struct {
     char frac_var[MAXSTRING]; /**< fraction variable name in the domain file */
     char y_dim[MAXSTRING]; /**< y dimension name in the domain file */
     char x_dim[MAXSTRING]; /**< x dimension name in the domain file */
-    int n_coord_dims; /**< number of x/y coordinates */
+    size_t n_coord_dims; /**< number of x/y coordinates */
 } domain_info_struct;
 
 /******************************************************************************
@@ -238,127 +237,11 @@ typedef struct {
  *           model is run on a single processor, then the two are identical.
  *****************************************************************************/
 typedef struct {
-    int ncells_total; /**< total number of grid cells on domain */
-    int ncells_active; /**< number of active grid cells on domain */
-    int n_nx; /**< size of x-index; */
-    int n_ny; /**< size of y-index */
+    size_t ncells_total; /**< total number of grid cells on domain */
+    size_t ncells_active; /**< number of active grid cells on domain */
+    size_t n_nx; /**< size of x-index; */
+    size_t n_ny; /**< size of y-index */
     location_struct *locations; /**< locations structs for local domain */
     domain_info_struct info; /**< structure storing domain file info */
 } domain_struct;
-
-/******************************************************************************
- * @brief    Structure for netcdf variable information
- *****************************************************************************/
-typedef struct {
-    int nc_varid;                   /**< variable netcdf id */
-    int nc_type;                    /**< variable netcdf type */
-    int nc_dimids[MAXDIMS];         /**< ids of dimensions */
-    int nc_counts[MAXDIMS];      /**< size of dimid */
-    int nc_dims;                 /**< number of dimensions */
-} nc_var_struct;
-
-/******************************************************************************
- * @brief    Structure for netcdf file information. Initially to store
- *           information for the output files (state and history)
- *****************************************************************************/
-typedef struct {
-    char c_fillvalue;
-    int i_fillvalue;
-    double d_fillvalue;
-    float f_fillvalue;
-    short int s_fillvalue;
-    int nc_id;
-    int band_dimid;
-    int front_dimid;
-    int frost_dimid;
-    int lake_node_dimid;
-    int layer_dimid;
-    int ni_dimid;
-    int nj_dimid;
-    int node_dimid;
-    int root_zone_dimid;
-    int time_dimid;
-    int time_bounds_dimid;
-    int veg_dimid;
-    int time_varid;
-    int time_bounds_varid;
-    int band_size;
-    int front_size;
-    int frost_size;
-    int lake_node_size;
-    int layer_size;
-    int ni_size;
-    int nj_size;
-    int node_size;
-    int root_zone_size;
-    int time_size;
-    int veg_size;
-    int open;
-    nc_var_struct *nc_vars;
-} nc_file_struct;
-
-/******************************************************************************
- * @brief    Structure for mapping the vegetation types for each grid cell as
- *           stored in VIC's veg_con_struct to a regular array.
- *****************************************************************************/
-typedef struct {
-    int nv_types; /**< total number of vegetation types */
-                     /**< size of vidx and Cv arrays */
-    int nv_active; /**< number of active vegetation types. Because of the */
-                      /**< way that VIC defines nveg, this is nveg+1 */
-                      /**< (for bare soil) or nveg+2 (if the treeline option */
-                      /**< is active as well) */
-    int *vidx;     /**< array of indices for active vegetation types */
-    double *Cv;    /**< array of fractional coverage for nc_types */
-} veg_con_map_struct;
-/******************************************************************************
- * @brief   This structure stores soil variables for the complete soil column
- *          for each grid cell.
- *****************************************************************************/
-typedef struct {
-    // State variables
-    double aero_resist[2];             /**< The (stability-corrected) aerodynamic
-                                          resistance (s/m) that was actually used
-                                          in flux calculations.
-                                          [0] = surface (bare soil, non-overstory veg, or snow pack)
-                                          [1] = overstory */
-    double asat;                       /**< saturated area fraction */
-    double CLitter;                    /**< carbon storage in litter pool [gC/m2] */
-    double CInter;                     /**< carbon storage in intermediate pool [gC/m2] */
-    double CSlow;                      /**< carbon storage in slow pool [gC/m2] */
-    //layer_data_struct layer[MAX_LAYERS]; 
-					/**< structure containing soil variables
-                                            for each layer (see above; including both
-                                            state and flux variables) */
-    double rootmoist;                  /**< total of layer.moist over all layers
-                                          in the root zone (mm) */
-    double wetness;                    /**< average of
-                                          (layer.moist - Wpwp)/(porosity*depth - Wpwp)
-                                          over all layers (fraction) */
-    double zwt;                        /**< average water table position [cm] - using lowest unsaturated layer */
-    double zwt_lumped;                 /**< average water table position [cm] - lumping all layers' moisture together */
-
-    // Fluxes
-    double pot_evap;                   /**< potential evaporation (mm) */
-    double baseflow;                   /**< baseflow from current cell (mm/TS) */
-    double recharge;                   /**< recharge from current cell (m/TS) */
-    double runoff;                     /**< runoff from current cell (mm/TS) */
-    double inflow;                     /**< moisture that reaches the top of
-                                          the soil column (mm) */
-    double RhLitter;                   /**< soil respiration from litter pool [gC/m2] */
-    double RhLitter2Atm;               /**< soil respiration from litter pool [gC/m2] that goes to atmosphere */
-    double RhInter;                    /**< soil respiration from intermediate pool [gC/m2] */
-    double RhSlow;                     /**< soil respiration from slow pool [gC/m2] */
-    double RhTot;                      /**< total soil respiration over all pools [gC/m2] (=RhLitter2Atm+RhInter+RhSlow) */
-} cell_data_struct;
-/******************************************************************************
- * @brief   This structure stores all variables needed to solve, or save
- *          solututions for all versions of this model. only cell data stored here
- *****************************************************************************/
-typedef struct {
-    cell_data_struct **cell;      /**< Stores soil layer variables */
-
-} all_vars_struct;
-
-
 

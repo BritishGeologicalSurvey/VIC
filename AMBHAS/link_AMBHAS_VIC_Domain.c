@@ -3,9 +3,8 @@
 * find nrow ncol for each VIC cell and find VIC ncell for each nrow/ncol 
 * 
 *****************************************************************************/
-#include "GW_global_vars.h"
-//#include "vic_driver_shared_image.h"
-//#include "vic_structs.h"
+
+#include "Link_AMBHAS_VIC.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
