@@ -42,10 +42,12 @@ vic_run(force_data_struct   *force,
         soil_con_struct     *soil_con,
         veg_con_struct      *veg_con,
         veg_lib_struct      *veg_lib,
-	location_struct    *location)
+	double Sy,
+	double z)
 {
     extern option_struct     options;
     extern parameters_struct param;
+
 
     char                     overstory;
     int                      j;
@@ -94,7 +96,8 @@ vic_run(force_data_struct   *force,
     veg_var_struct         **veg_var;
     energy_bal_struct      **energy;
     snow_data_struct       **snow;
-
+    extern RUNOFF_PRINT_FLAG;
+    
     // assign vic_run_veg_lib to veg_lib, so that the veg_lib for the correct
     // grid cell is used within vic_run. For simplicity sake, use vic_run_veg_lib
     // everywhere within vic_run
@@ -147,6 +150,9 @@ vic_run(force_data_struct   *force,
        Vegetation Type
     **************************************************/
     for (iveg = 0; iveg <= Nveg; iveg++) {
+     /* if (RUNOFF_PRINT_FLAG==1){
+	        //printf("_vegetation_band_no_%d", iveg);//js added
+       }*/
         /** Solve Veg Type only if Coverage Greater than 0% **/
         if (veg_con[iveg].Cv > 0.0) {
             Cv = veg_con[iveg].Cv;
@@ -313,13 +319,16 @@ vic_run(force_data_struct   *force,
             ******************************/
 
             for (band = 0; band < Nbands; band++) {
+            /*  if (RUNOFF_PRINT_FLAG==1){
+		             // printf("_Elevation_band_no_%d",band); //js added
+               }*/
                 if (soil_con->AreaFract[band] > 0) {
                     lag_one = veg_con[iveg].lag_one;
                     sigma_slope = veg_con[iveg].sigma_slope;
                     fetch = veg_con[iveg].fetch;
 
                     /* Initialize pot_evap */
-                    cell[iveg][band].pot_evap = 0;
+                    cell[iveg][band].pot_evap = 0;		  
 
                     ErrorFlag = surface_fluxes(overstory, bare_albedo,
                                                ice0[band], moist0[band],
@@ -340,7 +349,7 @@ vic_run(force_data_struct   *force,
                                                &(snow[iveg][band]),
                                                soil_con, &(veg_var[iveg][band]),
                                                lag_one, sigma_slope, fetch,
-                                               veg_con[iveg].CanopLayerBnd,location);
+                                               veg_con[iveg].CanopLayerBnd, Sy, z);
 
                     if (ErrorFlag == ERROR) {
                         return (ERROR);

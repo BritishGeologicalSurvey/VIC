@@ -530,7 +530,7 @@ put_data(all_vars_struct   *all_vars,
     ********************/
     inflow = out_data[OUT_PREC][0] + out_data[OUT_LAKE_CHAN_IN][0];  // mm over grid cell
     outflow = out_data[OUT_EVAP][0] + out_data[OUT_RUNOFF][0] +
-              out_data[OUT_BASEFLOW][0]+out_data[OUT_RECHARGE][0];  // mm over grid cell
+              out_data[OUT_BASEFLOW][0]+out_data[OUT_RECHARGE][0]+out_data[OUT_GW_INFLOW][0];  // mm over grid cell
     storage = 0.;
     for (index = 0; index < options.Nlayer; index++) {
         storage += out_data[OUT_SOIL_LIQ][index] +
@@ -655,8 +655,17 @@ collect_wb_terms(cell_data_struct cell,
     /** record groundwater recharge **/
     out_data[OUT_RECHARGE][0] += cell.recharge * AreaFactor;
 
+    /** record groundwater inflow **/
+    out_data[OUT_GW_INFLOW][0] += cell.gw_inflow * AreaFactor;
+
     /** record inflow **/
     out_data[OUT_INFLOW][0] += (cell.inflow) * AreaFactor;
+
+    /** record Q1 **/
+    out_data[OUT_Q1][0] += (cell.Q1) * AreaFactor;
+
+    /** record Q2 **/
+    out_data[OUT_Q2][0] += (cell.Q2) * AreaFactor;
 
     /** record canopy interception **/
     if (HasVeg) {

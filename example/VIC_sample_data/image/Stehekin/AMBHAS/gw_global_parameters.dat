@@ -1,0 +1,35 @@
+GW_PAM_NAME AMBHAS_Stehekin_TEST.nc
+NROW 6
+NCOL 7
+NTIME 56
+DLAT 0.125
+DLON 0.125
+DT 0.04166666666
+Outoption 24
+SimulationMode 1
+Restart 1 h_ini_Stehekin.nc
+K/Trans 0
+CONFINED 0
+GRID 1
+PUMPING 0
+VARIABLE_SY 1
+MAX_RECHARGE_FRACTION 0.01
+
+
+---Comment below here---
+0. groundwater parameter file name 
+1. number of rows (lat) 
+2. number of cols (rows) 
+3. number of time steps output is written
+4. lat grid spacing, if irregular set to 1
+5. lon grid spacing, if irregular set to 1
+6. time step (in days)
+7. Output option for h field in out_data.nc 0: every time step, 1: last time step, int: every int time step 
+8. SimulationMode 0: steady state, 1: transient with initial conditions from input, 2: transient and initial conditions from steady state, 3: dynamic steady state, 4: transient with dynamic steady state as initial conditions
+9. Use restart file as initial conditions, 0: no, 1:yes. filename=h_ini.nc
+10. read in 0: K [m/day] or 1: Trans [m2/day]
+11. 1: confined or 0: unconfined aquifer
+12: 0: regular grid using DLAT and DLON, 1: irregular grid reading in cell dimension and cell area for each cell
+13: 0: no pumping time series is read in, 1: pumping time series is read in
+14. 1 Sy has one value in the soil and one in the aquifer. Depth of the soil and Sy_soil are read in in the gw_data.nc file
+15. Fraction of water of a soil layer that can recharge in one time step. Limits recharge to reduce instability.

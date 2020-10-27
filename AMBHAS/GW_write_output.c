@@ -15,9 +15,9 @@ int GW_write_output(const gw_global_data_struct *g, const gw_data_struct *d, con
 
 	/* This is the name of the data file we will read. */
 	char name[20]="out_h";
-	char file_name[50];
+	char file_name[100];
 	int n;
-	n=sprintf(file_name,"out_data_%d.nc",ctime);
+	n=sprintf(file_name,"..//AMBHAS_OUT//h_%d.nc",(int)((float)ctime*g->DT));
 
 
 	/* We are writing 2D data */
@@ -32,7 +32,7 @@ int GW_write_output(const gw_global_data_struct *g, const gw_data_struct *d, con
 
 
 	/* For the units attributes. */
-	char var1_units[20]= "m/day";
+	char var1_units[20]= "m";
 	//char var2_units[20]= "m/day";
 	char lat_units[20]= "lon_units";
 	char lon_units[20]= "lat_units";
@@ -98,11 +98,11 @@ int GW_write_output(const gw_global_data_struct *g, const gw_data_struct *d, con
 
 
 	/* Define the coordinate variables. We will only define coordinate
-	Â  variables for lat and lon. Ordinarily we would need to provide
-	Â  an array of dimension IDs for each variable's dimensions, but
-	Â  since coordinate variables only have one dimension, we can
-	Â  simply provide the address of that dimension ID (&lat_dimid)and
-	Â  similarly for (&lon_dimid). */
+	  variables for lat and lon. Ordinarily we would need to provide
+	  an array of dimension IDs for each variable's dimensions, but
+	  since coordinate variables only have one dimension, we can
+	  simply provide the address of that dimension ID (&lat_dimid)and
+	  similarly for (&lon_dimid). */
 	if ((retval = nc_def_var(ncid, lon_name, NC_FLOAT, 1, &lon_dimid,
 	&lon_varid)))
 	ERR(retval);
@@ -126,8 +126,8 @@ int GW_write_output(const gw_global_data_struct *g, const gw_data_struct *d, con
 	creating share the same four dimensions. In C, the
 	unlimited dimension must come first on the list of dimids. */
 
-	dimids[1] = lat_dimid;
-	dimids[0] = lon_dimid;
+	dimids[0] = lat_dimid;
+	dimids[1] = lon_dimid;
 
 	 /* Define the netCDF variables for the data. */
 	if ((retval = nc_def_var(ncid, var1_name, NC_FLOAT, ndims,
@@ -158,8 +158,8 @@ int GW_write_output(const gw_global_data_struct *g, const gw_data_struct *d, con
 	timestep to write.) */
 
 	
-	count[1] = g->NROW;
-	count[0] = g->NCOL;
+	count[0] = g->NROW;
+	count[1] = g->NCOL;
 	start[0] = 0;
 	start[1] = 0;
 	//start[2] = 0;
@@ -175,14 +175,17 @@ int GW_write_output(const gw_global_data_struct *g, const gw_data_struct *d, con
 	double temp;
 				
 	//get output variable into the right way
-	for (lon=0; lon<g->NCOL; lon++){
-			for(lat=0; lat<g->NROW;lat++){
+	for(lat=0; lat<g->NROW;lat++){
+	    for (lon=0; lon<g->NCOL; lon++){
+
 
 
 					*(var1_out[0]+i)=p->h[lat][lon];//is this correct?
+           //printf("%.1f ",p->h[lat][lon]);
 
 					i++;
 				}
+        // printf("\n");
 			}
 
 
@@ -196,6 +199,7 @@ int GW_write_output(const gw_global_data_struct *g, const gw_data_struct *d, con
 		ERR(retval);
 
 		printf("*** SUCCESS writing file %s!\n", file_name);
+ 
 	return 0;
 }//end creatOutNetcdfFile
 

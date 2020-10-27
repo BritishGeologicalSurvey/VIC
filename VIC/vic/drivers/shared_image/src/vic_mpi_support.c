@@ -395,7 +395,7 @@ create_MPI_location_struct_type(MPI_Datatype *mpi_type)
     MPI_Datatype   *mpi_types;
 
     // nitems has to equal the number of elements in location_struct
-    nitems = 9;
+    nitems = 14;//changed for AMBHAS
     blocklengths = malloc(nitems * sizeof(*blocklengths));
     check_alloc_status(blocklengths, "Memory allocation error.");
 
@@ -448,6 +448,31 @@ create_MPI_location_struct_type(MPI_Datatype *mpi_type)
     // size_t local_idx;
     offsets[i] = offsetof(location_struct, local_idx);
     mpi_types[i++] = MPI_AINT;
+
+//added for AMBHAS
+
+    // size_t A_nlat;
+    offsets[i] = offsetof(location_struct, A_nlat);
+    mpi_types[i++] = MPI_AINT;
+
+    // size_t A_nlon;
+    offsets[i] = offsetof(location_struct, A_nlon);
+    mpi_types[i++] = MPI_AINT;
+
+    // double Sy;
+    offsets[i] = offsetof(location_struct, Sy);
+    mpi_types[i++] = MPI_DOUBLE;
+
+    // double z;
+    offsets[i] = offsetof(location_struct, z);
+    mpi_types[i++] = MPI_DOUBLE;
+
+    // double Kaq;
+    offsets[i] = offsetof(location_struct, Kaq);
+    mpi_types[i++] = MPI_DOUBLE;
+
+
+//end added for AMBHAS
 
     // make sure that the we have the right number of elements
     if (i != (size_t) nitems) {

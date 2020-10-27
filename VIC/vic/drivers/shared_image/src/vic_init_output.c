@@ -57,11 +57,13 @@ vic_init_output(dmy_struct *dmy_current)
     bool                      default_outputs = false;
     timer_struct              timer;
 
+
     // initialize the output data structures
     set_output_met_data_info();
 
     // allocate out_data
     alloc_out_data(local_domain.ncells_active, &out_data);
+
 
     // initialize the save data structures
     for (i = 0; i < local_domain.ncells_active; i++) {
@@ -186,8 +188,11 @@ vic_init_output(dmy_struct *dmy_current)
                            output_streams[streamnum].varid,
                            output_streams[streamnum].type);
     }
+
     // validate streams
+
     validate_streams(&output_streams);
+
 }
 
 /******************************************************************************

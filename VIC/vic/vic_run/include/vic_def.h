@@ -806,10 +806,13 @@ typedef struct {
     // Fluxes
     double pot_evap;                   /**< potential evaporation (mm) */
     double baseflow;                   /**< baseflow from current cell (mm/TS) */
-    double recharge;                   /**< recharge from current cell (m/TS) */
+    double recharge;                   /**< recharge from current cell (mm/TS) */
+    double gw_inflow;                   /**< inflow from the aquifer into the soil colum (mm/TS) */
     double runoff;                     /**< runoff from current cell (mm/TS) */
     double inflow;                     /**< moisture that reaches the top of
                                           the soil column (mm) */
+    double Q1;                        /**< moisture that leaves the top soil column into the second one(mm/TS) */
+    double Q2;                        /**< moisture that leaves the second soil column into the third one (mm/TS) */
     double RhLitter;                   /**< soil respiration from litter pool [gC/m2] */
     double RhLitter2Atm;               /**< soil respiration from litter pool [gC/m2] that goes to atmosphere */
     double RhInter;                    /**< soil respiration from intermediate pool [gC/m2] */

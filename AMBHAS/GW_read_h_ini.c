@@ -16,7 +16,9 @@ int GW_read_h_ini(const gw_global_data_struct *g, gw_param_struct *p){
 printf("*** GW_read_h_ini is called \n");
 
 	/* This is the name of the data file we will read. */
-	char file_name[20]= "h_ini.nc";
+	char file_name[100]= "..//AMBHAS//";
+	strcat(file_name, g->hininame);
+	printf("*** %s \n", file_name);
 
 	/* We are reading 2D data, a  -lat-lon grid. */
 	size_t ndims= 2;
@@ -46,7 +48,7 @@ printf("*** GW_read_h_ini is called \n");
 
 	/* Program variables to hold the data we will read. We will only
 	need enough space to hold one timestep of data; one record. */
-	float var1_in[g->NCOL][g->NROW];
+	float var1_in[g->NROW][g->NCOL];
 
 
 	/*Output variables*/
@@ -60,6 +62,7 @@ printf("*** GW_read_h_ini is called \n");
 
 	/* Error handling. */
 	int retval;
+	//printf("*** Flag0 \n");
 
 	/* Open the file. */
 	if ((retval = nc_open(file_name, NC_NOWRITE, &ncid)))
@@ -95,10 +98,10 @@ printf("*** GW_read_h_ini is called \n");
 	* that the data arrays in this program are the correct size to
 	* hold one timestep. */
 
+
 	counter[0] = g->NROW; //orig
 	counter[1] = g->NCOL;
-	//counter[0] = NCOL;//needs to be this way
-	//counter[1] = NROW;
+
 
 	start[0] = 0;
 	start[1] = 0;
@@ -106,9 +109,6 @@ printf("*** GW_read_h_ini is called \n");
 
 	//printf("*** Flag5 \n");
 
-	/* Read and check one record at a time. */
-	//for (rec = 0; rec < NREC; rec++)
-	//{
 	if ((retval = nc_get_vara_float(ncid, varid1, start,
 	counter, &var1_in[0][0])))
 		ERR(retval);
@@ -118,16 +118,10 @@ printf("*** GW_read_h_ini is called \n");
 	/* Check the data. */
 	i = 0;
 
-
-
 	for (lat = 0; lat < g->NROW; lat++){
 		for (lon = 0; lon < g->NCOL; lon++){
-
-			var1_in[lon][lat];
-
-		//get data into the right format (lat, lon), it is somehow wrong like this!
-
 			p->h[lat][lon]=*(var1_in[0]+i);
+			p->hini[lat][lon]=*(var1_in[0]+i);
 			i++;
 		}
 	}
@@ -138,7 +132,7 @@ printf("*** GW_read_h_ini is called \n");
 
 	printf("*** SUCCESS reading file h_ini.nc!\n");
 
-
+	/*
 	printf("hini from input file: \n");
 	for (lat=0; lat<g->NROW; lat++){
 		for (lon=0; lon<g->NCOL; lon ++){
@@ -147,6 +141,7 @@ printf("*** GW_read_h_ini is called \n");
 		}
 		printf("\n");
 	}
+	*/
 
 
 

@@ -51,28 +51,69 @@ vic_image_run(dmy_struct *dmy_current)
     size_t                     i;
     timer_struct               timer;
 
-
+    extern RUNOFF_PRINT_FLAG;
+    extern RUNOFF_PRINT_CELL;
     // Print the current timestep info before running vic_run
     sprint_dmy(dmy_str, dmy_current);
     debug("Running timestep %zu: %s", current, dmy_str);
 
+ RUNOFF_PRINT_FLAG=0;
+   RUNOFF_PRINT_CELL=0;
     for (i = 0; i < local_domain.ncells_active; i++) {
+   // printf("VIC_image_run grid cell %d", i);
         // Set global reference string (for debugging inside vic_run)
-        sprintf(vic_run_ref_str, "Gridcell io_idx: %zu, timestep info: %s",
-                local_domain.locations[i].io_idx, dmy_str);
+        sprintf(vic_run_ref_str, "Gridcell io_idx: %zu, timestep info: %s",local_domain.locations[i].io_idx, dmy_str);
+         
+      //print out information when water table is above the land surface
+/*     
+  if(current==0){
+    RUNOFF_PRINT_CELL=0;
+    RUNOFF_PRINT_FLAG=0;
+  }
 
+      if(i==0){
+  RUNOFF_PRINT_FLAG=0;
+  }
+
+	//printf("cell no = %d \n", i);//js added for testing
+ if(RUNOFF_PRINT_FLAG==1){
+       RUNOFF_PRINT_CELL=i-1;
+         printf("Cell %d  ", i-1);
+ }
+
+RUNOFF_PRINT_FLAG=0;
+*/
+
+//only print for cell 820
+      //print out information when water table is above the land surface
+
+
+//RUNOFF_PRINT_FLAG=0;
+/*
+//Print out in runoff.c fluxes for one cell. Needs to be run on one core
+if(i==559){
+    RUNOFF_PRINT_FLAG=1;
+    printf("Cell %d  ", i);
+  // printf("Cell %d flag %d \n", i, RUNOFF_PRINT_FLAG);
+}
+*/
         update_step_vars(&(all_vars[i]), veg_con[i], veg_hist[i]);
 
         timer_start(&timer);
+        
         vic_run(&(force[i]), &(all_vars[i]), dmy_current, &global_param,
-                &lake_con, &(soil_con[i]), veg_con[i], veg_lib[i], &local_domain.locations[i]);
+                &lake_con, &(soil_con[i]), veg_con[i], veg_lib[i], local_domain.locations[i].Sy, local_domain.locations[i].z);
+                
+
+
+
         timer_stop(&timer);
 
         put_data(&(all_vars[i]), &(force[i]), &(soil_con[i]), veg_con[i],
                  veg_lib[i], &lake_con, out_data[i], &(save_data[i]),
                  &timer);
     }
-    for (i = 0; i < options.Noutstreams; i++) {
-        agg_stream_data(&(output_streams[i]), dmy_current, out_data);
-    }
+   // for (i = 0; i < options.Noutstreams; i++) {
+    //    agg_stream_data(&(output_streams[i]), dmy_current, out_data);
+   // }
 }

@@ -48,6 +48,7 @@ vic_force(void)
     extern veg_hist_struct   **veg_hist;
     extern parameters_struct   param;
     extern param_set_struct    param_set;
+    extern int SIM_MODE;
 
     double                    *t_offset = NULL;
     double                    *dvar = NULL;
@@ -66,9 +67,23 @@ vic_force(void)
     dvar = malloc(local_domain.ncells_active * sizeof(*dvar));
     check_alloc_status(dvar, "Memory allocation error.");
 
-    // for now forcing file is determined by the year
-    sprintf(filenames.forcing[0], "%s%4d.nc", filenames.f_path_pfx[0],
-            dmy[current].year);
+    printf("SIM_MODE %d \n", SIM_MODE);
+    //if SIM_MODE==1: time variant. use forcing file of each year
+    if (SIM_MODE==1){
+        // for now forcing file is determined by the year
+        sprintf(filenames.forcing[0], "%s%4d.nc", filenames.f_path_pfx[0],
+                dmy[current].year);
+        printf(" forcing file name %s \n", filenames.forcing[0]);
+    }
+    
+    //if SIM_MODE==0: steady state. use the forcing file of the first year for each year
+    if(SIM_MODE==0){
+    	 sprintf(filenames.forcing[0], "%s%4d.nc", filenames.f_path_pfx[0],
+    		    dmy[0].year);
+      printf(" forcing file name %s \n", filenames.forcing[0]);
+    
+    }
+
 
     // global_param.forceoffset[0] resets every year since the met file restarts
     // every year

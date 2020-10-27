@@ -14,11 +14,9 @@
 #include <math.h>
 
 int writeObsBH(const gw_global_data_struct *g, const gw_ts_struct *ts, int start, int nts, int flag){
-char name[20];
-int count;
-int i;
-
-
+	char name[20];
+	int count;
+	int i;
 
 	/*printf("Observation Borehole No, lat, lon: \n");
 
@@ -27,70 +25,92 @@ int i;
 			printf("\n");
 		}
 		printf("\n");
-*/
+	*/
 
-if(flag==1){
-	FILE *fp;
-	fp=fopen("gw_observation_ts.out","w");//open file for writing
-	if (fp==NULL){
-		fprintf(stderr, "Can't open file in.list!\n");
-		exit(1);
-	}
-	fprintf(fp,"time_step/coords ");
-	for(i=0; i<(g->NUMOBSBH);i++){
-		fprintf(fp,"%.2f/%.2f ",g->p_obslat[i], g->p_obslon[i]);
-	}
-	fprintf(fp,"baseflow_tot balance_tot \n");
-
-	for(count=start; count<(nts+start); count++){
-		fprintf(fp,"%d ", count);
-		for(i=0; i<(g->NUMOBSBH);i++){
-		 	fprintf(fp, "%.2f ", ts->h_obs[i][count]);
+	if(flag==1){
+		FILE *fp;
+		fp=fopen("..//AMBHAS_OUT//gw_observation_ts.out","w");//open file for writing
+		if (fp==NULL){
+			fprintf(stderr, "Can't open file in.list!\n");
+			exit(1);
 		}
-	fprintf(fp, "%.2f ", ts->total_baseflow[count]);
-	fprintf(fp, "%.2f ", ts->balance[count]);
-	fprintf(fp,"\n");
-	}
-	fclose(fp);
-}
-if(flag==2){
-	FILE *fp;
-	fp=fopen("gw_observation_ts.out","a");//append file for writing
-	if (fp==NULL){
-		fprintf(stderr, "Can't open file in.list!\n");
-		exit(1);
-	}
-	for(count=0; count<1; count++){
-		fprintf(fp,"%d ", nts);
+		fprintf(fp,"time_step/coords ");
 		for(i=0; i<(g->NUMOBSBH);i++){
-			 fprintf(fp, "%.2f ", ts->h_obs[i][count]);
+			fprintf(fp,"%.2f/%.2f ",g->p_obslat[i], g->p_obslon[i]);
 		}
-	fprintf(fp, "%.2f ", ts->total_baseflow[count]);
-	fprintf(fp, "%.2f ", ts->balance[count]);
-	fprintf(fp,"\n");
-	}
-	fclose(fp);
+		fprintf(fp,"baseflow_tot leakage_tot balance_tot \n");
 
-}
-
-if(flag==3){
-	FILE *fp;
-	fp=fopen("gw_observation_ts.out","a");//append file for writing
-	if (fp==NULL){
-		fprintf(stderr, "Can't open file in.list!\n");
-		exit(1);
-	}
-	for(count=0; count<nts; count++){
-		fprintf(fp,"%d ", count+start);
-		for(i=0; i<(g->NUMOBSBH);i++){
-		 fprintf(fp, "%.2f ", ts->h_obs[i][count]);
+		for(count=start; count<(nts+start); count++){
+			fprintf(fp,"%d ", count);
+			for(i=0; i<(g->NUMOBSBH);i++){
+				fprintf(fp, "%.18f ", ts->h_obs[i][count]);
+			}
+			fprintf(fp, "%.12f ", ts->total_baseflow[count]);
+			fprintf(fp, "%.12f ", ts->total_leakage[count]);
+			fprintf(fp, "%.12f ", ts->balance[count]);
+			fprintf(fp,"\n");
 		}
-	fprintf(fp, "%.2f ", ts->total_baseflow[count]);
-	fprintf(fp, "%.2f ", ts->balance[count]);
-	fprintf(fp,"\n");
+		fclose(fp);
 	}
-	fclose(fp);
+	if(flag==2){
+		FILE *fp;
+		fp=fopen("..//AMBHAS_OUT//gw_observation_ts.out","a");//append file for writing
+		if (fp==NULL){
+			fprintf(stderr, "Can't open file in.list!\n");
+			exit(1);
+		}
+		for(count=0; count<1; count++){
+			fprintf(fp,"%d ", nts);
+			for(i=0; i<(g->NUMOBSBH);i++){
+				 fprintf(fp, "%.18f ", ts->h_obs[i][count]);
+			}
+			fprintf(fp, "%.12f ", ts->total_baseflow[count]);
+			fprintf(fp, "%.12f ", ts->total_leakage[count]);
+			fprintf(fp, "%.12f ", ts->balance[count]);
+			fprintf(fp,"\n");
+		}
+		fclose(fp);
+	}
 
-}
+	if(flag==3){
+		FILE *fp;
+		fp=fopen("..//AMBHAS_OUT//gw_observation_ts.out","a");//append file for writing
+		if (fp==NULL){
+			fprintf(stderr, "Can't open file in.list!\n");
+			exit(1);
+		}
+		for(count=0; count<nts; count++){
+			fprintf(fp,"%d ", count+start);
+			for(i=0; i<(g->NUMOBSBH);i++){
+				fprintf(fp, "%.18f ", ts->h_obs[i][count]);
+			}
+			fprintf(fp, "%.12f ", ts->total_baseflow[count]);
+			fprintf(fp, "%.12f ", ts->total_leakage[count]);
+			fprintf(fp, "%.12f ", ts->balance[count]);
+			fprintf(fp,"\n");
+		}
+		fclose(fp);
+	}
+
+	if(flag==4){
+		FILE *fp;
+		fp=fopen("..//AMBHAS_OUT//gw_observation_ts.out","a");//append file for writing
+		if (fp==NULL){
+			fprintf(stderr, "Can't open file in.list!\n");
+			exit(1);
+		}
+		for(count=nts-1; count<nts; count++){
+			fprintf(fp,"%d ", count+start);
+			for(i=0; i<(g->NUMOBSBH);i++){
+				fprintf(fp, "%.18f ", ts->h_obs[i][count]);
+			}
+			fprintf(fp, "%.12f ", ts->total_baseflow[count]);
+			fprintf(fp, "%.12f ", ts->total_leakage[count]);
+			fprintf(fp, "%.12f ", ts->balance[count]);
+			fprintf(fp,"\n");
+		}
+		fclose(fp);
+
+	}
 
 }

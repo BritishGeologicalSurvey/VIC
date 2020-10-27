@@ -1,0 +1,2435 @@
+
+../../vic_run/src/physics.c,170
+calc_latent_heat_of_sublimation(35,1539
+calc_latent_heat_of_vaporization(49,1972
+calc_outgoing_longwave(62,2331
+calc_scale_height(76,2756
+calc_sensible_heat(93,3227
+
+../../vic_run/src/write_vegvar.c,22
+write_vegvar(37,1536
+
+../../vic_run/src/faparl.c,16
+faparl(36,1670
+
+../../vic_run/src/root_brent.c,20
+root_brent(67,2947
+
+../../vic_run/src/StabilityCorrection.c,29
+StabilityCorrection(34,1457
+
+../../vic_run/src/correct_precip.c,24
+correct_precip(39,1665
+
+../../vic_run/src/soil_thermal_eqn.c,26
+soil_thermal_eqn(33,1326
+
+../../vic_run/src/CalcBlowingSnow.c,266
+CalcBlowingSnow(33,1444
+qromb(273,10156
+polint(314,11432
+trapzd(365,12841
+rtnewt(414,14227
+get_shear(489,16064
+sub_with_height(505,16584
+get_prob(577,18788
+get_thresh(627,20294
+shear_stress(662,21313
+CalcSubFlux(700,22440
+transport_with_height(806,26203
+
+../../vic_run/src/vic_run.c,74
+veg_lib_struct *vic_run_veg_lib;vic_run_veg_lib30,1270
+vic_run(37,1618
+
+../../vic_run/src/snow_melt.c,137
+snow_melt(34,1497
+CalcSnowPackEnergyBalance(518,22725
+ErrorSnowPackEnergyBalance(538,23412
+ErrorPrintSnowPackEnergyBalance(556,24016
+
+../../vic_run/src/compute_pot_evap.c,26
+compute_pot_evap(33,1413
+
+../../vic_run/src/soil_carbon_balance.c,29
+soil_carbon_balance(40,1841
+
+../../vic_run/src/latent_heat_from_snow.c,31
+latent_heat_from_snow(33,1439
+
+../../vic_run/src/arno_evap.c,19
+arno_evap(39,1708
+
+../../vic_run/src/calc_snow_coverage.c,28
+calc_snow_coverage(40,1835
+
+../../vic_run/src/compute_coszen.c,24
+compute_coszen(34,1519
+
+../../vic_run/src/func_atmos_energy_bal.c,31
+func_atmos_energy_bal(33,1475
+
+../../vic_run/src/IceEnergyBalance.c,26
+IceEnergyBalance(33,1443
+
+../../vic_run/src/calc_atmos_energy_bal.c,248
+calc_atmos_energy_bal(39,1750
+solve_atmos_energy_bal(138,5444
+error_calc_atmos_energy_bal(157,5928
+error_print_atmos_energy_bal(175,6378
+solve_atmos_moist_bal(220,7893
+error_calc_atmos_moist_bal(239,8377
+error_print_atmos_moist_bal(257,8833
+
+../../vic_run/src/penman.c,54
+calc_rc(34,1463
+calc_rc_ps(92,3325
+penman(182,7221
+
+../../vic_run/src/massrelease.c,21
+MassRelease(33,1441
+
+../../vic_run/src/func_surf_energy_bal.c,30
+func_surf_energy_bal(39,1802
+
+../../vic_run/src/frozen_soil.c,236
+calc_layer_average_thermal_props(35,1586
+solve_T_profile(150,6317
+solve_T_profile_implicit(254,10116
+calc_soil_thermal_fluxes(346,14640
+error_solve_T_profile(560,23175
+error_print_solve_T_profile(578,23593
+fda_heat_eqn(643,25775
+
+../../vic_run/src/initialize_lake.c,25
+initialize_lake(35,1579
+
+../../vic_run/src/snow_intercept.c,140
+snow_intercept(34,1491
+solve_canopy_energy_bal(568,23653
+error_calc_canopy_energy_bal(586,24147
+error_print_canopy_energy_bal(603,24601
+
+../../vic_run/src/lake_utils.c,59
+get_sarea(34,1506
+get_volume(74,2688
+get_depth(122,4123
+
+../../vic_run/src/advected_sensible_heat.c,32
+advected_sensible_heat(39,1776
+
+../../vic_run/src/func_atmos_moist_bal.c,30
+func_atmos_moist_bal(33,1479
+
+../../vic_run/src/lakes.eb.c,560
+solve_lake(33,1470
+latsens(533,23401
+alblake(621,26863
+colavg(717,29432
+calc_density(774,31382
+eddy(802,32355
+iceform(936,37739
+icerad(1043,41356
+lakeice(1111,43878
+lkdrag(1197,47235
+rhoinit(1255,48788
+specheat(1280,49739
+temp_area(1294,50205
+tracer_mixer(1567,59859
+tridia(1716,65880
+energycalc(1765,67186
+water_balance(1809,68424
+advect_soil_veg_storage(2313,90546
+rescale_soil_veg_fluxes(2441,95818
+advect_snow_storage(2484,97315
+rescale_snow_storage(2523,98954
+rescale_snow_energy_fluxes(2543,99660
+advect_carbon_storage(2647,103966
+
+../../vic_run/src/compute_zwt.c,47
+compute_zwt(34,1550
+wrap_compute_zwt(80,3448
+
+../../vic_run/src/canopy_evap.c,45
+canopy_evap(38,1739
+transpiration(169,5972
+
+../../vic_run/src/newt_raph_func_fast.c,54
+newt_raph(39,1728
+fdjac3(111,3947
+tridiag(153,5092
+
+../../vic_run/src/prepare_full_energy.c,29
+prepare_full_energy(37,1697
+
+../../vic_run/src/ice_melt.c,133
+ice_melt(34,1516
+CalcIcePackEnergyBalance(617,25784
+ErrorIcePackEnergyBalance(637,26478
+ErrorPrintIcePackEnergyBalance(656,27128
+
+../../vic_run/src/water_under_ice.c,25
+water_under_ice(33,1432
+
+../../vic_run/src/CalcAerodynamic.c,25
+CalcAerodynamic(39,1921
+
+../../vic_run/src/compute_soil_resp.c,27
+compute_soil_resp(33,1477
+
+../../vic_run/src/comparisons.c,57
+assert_close_float(33,1453
+assert_close_double(48,1920
+
+../../vic_run/src/calc_rainonly.c,23
+calc_rainonly(35,1601
+
+../../vic_run/src/calc_Nscale_factors.c,29
+calc_Nscale_factors(37,1648
+
+../../vic_run/src/runoff.c,51
+runoff(40,1927
+compute_runoff_and_asat(852,36987
+
+../../vic_run/src/canopy_assimilation.c,29
+canopy_assimilation(33,1486
+
+../../vic_run/src/write_layer.c,21
+write_layer(37,1650
+
+../../vic_run/src/func_canopy_energy_bal.c,32
+func_canopy_energy_bal(35,1562
+
+../../vic_run/src/SnowPackEnergyBalance.c,31
+SnowPackEnergyBalance(33,1444
+
+../../vic_run/src/estimate_T1.c,21
+estimate_T1(36,1692
+
+../../vic_run/src/interpoloation.c,23
+linear_interp(33,1436
+
+../../vic_run/src/surface_fluxes.c,24
+surface_fluxes(35,1535
+
+../../vic_run/src/photosynth.c,61
+photosynth(35,1526
+hiTinhib(460,23628
+darkinhib(482,24378
+
+../../vic_run/src/calc_surf_energy_bal.c,140
+calc_surf_energy_bal(37,1711
+solve_surf_energy_bal(757,37211
+error_calc_surf_energy_bal(776,37686
+error_print_surf_energy_bal(794,38121
+
+../../vic_run/src/snow_utility.c,71
+snow_density(41,1915
+new_snow_density(208,7827
+snow_albedo(248,9165
+
+../../vic_run/src/alloc_and_free.c,100
+malloc_2d_double(34,1530
+malloc_3d_double(51,2156
+free_2d_double(74,2991
+free_3d_double(89,3397
+
+../../vic_run/src/compute_derived_lake_dimensions.c,41
+compute_derived_lake_dimensions(35,1599
+
+../../vic_run/src/solve_snow.c,20
+solve_snow(37,1741
+
+../../vic_run/src/svp.c,32
+svp(35,1493
+svp_slope(56,2061
+
+../../vic_run/src/calc_veg_params.c,84
+calc_veg_displacement(35,1566
+calc_veg_height(51,2073
+calc_veg_roughness(68,2621
+
+../../vic_run/src/soil_conduction.c,475
+soil_conductivity(37,1602
+volumetric_heat_capacity(110,4472
+set_node_parameters(135,5500
+distribute_node_moisture_properties(210,8437
+estimate_frost_temperature_and_depth(324,13311
+estimate_layer_temperature(430,17674
+estimate_layer_ice_content(492,20044
+estimate_layer_temperature_quick_flux(598,24487
+estimate_layer_ice_content_quick_flux(639,26098
+compute_soil_layer_thermal_properties(704,28884
+find_0_degree_fronts(745,30888
+maximum_unfrozen_water(796,32714
+
+../../vic_run/src/water_energy_balance.c,30
+water_energy_balance(33,1444
+
+src/vic_image_init.c,24
+vic_image_init(33,1434
+
+src/vic_populate_model_state.c,34
+vic_populate_model_state(39,1839
+
+src/vic_image.c,4165
+size_t              NF,34,1442
+size_t              NF, NR;34,1442
+size_t              current;35,1470
+size_t             *filter_active_cells filter_active_cells36,1499
+size_t             *mpi_map_mapping_array mpi_map_mapping_array37,1547
+all_vars_struct    *all_vars all_vars38,1597
+force_data_struct  *force force39,1634
+dmy_struct         *dmy dmy40,1668
+filenames_struct    filenames;41,1700
+filep_struct        filep;42,1731
+domain_struct       global_domain;43,1758
+global_param_struct global_param;44,1793
+lake_con_struct    *lake_con lake_con45,1827
+domain_struct       local_domain;46,1864
+MPI_Comm            MPI_COMM_VIC 47,1898
+MPI_Datatype        mpi_global_struct_type;48,1949
+MPI_Datatype        mpi_filenames_struct_type;49,1993
+MPI_Datatype        mpi_location_struct_type;50,2040
+MPI_Datatype        mpi_alarm_struct_type;51,2086
+MPI_Datatype        mpi_option_struct_type;52,2129
+MPI_Datatype        mpi_param_struct_type;53,2173
+int                *mpi_map_local_array_sizes mpi_map_local_array_sizes54,2216
+int                *mpi_map_global_array_offsets mpi_map_global_array_offsets55,2270
+int                 mpi_rank;56,2327
+int                 mpi_size;57,2357
+option_struct       options;58,2387
+parameters_struct   param;59,2416
+param_set_struct    param_set;60,2443
+soil_con_struct    *soil_con soil_con61,2474
+veg_con_map_struct *veg_con_map veg_con_map62,2511
+veg_con_struct    **veg_con veg_con63,2551
+veg_hist_struct   **veg_hist veg_hist64,2587
+veg_lib_struct    **veg_lib veg_lib65,2624
+metadata_struct     state_metadata[state_metadata66,2660
+metadata_struct     out_metadata[out_metadata67,2710
+save_data_struct   *save_data;save_data68,2760
+double           ***out_data out_data69,2804
+stream_struct      *output_streams output_streams70,2868
+nc_file_struct     *nc_hist_files nc_hist_files71,2926
+double *temp_r;temp_r72,2983
+double *temp_gw;temp_gw73,3032
+double *temp_baseflow;temp_baseflow74,3082
+double *temp_z;temp_z75,3137
+double *out_recharge;out_recharge77,3186
+double *out_gw_inflow;out_gw_inflow78,3241
+double *global_out_recharge;global_out_recharge79,3297
+double *global_out_gw_inflow;global_out_gw_inflow80,3358
+double *cont_out_recharge;cont_out_recharge81,3420
+double *cont_out_gw_inflow;cont_out_gw_inflow82,3479
+double *outp_baseflow;outp_baseflow83,3539
+double *outp_z;outp_z84,3594
+double *outp_sy;outp_sy85,3642
+int *local_order;local_order86,3690
+int *ncells_run ncells_run87,3740
+int *ncells_assign ncells_assign88,3790
+int *ncells_order ncells_order89,3843
+int *g_mapping g_mapping90,3895
+int * my_ncells 91,3944
+int *total_ncells_active total_ncells_active92,3994
+int tag1,93,4032
+int tag1, tag2,93,4032
+int tag1, tag2, tag3,93,4032
+int tag1, tag2, tag3, tag4,93,4032
+int tag1, tag2, tag3, tag4, tag5,93,4032
+int tag1, tag2, tag3, tag4, tag5, tag6,93,4032
+int tag1, tag2, tag3, tag4, tag5, tag6, tag7,93,4032
+int tag1, tag2, tag3, tag4, tag5, tag6, tag7, dest,93,4032
+int tag1, tag2, tag3, tag4, tag5, tag6, tag7, dest, offset,93,4032
+int tag1, tag2, tag3, tag4, tag5, tag6, tag7, dest, offset, sourc,93,4032
+int tag1, tag2, tag3, tag4, tag5, tag6, tag7, dest, offset, sourc, count,93,4032
+int tag1, tag2, tag3, tag4, tag5, tag6, tag7, dest, offset, sourc, count, j 93,4032
+int tag1, tag2, tag3, tag4, tag5, tag6, tag7, dest, offset, sourc, count, j , proc,93,4032
+int tag1, tag2, tag3, tag4, tag5, tag6, tag7, dest, offset, sourc, count, j , proc, pos,93,4032
+int tag1, tag2, tag3, tag4, tag5, tag6, tag7, dest, offset, sourc, count, j , proc, pos,cont,93,4032
+int tag1, tag2, tag3, tag4, tag5, tag6, tag7, dest, offset, sourc, count, j , proc, pos,cont, cts;93,4032
+MPI_Status status_1;94,4131
+MPI_Status status_2;95,4152
+MPI_Status status_3;96,4173
+MPI_Status status_4;97,4194
+MPI_Status status_5;98,4215
+MPI_Status status_6;99,4236
+MPI_Status status_7;100,4257
+int g_ncells_active,101,4278
+int g_ncells_active, g_ncells_total;101,4278
+int RUNOFF_PRINT_FLAG=102,4316
+int RUNOFF_PRINT_CELL=103,4390
+float MAX_RECHARGE_FRACTION=104,4467
+int SIM_MODE=105,4644
+main(115,5082
+
+src/vic_image_finalize.c,28
+vic_image_finalize(33,1474
+
+src/get_global_param.c,26
+get_global_param(35,1624
+
+src/display_current_settings.c,34
+display_current_settings(35,1588
+
+src/check_save_state_flag.c,31
+check_save_state_flag(35,1534
+
+src/vic_image_start.c,25
+vic_image_start(33,1461
+
+src/vic_force.c,52
+vic_force(33,1422
+get_forcing_file_info(477,19871
+
+../shared_all/src/initialize_veg.c,24
+initialize_veg(33,1477
+
+../shared_all/src/zero_output_list.c,26
+zero_output_list(33,1487
+
+../shared_all/src/initialize_snow.c,25
+initialize_snow(33,1499
+
+../shared_all/src/put_data.c,182
+put_data(35,1605
+collect_wb_terms(581,26150
+collect_eb_terms(783,33626
+initialize_save_data(1065,43924
+calc_water_balance_error(1087,44884
+calc_energy_balance_error(1103,45392
+
+../shared_all/src/print_library_shared.c,611
+print_cell_data(33,1407
+print_dmy(80,3422
+sprint_dmy(94,4001
+print_energy_bal(111,4570
+print_force_type(238,10718
+print_global_param(250,11225
+print_lake_con(292,13530
+print_lake_var(330,15028
+print_layer_data_states(399,18575
+print_layer_data_fluxes(419,19218
+print_option(430,19639
+print_out_data(502,24199
+print_stream(526,24961
+print_alarm(561,26347
+print_out_metadata(580,27054
+print_param_set(601,27832
+print_parameters(628,28917
+print_save_data(793,39312
+print_snow_data(808,39939
+print_soil_con(853,42547
+print_veg_con(1079,51358
+print_veg_lib(1127,53099
+print_veg_var(1194,55961
+
+../shared_all/src/calc_root_fraction.c,29
+calc_root_fractions(35,1645
+
+../shared_all/src/free_all_vars.c,23
+free_all_vars(36,1548
+
+../shared_all/src/agg_data.c,25
+agg_stream_data(33,1439
+
+../shared_all/src/compute_derived_state_vars.c,36
+compute_derived_state_vars(37,1709
+
+../shared_all/src/history_metadata.c,34
+set_output_met_data_info(33,1463
+
+../shared_all/src/initialize_parameters.c,31
+initialize_parameters(33,1431
+
+../shared_all/src/forcing_utils.c,105
+average(33,1449
+q_to_vp(64,2137
+air_density(88,2713
+will_it_snow(106,3201
+count_force_vars(128,3832
+
+../shared_all/src/vic_time.c,548
+#define small_offset 32,1366
+fractional_day_from_dmy(39,1708
+julian_day_from_dmy(67,2672
+no_leap_day_from_dmy(136,4671
+all_leap_from_dmy(165,5496
+all_30_day_from_dmy(194,6319
+dmy_julian_day(231,7519
+dmy_no_leap_day(330,10268
+dmy_all_leap(394,11906
+dmy_all_30_day(458,13467
+date2num(498,14844
+num2date(558,16966
+make_lastday(613,18777
+leap_year(652,19919
+initialize_time(680,20843
+invalid_date(710,21916
+dt_seconds_to_time_units(757,23106
+parse_nc_time_units(782,24013
+time_delta(815,25245
+dmy_equal(902,28284
+strpdmy(918,28763
+
+../shared_all/src/initialize_energy.c,27
+initialize_energy(33,1423
+
+../shared_all/src/soil_moisture_from_water_table.c,40
+soil_moisture_from_water_table(67,2873
+
+../shared_all/src/vic_log.c,148
+finalize_logging(37,1661
+get_current_datetime(51,2068
+get_logname(78,2912
+initialize_log(104,3674
+setup_logging(115,3956
+print_trace(147,4859
+
+../shared_all/src/alarms.c,62
+reset_alarm(34,1493
+raise_alarm(99,4459
+set_alarm(116,4958
+
+../shared_all/src/make_all_vars.c,23
+make_all_vars(35,1585
+
+../shared_all/src/timing.c,130
+get_wall_time(33,1434
+get_cpu_time(46,1829
+timer_init(55,2097
+timer_start(68,2411
+timer_stop(80,2726
+timer_continue(93,3149
+
+../shared_all/src/free_vegcon.c,21
+free_vegcon(33,1491
+
+../shared_all/src/open_file.c,19
+open_file(44,2052
+
+../shared_all/src/make_energy_bal.c,25
+make_energy_bal(35,1605
+
+../shared_all/src/initialize_global.c,27
+initialize_global(35,1537
+
+../shared_all/src/set_output_defaults.c,65
+get_default_nstreams_nvars(35,1639
+set_output_defaults(97,3090
+
+../shared_all/src/compute_treeline.c,26
+compute_treeline(44,2175
+
+../shared_all/src/initialize_soil.c,25
+initialize_soil(34,1526
+
+../shared_all/src/compress_files.c,24
+compress_files(33,1497
+
+../shared_all/src/compute_lake_params.c,29
+compute_lake_params(35,1537
+
+../shared_all/src/initialize_options.c,28
+initialize_options(35,1517
+
+../shared_all/src/vic_history.c,232
+alloc_out_data(33,1486
+setup_stream(66,2689
+validate_streams(129,5003
+alloc_aggdata(172,6651
+reset_stream(210,8165
+get_default_outvar_aggtype(239,9099
+set_output_var(347,11889
+free_streams(412,14049
+free_out_data(454,15620
+
+../shared_all/src/get_parameters.c,55
+get_parameters(33,1449
+validate_parameters(538,24840
+
+../shared_all/src/make_veg_var.c,22
+make_veg_var(33,1520
+
+../shared_all/src/make_dmy.c,37
+make_dmy(35,1631
+free_dmy(123,5096
+
+../shared_all/src/cmd_proc.c,122
+char *optstring optstring32,1292
+cmd_proc(43,1770
+print_usage(94,3174
+print_version(117,4104
+print_license(134,4783
+
+../shared_all/src/make_snow_data.c,24
+make_snow_data(35,1590
+
+../shared_all/src/input_tools.c,335
+str_to_bool(33,1461
+count_nstreams_nvars(51,2019
+str_to_agg_type(107,3698
+str_to_out_type(141,4812
+str_to_out_mult(169,5715
+str_to_freq_flag(183,6172
+str_to_ascii_format(224,7328
+str_to_calendar(237,7809
+str_to_timeunits(277,9138
+str_from_time_units(300,9846
+str_from_calendar(325,10653
+cell_method_from_agg_type(366,12072
+
+../shared_all/src/generate_default_lake_state.c,37
+generate_default_lake_state(35,1599
+
+../shared_all/src/update_step_vars.c,26
+update_step_vars(35,1559
+
+../shared_all/src/make_cell_data.c,24
+make_cell_data(35,1591
+
+../shared_all/src/generate_default_state.c,32
+generate_default_state(35,1593
+
+../shared_image/src/vic_finalize.c,22
+vic_finalize(33,1485
+
+../shared_image/src/init_library.c,130
+initialize_soil_con(33,1420
+initialize_veg_con(126,4125
+initialize_domain_info(156,5025
+initialize_global_structures(172,5579
+
+../shared_image/src/get_nc_dimension.c,26
+get_nc_dimension(33,1413
+
+../shared_image/src/put_nc_attr.c,21
+put_nc_attr(33,1426
+
+../shared_image/src/initialize_files.c,57
+initialize_filenames(35,1527
+initialize_fileps(56,2184
+
+../shared_image/src/set_force_type.c,24
+set_force_type(35,1645
+
+../shared_image/src/vic_alloc.c,19
+vic_alloc(33,1439
+
+../shared_image/src/vic_start.c,19
+vic_start(33,1447
+
+../shared_image/src/get_global_domain.c,203
+get_global_domain(33,1434
+get_nc_latlon(161,5987
+copy_domain_info(276,10295
+initialize_domain(294,10968
+initialize_location(317,11778
+add_nveg_to_global_domain(338,12500
+get_domain_type(366,13350
+
+../shared_image/src/vic_image_timing.c,32
+write_vic_timing_table(33,1429
+
+../shared_image/src/alloc_veg_hist.c,47
+alloc_veg_hist(33,1419
+free_veg_hist(55,2384
+
+../shared_image/src/vic_store.c,122
+vic_store(33,1403
+set_nc_state_file_info(1275,53900
+set_nc_state_var_info(1323,55756
+initialize_state_file(1521,63838
+
+../shared_image/src/alloc_atmos.c,41
+alloc_force(33,1464
+free_force(90,3807
+
+../shared_image/src/vic_init.c,18
+vic_init(33,1423
+
+../shared_image/src/check_domain_info.c,45
+compare_ncdomain_with_global_domain(35,1572
+
+../shared_image/src/state_metadata.c,34
+set_state_meta_data_info(33,1464
+
+../shared_image/src/vic_mpi_support.c,1484
+print_mpi_error_str(34,1464
+initialize_mpi(51,2018
+create_MPI_global_struct_type(92,3748
+create_MPI_filenames_struct_type(284,10103
+create_MPI_location_struct_type(386,13415
+create_MPI_option_struct_type(504,16896
+create_MPI_param_struct_type(772,25382
+create_MPI_dmy_struct_type(1437,45961
+create_MPI_alarm_struct_type(1512,48358
+map(1607,51598
+mpi_map_decomp_domain(1665,53792
+gather_put_nc_field_double(1713,55527
+gather_put_nc_field_float(1781,58341
+gather_put_nc_field_int(1851,61177
+gather_put_nc_field_short(1924,63994
+gather_put_nc_field_schar(1997,66862
+get_scatter_nc_field_double(2070,69706
+get_scatter_nc_field_float(2131,72230
+get_scatter_nc_field_int(2194,74759
+size_t *filter_active_cells filter_active_cells2256,77077
+size_t *mpi_map_mapping_array mpi_map_mapping_array2257,77113
+filenames_struct filenames;2261,77263
+filep_struct     filep;2262,77291
+domain_struct    global_domain;2263,77315
+domain_struct    local_domain;2264,77347
+MPI_Datatype     mpi_global_struct_type;2267,77448
+MPI_Datatype     mpi_location_struct_type;2268,77489
+MPI_Datatype     mpi_option_struct_type;2269,77532
+MPI_Datatype     mpi_param_struct_type;2270,77573
+int             *mpi_map_local_array_sizes mpi_map_local_array_sizes2271,77613
+int             *mpi_map_global_array_offsets mpi_map_global_array_offsets2272,77664
+int              mpi_rank;2273,77718
+int              mpi_size;2274,77745
+FILE *LOG_DEST;LOG_DEST2287,78221
+main(2300,78929
+
+../shared_image/src/vic_init_output.c,125
+vic_init_output(34,1478
+initialize_history_file(202,7963
+set_global_nc_attributes(586,24295
+initialize_nc_file(666,27176
+
+../shared_image/src/print_library_shared_image.c,173
+print_force_data(33,1410
+print_domain(65,2922
+print_location(87,3737
+sprint_location(104,4557
+print_nc_file(125,5340
+print_nc_var(160,7344
+print_veg_con_map(184,8197
+
+../shared_image/src/parse_output_info.c,27
+parse_output_info(34,1524
+
+../shared_image/src/get_nc_field.c,84
+get_nc_field_double(33,1460
+get_nc_field_float(67,2556
+get_nc_field_int(101,3637
+
+../shared_image/src/vic_image_run.c,23
+vic_image_run(33,1450
+
+../shared_image/src/get_nc_var_type.c,25
+get_nc_var_type(33,1418
+
+../shared_image/src/vic_nc_info.c,98
+set_nc_var_info(33,1429
+set_nc_var_dimids(115,3982
+get_nc_mode(192,6534
+get_nc_dtype(219,7227
+
+../shared_image/src/vic_write.c,45
+vic_write_output(33,1445
+vic_write(57,2322
+
+../shared_image/src/get_nc_varndimensions.c,31
+get_nc_varndimensions(33,1410
+
+../shared_image/src/vic_restore.c,54
+vic_restore(33,1419
+check_init_state_file(876,36516
+
+../shared_image/src/get_nc_var_attr.c,25
+get_nc_var_attr(33,1430
+
+../../../../AMBHAS/free_structs.c,24
+void free_structs(4,49
+
+../../../../AMBHAS/GW_read_ts.c,42
+#define ERR(7,125
+int GW_read_Ts(11,396
+
+../../../../AMBHAS/get_AMBHAS_Data_Into_VIC.c,37
+int get_AMBHAS_Data_Into_VIC(14,407
+
+../../../../AMBHAS/link_AMBHAS_Local_VIC_Domain.c,42
+void link_AMBHAS_Local_VIC_Domain(13,363
+
+../../../../AMBHAS/get_AMBHAS_Output_Into_VIC.c,39
+int get_AMBHAS_Output_Into_VIC(13,310
+
+../../../../AMBHAS/get_AMBHAS_Data_Into_Global_VIC.c,44
+int get_AMBHAS_Data_Into_Global_VIC(14,407
+
+../../../../AMBHAS/GW_initialise.c,26
+int GW_initialise(14,456
+
+../../../../AMBHAS/writeObsBH.c,23
+int writeObsBH(16,487
+
+../../../../AMBHAS/allocate_structs.c,28
+void allocate_structs(4,49
+
+../../../../AMBHAS/getObsDataCount.c,28
+int getObsDataCount(13,431
+
+../../../../AMBHAS/GW_read_1pumping.c,49
+#define ERR(13,360
+int GW_read_1pumping(14,459
+
+../../../../AMBHAS/free2DArray.c,23
+void free2DArray(3,48
+
+../../../../AMBHAS/allocate2DInt.c,27
+int ** allocate2DInt(3,48
+
+../../../../AMBHAS/GW_write_output.c,47
+#define ERR(9,146
+int GW_write_output(14,453
+
+../../../../AMBHAS/link_AMBHAS_VIC_Domain.c,36
+void link_AMBHAS_VIC_Domain(13,402
+
+../../../../AMBHAS/readGlobalData.c,27
+int readGlobalData(12,351
+
+../../../../AMBHAS/GW_read_data.c,45
+#define ERR(13,442
+int GW_read_data(15,542
+
+../../../../AMBHAS/calculateSy.c,24
+int calculateSy(16,494
+
+../../../../AMBHAS/get_VIC_Data_Into_AMBHAS.c,37
+int get_VIC_Data_Into_AMBHAS(13,319
+
+../../../../AMBHAS/updateTrans.c,24
+int updateTrans(14,454
+
+../../../../AMBHAS/GW_read_h_ini.c,46
+#define ERR(13,357
+int GW_read_h_ini(14,456
+
+../../../../AMBHAS/allocate2DArray.c,32
+double ** allocate2DArray(3,48
+
+../../../../AMBHAS/calculateGwInit.c,28
+int calculateGwInit(14,454
+
+../../../../AMBHAS/calculateGWFlow.c,30
+float calculateGwFlow(11,303
+
+../../vic_run/include/vic_run.h,26
+#define VIC_RUN_H28,1202
+
+../../vic_run/include/vic_physical_constants.h,2097
+#define VIC_PHYSICAL_CONSTANTS28,1217
+#define DAYS_PER_360DAY_YEAR 31,1280
+#define DAYS_PER_YEAR 32,1342
+#define DAYS_PER_LYEAR 33,1398
+#define DAYS_PER_JYEAR 34,1452
+#define HOURS_PER_DAY 35,1510
+#define MONTHS_PER_YEAR 36,1558
+#define MIN_PER_HOUR 37,1610
+#define MIN_PER_DAY 38,1660
+#define SEC_PER_MIN 39,1734
+#define SEC_PER_HOUR 40,1786
+#define SEC_PER_DAY 41,1862
+#define JOULES_PER_CAL 44,1968
+#define GRAMS_PER_KG 45,2026
+#define PA_PER_KPA 46,2080
+#define BAR_PER_KPA 47,2124
+#define RAD_PER_DEG 48,2170
+#define M_PER_KM 49,2231
+#define MM_PER_M 50,2282
+#define CM_PER_M 51,2334
+#define MM_PER_CM 52,2386
+#define MM_PER_IN 53,2442
+#define IN_PER_M 54,2494
+#define MOLE_PER_KMOLE 55,2560
+#define FRACT_TO_PERCENT 56,2615
+#define PPM_to_MIXRATIO 57,2644
+#define C_TO_F(58,2675
+#define CONST_PI 61,2751
+#define CONST_CDAY 64,2821
+#define CONST_SDAY 65,2885
+#define CONST_DDAYS_PER_YEAR 66,2949
+#define CONST_OMEGA 69,3051
+#define CONST_SECPERRAD 70,3101
+#define CONST_RADPERDAY 71,3178
+#define CONST_RADPERDEG 72,3258
+#define CONST_MINDECL 73,3321
+#define CONST_DAYSOFF 74,3393
+#define CONST_REARTH 77,3501
+#define CONST_G 78,3565
+#define CONST_STEBOL 79,3636
+#define CONST_BOLTZ 80,3712
+#define CONST_AVOGAD 81,3789
+#define CONST_KARMAN 82,3866
+#define CONST_MWDAIR 84,3946
+#define CONST_MWWV 85,4022
+#define CONST_MWCO2 86,4100
+#define CONST_MWAIR 87,4170
+#define CONST_MWC 88,4240
+#define CONST_RGAS 90,4333
+#define CONST_RDAIR 91,4424
+#define CONST_RWV 92,4511
+#define CONST_EPS 93,4598
+#define CONST_TKTRIP 95,4700
+#define CONST_TKFRZ 96,4769
+#define CONST_PSTD 98,4877
+#define CONST_TSTD 99,4956
+#define CONST_RHODAIR 101,5060
+#define CONST_RHOFW 102,5169
+#define CONST_RHOICE 103,5238
+#define CONST_CPDAIR 105,5325
+#define CONST_CPMAIR 106,5399
+#define CONST_CPWV 107,5477
+#define CONST_CPFW 108,5549
+#define CONST_CPFWICE 109,5621
+#define CONST_CPICE 110,5694
+#define CONST_VCPICE_WQ 112,5794
+#define CONST_LATICE 114,5944
+#define CONST_LATVAP 115,6011
+#define CONST_LATSUB 116,6083
+#define CONST_SPVAL 119,6201
+
+../../vic_run/include/vic_def.h,22334
+#define VIC_DEF_H28,1192
+#define _BSD_SOURCE30,1211
+#define __USE_XOPEN31,1231
+#define _GNU_SOURCE32,1251
+#define MAXSTRING 53,1639
+#define MISSING 54,1665
+#define MISSING_USI 55,1718
+#define MISSING_S 56,1789
+#define NODATA_VH 57,1857
+#define NODATA_VEG 58,1930
+#define ERROR 59,2005
+#define MAX_VEG 62,2143
+#define MAX_LAYERS 63,2226
+#define MAX_NODES 64,2304
+#define MAX_BANDS 65,2380
+#define MAX_FRONTS 66,2448
+#define MAX_FROST_AREAS 67,2548
+#define MAX_LAKE_NODES 68,2621
+#define MAX_ZWTVMOIST 69,2697
+#define MINSOILDEPTH 72,2938
+#define MIN_FCANOPY 73,3027
+#define MIN_SNOW_WETFRAC 74,3100
+#define MIN_SUBDAILY_STEPS_PER_DAY 77,3260
+#define MAX_SUBDAILY_STEPS_PER_DAY 78,3298
+#define WET 81,3352
+#define DRY 82,3366
+#define RAIN 86,3401
+#define SNOW 87,3416
+#define min(90,3439
+#define max(91,3473
+char          vic_run_ref_str[vic_run_ref_str97,3788
+    DENS_BRAS,104,4040
+    DENS_SNTHRM105,4055
+    ARNO,113,4280
+    NIJSSEN2001114,4290
+    AR_406,122,4520
+    AR_406_LS,123,4532
+    AR_406_FULL,124,4547
+    AR_410125,4564
+    GF_406,133,4778
+    GF_410134,4790
+    RC_JARVIS,142,5019
+    RC_PHOTO143,5034
+    PS_FARQUHAR,151,5262
+    PS_MONTEITH152,5279
+    PHOTO_C3,160,5502
+    PHOTO_C4161,5516
+    short AboveTreelineVeg;171,5814
+    unsigned short int AERO_RESIST_CANSNOW;173,5960
+    bool BLOWING;197,7832
+    bool BLOWING_VAR_THRESHOLD;198,7912
+    bool BLOWING_CALC_PROB;199,7944
+    bool BLOWING_SIMPLE;200,7972
+    bool BLOWING_FETCH;201,7997
+    bool BLOWING_SPATIAL_WIND;202,8021
+    bool CARBON;203,8052
+    bool CLOSE_ENERGY;205,8191
+    bool COMPUTE_TREELINE;212,8704
+    bool CONTINUEONERROR;214,8851
+    bool CORRPREC;215,8943
+    bool EQUAL_AREA;216,9025
+    bool EXP_TRANS;218,9194
+    bool FROZEN_SOIL;220,9347
+    bool FULL_ENERGY;221,9409
+    unsigned short int GRND_FLUX_TYPE;222,9470
+    bool IMPLICIT;225,9738
+    bool JULY_TAVG_SUPPLIED;227,9863
+    bool LAKES;230,10102
+    size_t Ncanopy;231,10163
+    size_t Nfrost;232,10234
+    size_t Nlakenode;233,10301
+    size_t Nlayer;234,10377
+    size_t Nnode;235,10436
+    bool NOFLUX;236,10511
+    size_t NVEGTYPES;238,10640
+    size_t NLAKENODES;240,10769
+    unsigned short int RC_MODE;242,10894
+    size_t ROOT_ZONES;244,11124
+    bool QUICK_FLUX;245,11197
+    bool QUICK_SOLVE;248,11397
+    bool SHARE_LAYER_MOIST;251,11597
+    unsigned short int SNOW_DENSITY;252,11718
+    size_t SNOW_BAND;253,11869
+    bool SPATIAL_FROST;255,11991
+    bool SPATIAL_SNOW;258,12231
+    bool TFALLBACK;262,12534
+    bool BASEFLOW;271,13105
+    unsigned short int GRID_DECIMAL;272,13197
+    bool VEGLIB_FCAN;273,13291
+    bool VEGLIB_PHOTO;274,13380
+    bool VEGPARAM_ALB;275,13467
+    bool VEGPARAM_FCAN;276,13553
+    bool VEGPARAM_LAI;277,13640
+    unsigned short int ALB_SRC;278,13723
+    unsigned short int FCAN_SRC;280,13924
+    unsigned short int LAI_SRC;282,14127
+    bool LAKE_PROFILE;284,14322
+    bool ORGANIC_FRACT;285,14395
+    unsigned short int STATE_FORMAT;288,14555
+    bool INIT_STATE;289,14645
+    bool SAVE_STATE;290,14718
+    size_t Noutstreams;293,14797
+} option_struct;294,14854
+    double wind_h;300,15116
+    double resolution;301,15191
+    double dt;302,15261
+    double snow_dt;303,15325
+    double runoff_dt;304,15400
+    double atmos_dt;305,15471
+    size_t model_steps_per_day;306,15541
+    size_t snow_steps_per_day;307,15618
+    size_t runoff_steps_per_day;308,15694
+    size_t atmos_steps_per_day;309,15772
+    unsigned short int endday;310,15849
+    unsigned short int endmonth;311,15921
+    unsigned short int endyear;312,15995
+    unsigned short int forceday[forceday313,16068
+    unsigned int forcesec[forcesec314,16138
+    unsigned short int forcemonth[forcemonth316,16276
+    unsigned short int forceoffset[forceoffset317,16350
+    unsigned int forceskip[forceskip319,16524
+    unsigned short int forceyear[forceyear321,16671
+    size_t nrecs;322,16742
+    unsigned short int startday;323,16814
+    unsigned short int startmonth;324,16887
+    unsigned int startsec;325,16964
+    unsigned short int startyear;327,17097
+    unsigned short int stateday;328,17172
+    unsigned short int statemonth;330,17304
+    unsigned int statesec;332,17440
+    unsigned short int stateyear;333,17530
+    unsigned short int calendar;335,17663
+    unsigned short int time_units;336,17724
+    double time_origin_num;337,17792
+    char time_origin_str[time_origin_str338,17855
+} global_param_struct;339,17920
+    double LAPSE_RATE;346,18195
+    double GAUGE_HEIGHT;349,18291
+    double HUGE_RESIST;352,18386
+    double ALBEDO_BARE_SOIL;355,18491
+    double EMISS_GRND;358,18588
+    double EMISS_VEG;359,18644
+    double EMISS_ICE;360,18700
+    double EMISS_SNOW;361,18754
+    double EMISS_H2O;362,18805
+    double SOIL_RARC;365,18894
+    double SOIL_RESID_MOIST;366,19020
+    double SOIL_SLAB_MOIST_FRACT;367,19106
+    double SOIL_WINDH;368,19338
+    double VEG_LAI_SNOW_MULTIPLIER;371,19446
+    double VEG_LAI_WATER_FACTOR;372,19582
+    double VEG_MIN_INTERCEPTION_STORAGE;373,19724
+    double VEG_RATIO_DH_HEIGHT;374,19840
+    double VEG_RATIO_RL_HEIGHT;375,19939
+    double CANOPY_CLOSURE;378,20061
+    double CANOPY_RSMAX;379,20156
+    double CANOPY_VPDMINFACTOR;380,20225
+    double LAKE_TMELT;383,20338
+    double LAKE_MAX_SURFACE;384,20361
+    double LAKE_BETA;385,20440
+    double LAKE_FRACMIN;386,20511
+    double LAKE_FRACLIM;387,20573
+    double LAKE_DM;388,20643
+    double LAKE_SNOWCRIT;389,20703
+    double LAKE_ZWATER;390,20753
+    double LAKE_ZSNOW;391,20777
+    double LAKE_RHOSNOW;392,20800
+    double LAKE_CONDI;393,20859
+    double LAKE_CONDS;394,20919
+    double LAKE_LAMISW;395,20980
+    double LAKE_LAMILW;396,21066
+    double LAKE_LAMSSW;397,21151
+    double LAKE_LAMSLW;398,21238
+    double LAKE_LAMWSW;399,21324
+    double LAKE_LAMWLW;400,21412
+    double LAKE_A1;401,21499
+    double LAKE_A2;402,21566
+    double LAKE_QWTAU;403,21634
+    int LAKE_MAX_ITER;404,21700
+    double SVP_A;407,21768
+    double SVP_B;408,21845
+    double SVP_C;409,21922
+    double PHOTO_OMEGA;412,22033
+    double PHOTO_LAIMAX;413,22096
+    double PHOTO_LAILIMIT;414,22162
+    double PHOTO_LAIMIN;415,22265
+    double PHOTO_EPAR;416,22330
+    double PHOTO_FCMAX;417,22422
+    double PHOTO_FCMIN;418,22526
+    double PHOTO_ZENITHMIN;419,22630
+    double PHOTO_ZENITHMINPAR;420,22705
+    double PHOTO_ALBSOIPARMIN;421,22819
+    double PHOTO_MINMAXETRANS;422,22898
+    double PHOTO_MINSTOMCOND;423,23002
+    double PHOTO_FCI1C3;424,23084
+    double PHOTO_FCI1C4;425,23208
+    double PHOTO_OX;426,23332
+    double PHOTO_KC;427,23404
+    double PHOTO_KO;428,23497
+    double PHOTO_EC;429,23588
+    double PHOTO_EO;430,23653
+    double PHOTO_EV;431,23718
+    double PHOTO_ER;432,23786
+    double PHOTO_ALC3;433,23865
+    double PHOTO_FRDC3;434,23929
+    double PHOTO_EK;435,24011
+    double PHOTO_ALC4;436,24071
+    double PHOTO_FRDC4;437,24132
+    double PHOTO_THETA;438,24214
+    double PHOTO_FRLEAF;439,24267
+    double PHOTO_FRGROWTH;440,24373
+    double SRESP_E0_LT;443,24486
+    double SRESP_T0_LT;444,24549
+    double SRESP_WMINFM;445,24612
+    double SRESP_WMAXFM;446,24715
+    double SRESP_WOPTFM;447,24818
+    double SRESP_RHSAT;448,24918
+    double SRESP_RFACTOR;449,25064
+    double SRESP_TAULITTER;450,25187
+    double SRESP_TAUINTER;451,25254
+    double SRESP_TAUSLOW;452,25326
+    double SRESP_FAIR;453,25389
+    double SRESP_FINTER;454,25493
+    double SNOW_MAX_SURFACE_SWE;457,25647
+    double SNOW_LIQUID_WATER_CAPACITY;458,25748
+    double SNOW_NEW_SNOW_DENSITY;459,25866
+    double SNOW_DENS_DMLIMIT;460,25936
+    double SNOW_DENS_DMLIMIT_FACTOR;461,26046
+    double SNOW_DENS_MAX_CHANGE;462,26170
+    double SNOW_DENS_ETA0;463,26263
+    double SNOW_DENS_C1;464,26389
+    double SNOW_DENS_C2;465,26460
+    double SNOW_DENS_C3;466,26531
+    double SNOW_DENS_C3_CONST;467,26602
+    double SNOW_DENS_C4;468,26679
+    double SNOW_DENS_C4WET;469,26750
+    double SNOW_DENS_C5;470,26824
+    double SNOW_DENS_C6;471,26929
+    double SNOW_DENS_F;472,27037
+    double SNOW_DENS_EXP;473,27107
+    double SNOW_DENS_DENOM;474,27202
+    double SNOW_NEW_SNT_C1;475,27302
+    double SNOW_NEW_SNT_C2;476,27388
+    double SNOW_NEW_SNT_C3;477,27474
+    double SNOW_NEW_BRAS_DENOM;478,27560
+    double SNOW_MIN_SWQ_EB_THRES;479,27648
+    double SNOW_A1;480,27797
+    double SNOW_A2;481,27937
+    double SNOW_L1;482,28077
+    double SNOW_L2;483,28223
+    double SNOW_NEW_SNOW_ALB;484,28369
+    double SNOW_ALB_ACCUM_A;485,28438
+    double SNOW_ALB_ACCUM_B;486,28506
+    double SNOW_ALB_THAW_A;487,28574
+    double SNOW_ALB_THAW_B;488,28641
+    double SNOW_TRACESNOW;489,28708
+    double SNOW_CONDUCT;490,28837
+    double SNOW_MAX_SNOW_TEMP;491,28899
+    double SNOW_MIN_RAIN_TEMP;492,28986
+    double BLOWING_KA;495,29105
+    double BLOWING_CSALT;496,29172
+    double BLOWING_UTHRESH;497,29230
+    double BLOWING_KIN_VIS;498,29296
+    int BLOWING_MAX_ITER;499,29367
+    int BLOWING_K;500,29447
+    double BLOWING_SETTLING;501,29466
+    int BLOWING_NUMINCS;502,29535
+    double TREELINE_TEMPERATURE;505,29645
+    double SNOW_DT;508,29764
+    double SURF_DT;509,29887
+    double SOIL_DT;510,29993
+    double CANOPY_DT;511,30096
+    double CANOPY_VP;512,30202
+    double TOL_GRND;515,30341
+    double TOL_OVER;516,30362
+    int FROZEN_MAXITER;519,30414
+    int NEWT_RAPH_MAXTRIAL;522,30479
+    double NEWT_RAPH_TOLX;523,30507
+    double NEWT_RAPH_TOLF;524,30534
+    double NEWT_RAPH_R_MAX;525,30561
+    double NEWT_RAPH_R_MIN;526,30589
+    double NEWT_RAPH_RELAX1;527,30617
+    double NEWT_RAPH_RELAX2;528,30646
+    double NEWT_RAPH_RELAX3;529,30675
+    double NEWT_RAPH_EPS2;530,30704
+    int ROOT_BRENT_MAXTRIES;533,30761
+    int ROOT_BRENT_MAXITER;534,30790
+    double ROOT_BRENT_TSTEP;535,30818
+    double ROOT_BRENT_T;536,30847
+} parameters_struct;537,30872
+    bool FS_ACTIVE;543,31142
+    double Ds;545,31290
+    double Dsmax;547,31418
+    double Ksat[Ksat549,31543
+    double Wcr[Wcr551,31673
+    double Wpwp[Wpwp555,31949
+    double Ws;557,32090
+    double AlbedoPar;558,32170
+    double alpha[alpha559,32253
+    double annual_prec;560,32325
+    double avg_temp;561,32405
+    double avgJulyAirTemp;562,32480
+    double b_infilt;563,32559
+    double beta[beta564,32628
+    double bubble[bubble565,32700
+    double bubble_node[bubble_node566,32779
+    double bulk_density[bulk_density567,32848
+    double bulk_dens_min[bulk_dens_min568,32921
+    double bulk_dens_org[bulk_dens_org569,33005
+    double c;570,33089
+    double depth[depth571,33168
+    double dp;572,33256
+    double dz_node[dz_node573,33333
+    double Zsum_node[Zsum_node574,33406
+    double expt[expt575,33475
+    double expt_node[expt_node576,33615
+    double frost_fract[frost_fract577,33754
+    double frost_slope;578,33850
+    double gamma[gamma579,33924
+    double init_moist[init_moist580,33996
+    double max_infil;581,34076
+    double max_moist[max_moist582,34148
+    double max_moist_node[max_moist_node583,34234
+    double max_snow_distrib_slope;584,34322
+    double phi_s[phi_s585,34639
+    double porosity[porosity586,34727
+    double quartz[quartz587,34793
+    double organic[organic588,34896
+    double resid_moist[resid_moist589,34998
+    double rough;590,35084
+    double snow_rough;591,35157
+    double soil_density[soil_density592,35230
+    double soil_dens_min[soil_dens_min593,35307
+    double soil_dens_org[soil_dens_org594,35395
+    double *BandElev;BandElev595,35483
+    double *AreaFract;AreaFract596,35567
+    double *Pfactor;Pfactor597,35672
+    double *Tfactor;Tfactor598,35795
+    bool *AboveTreeLine;AboveTreeLine599,35912
+    double elevation;600,36004
+    double lat;601,36074
+    double lng;602,36147
+    double cell_area;603,36221
+    double time_zone_lng;604,36291
+    unsigned int gridcel;605,36371
+    double zwtvmoist_zwt[zwtvmoist_zwt606,36434
+    double zwtvmoist_moist[zwtvmoist_moist607,36550
+    double slope;608,36670
+    double aspect;609,36688
+    double ehoriz;610,36707
+    double whoriz;611,36726
+} soil_con_struct;612,36745
+    double albedo[albedo619,37056
+    double *CanopLayerBnd;CanopLayerBnd621,37187
+    double Cv;623,37326
+    double displacement[displacement624,37394
+    double fcanopy[fcanopy626,37539
+    double fetch;628,37690
+    double LAI[LAI630,37805
+    int LAKE;631,37885
+    double lag_one;632,37961
+    double root[root634,38078
+    double roughness[roughness636,38194
+    double sigma_slope;638,38330
+    int veg_class;640,38455
+    size_t vegetat_type_num;641,38518
+    double Wdmax[Wdmax643,38631
+    double *zone_depth;zone_depth645,38761
+    double *zone_fract;zone_fract646,38816
+} veg_con_struct;647,38887
+    double albedo[albedo653,39161
+    double displacement[displacement655,39299
+    double emissivity[emissivity657,39429
+    double fcanopy[fcanopy658,39510
+    double LAI[LAI660,39648
+    size_t NVegLibTypes;661,39706
+    bool overstory;663,39819
+    double rad_atten;665,39952
+    double rarc;667,40074
+    double rmin;668,40140
+    double roughness[roughness669,40209
+    double trunk_ratio;670,40289
+    double Wdmax[Wdmax672,40417
+    double wind_atten;673,40495
+    double wind_h;675,40613
+    double RGL;676,40685
+    unsigned short int veg_class;679,40906
+    char Ctype;681,41002
+    double CO2Specificity;682,41076
+    double LightUseEff;684,41196
+    double MaxCarboxRate;685,41276
+    double MaxETransport;687,41395
+    double NPPfactor_sat;689,41531
+    bool NscaleFlag;691,41677
+    double Wnpp_inhib;693,41807
+} veg_lib_struct;697,42113
+    double *albedo;albedo707,42663
+    double *displacement;displacement708,42726
+    double *fcanopy;fcanopy709,42795
+    double *LAI;LAI711,42909
+    double *roughness;roughness712,42967
+} veg_hist_struct;713,43033
+    double *air_temp;air_temp723,43568
+    double *Catm;Catm724,43618
+    double *channel_in;channel_in725,43695
+    double *coszen;coszen726,43770
+    double *density;density727,43832
+    double *fdir;fdir728,43890
+    double *longwave;longwave729,43976
+    double out_prec;731,44115
+    double out_rain;733,44250
+    double out_snow;734,44308
+    double *par;par735,44366
+    double *prec;prec736,44443
+    double *pressure;pressure737,44512
+    double *shortwave;shortwave738,44569
+    bool *snowflag;snowflag739,44637
+    double *vp;vp741,44781
+    double *vpd;vpd742,44843
+    double *wind;wind743,44913
+} force_data_struct;744,44959
+    unsigned short int day;751,45266
+    unsigned short int day_in_year;752,45322
+    unsigned short int month;753,45385
+    int year;754,45443
+    unsigned int dayseconds;755,45500
+} dmy_struct;756,45567
+    double Cs;764,45941
+    double T;766,46072
+    double ice[ice767,46149
+    double kappa;768,46230
+    double moist;770,46355
+    double phi;772,46469
+    double zwt;773,46534
+    double bare_evap_frac;775,46652
+    double evap;776,46768
+} layer_data_struct;777,46844
+    double aero_resist[aero_resist785,47176
+    double asat;790,47566
+    double CLitter;791,47637
+    double CInter;792,47722
+    double CSlow;793,47813
+    layer_data_struct layer[layer794,47896
+    double rootmoist;797,48137
+    double wetness;799,48285
+    double zwt;802,48499
+    double zwt_lumped;803,48613
+    double pot_evap;807,48750
+    double baseflow;808,48824
+    double recharge;809,48906
+    double gw_inflow;810,48988
+    double runoff;811,49088
+    double inflow;812,49168
+    double Q1;814,49311
+    double Q2;815,49425
+    double RhLitter;816,49542
+    double RhLitter2Atm;817,49631
+    double RhInter;818,49744
+    double RhSlow;819,49839
+    double RhTot;820,49926
+} cell_data_struct;821,50050
+    double AlbedoLake;829,50416
+    double AlbedoOver;830,50488
+    double AlbedoUnder;831,50564
+    double Cs[Cs832,50631
+    double Cs_node[Cs_node833,50715
+    double fdepth[fdepth834,50806
+    bool frozen;835,50883
+    double ice[ice836,50953
+    double kappa[kappa837,51019
+    double kappa_node[kappa_node838,51113
+    double moist[moist839,51210
+    size_t Nfrost;840,51281
+    size_t Nthaw;841,51358
+    double T[T842,51434
+    bool T_fbflag[T_fbflag843,51505
+    unsigned int T_fbcount[T_fbcount844,51604
+    int T1_index;845,51723
+    double Tcanopy;846,51808
+    bool Tcanopy_fbflag;847,51879
+    unsigned int Tcanopy_fbcount;848,51978
+    double tdepth[tdepth849,52095
+    double Tfoliage;850,52171
+    bool Tfoliage_fbflag;851,52252
+    unsigned int Tfoliage_fbcount;852,52353
+    double Tsurf;853,52470
+    bool Tsurf_fbflag;854,52541
+    unsigned int Tsurf_fbcount;855,52638
+    double unfrozen;856,52755
+    double advected_sensible;858,52854
+    double advection;859,52946
+    double AtmosError;860,53009
+    double AtmosLatent;861,53032
+    double AtmosLatentSub;862,53110
+    double AtmosSensible;863,53192
+    double canopy_advection;864,53272
+    double canopy_latent;865,53357
+    double canopy_latent_sub;866,53439
+    double canopy_refreeze;867,53536
+    double canopy_sensible;868,53638
+    double deltaCC;869,53731
+    double deltaH;870,53807
+    double error;871,53883
+    double fusion;872,53953
+    double grnd_flux;873,54032
+    double latent;874,54097
+    double latent_sub;875,54166
+    double longwave;876,54245
+    double LongOverIn;877,54311
+    double LongUnderIn;878,54383
+    double LongUnderOut;879,54456
+    double melt_energy;880,54531
+    double NetLongAtmos;881,54621
+    double NetLongOver;882,54711
+    double NetLongUnder;883,54802
+    double NetShortAtmos;884,54894
+    double NetShortGrnd;885,54967
+    double NetShortOver;886,55043
+    double NetShortUnder;887,55135
+    double out_long_canopy;888,55228
+    double out_long_surface;889,55297
+    double refreeze_energy;890,55367
+    double sensible;891,55452
+    double shortwave;892,55523
+    double ShortOverIn;893,55595
+    double ShortUnderIn;894,55668
+    double snow_flux;895,55742
+} energy_bal_struct;896,55825
+    double albedo;904,56155
+    double displacement;905,56232
+    double fcanopy;907,56350
+    double LAI;909,56476
+    double roughness;910,56548
+    double Wdew;912,56663
+    double Wdmax;913,56734
+    double canopyevap;917,56866
+    double throughfall;918,56938
+    double AnnualNPP;922,57100
+    double AnnualNPPPrev;923,57173
+    double Ci;925,57292
+    double *CiLayer;CiLayer927,57429
+    double NPPfactor;929,57572
+    double *NscaleFactor;NscaleFactor932,57781
+    double rc;934,57900
+    double *rsLayer;rsLayer935,57979
+    double aPAR;939,58129
+    double *aPARLayer;aPARLayer941,58260
+    double GPP;943,58397
+    double Litterfall;945,58537
+    double NPP;947,58670
+    double Raut;949,58801
+    double Rdark;951,58935
+    double Rgrowth;953,59058
+    double Rmaint;955,59209
+    double Rphoto;957,59347
+} veg_var_struct;959,59468
+    double albedo;967,59783
+    double canopy_albedo;968,59850
+    double coldcontent;969,59915
+    double coverage;970,59977
+    double density;971,60061
+    double depth;972,60119
+    unsigned int last_snow;973,60170
+    double max_snow_depth;974,60241
+    bool MELTING;976,60401
+    double pack_temp;978,60516
+    double pack_water;979,60599
+    bool snow;980,60677
+    double snow_canopy;981,60742
+    double store_coverage;982,60807
+    bool store_snow;983,60892
+    double store_swq;985,61052
+    double surf_temp;987,61200
+    unsigned int surf_temp_fbcount;988,61298
+    bool surf_temp_fbflag;989,61414
+    double surf_water;990,61508
+    double swq;991,61590
+    double snow_distrib_slope;992,61671
+    double tmp_int_storage;993,61763
+    double blowing_flux;995,61859
+    double canopy_vapor_flux;996,61938
+    double mass_error;998,62092
+    double melt;999,62152
+    double Qnet;1000,62207
+    double surface_flux;1001,62290
+    double transport;1002,62369
+    double vapor_flux;1003,62458
+} snow_data_struct;1005,62601
+    size_t numnod;1012,62906
+    double z[z1013,62996
+    double basin[basin1014,63138
+    double Cl[Cl1015,63261
+    double b;1016,63414
+    double maxdepth;1017,63509
+    double mindepth;1018,63605
+    double maxvolume;1019,63701
+    double minvolume;1020,63791
+    double bpercent;1022,63912
+    double rpercent;1023,64024
+    double wfrac;1024,64122
+    double depth_in;1026,64252
+    int lake_idx;1027,64358
+} lake_con_struct;1028,64442
+    unsigned short int activenod;1035,64780
+    double dz;1036,64893
+    double surfdz;1037,65013
+    double ldepth;1038,65107
+    double surface[surface1039,65232
+    double sarea;1040,65356
+    double sarea_save;1041,65461
+    double volume;1042,65584
+    double volume_save;1043,65705
+    double temp[temp1044,65844
+    double tempavg;1045,65926
+    double areai;1047,66090
+    double new_ice_area;1048,66187
+    double ice_water_eq;1049,66278
+    double hice;1050,66369
+    double tempi;1051,66452
+    double swe;1052,66519
+    double swe_save;1053,66618
+    double surf_temp;1054,66723
+    double pack_temp;1055,66803
+    double coldcontent;1056,66880
+    double surf_water;1057,66948
+    double pack_water;1058,67032
+    double SAlbedo;1059,67113
+    double sdepth;1060,67186
+    double aero_resist;1062,67343
+    double density[density1063,67441
+    double baseflow_in;1065,67544
+    double baseflow_out;1066,67651
+    double channel_in;1067,67748
+    double evapw;1068,67830
+    double ice_throughfall;1069,67937
+    double prec;1070,68089
+    double recharge;1071,68199
+    double runoff_in;1072,68286
+    double runoff_out;1073,68399
+    double snowmlt;1074,68502
+    double vapor_flux;1075,68601
+    snow_data_struct snow;1078,68852
+    energy_bal_struct energy;1079,68923
+    cell_data_struct soil;1080,69001
+} lake_var_struct;1081,69066
+    cell_data_struct **cell;cell1088,69392
+    energy_bal_struct **energy;energy1089,69462
+    lake_var_struct lake_var;1090,69536
+    snow_data_struct **snow;snow1091,69608
+    veg_var_struct **veg_var;veg_var1092,69672
+} all_vars_struct;1093,69742
+
+../../vic_run/include/vic_log.h,607
+#define __vic_log_h__42,1918
+#define LOG_LVL 58,2327
+FILE *LOG_DEST;LOG_DEST61,2354
+#define clean_errno(71,2596
+#define debug(75,2691
+#define debug(78,2850
+#define log_info(85,2930
+#define log_info(87,3013
+#define log_info(91,3165
+#define log_warn(97,3247
+#define log_warn(100,3402
+#define log_warn(105,3626
+#define log_err(111,3710
+#define log_err(116,3959
+#define check_debug(128,4490
+#define check(131,4636
+#define check_alloc_status(133,4776
+#define sentinel(138,5026
+#define check_mem(141,5149
+#define TRACE(143,5200
+#define error_response(146,5340
+#define error_unless(149,5490
+
+include/vic_driver_image.h,63
+#define VIC_DRIVER_IMAGE_H28,1220
+#define VIC_DRIVER 32,1286
+
+../shared_all/include/vic_driver_shared_all.h,12216
+#define VIC_DRIVER_SHARED_H28,1226
+#define MAX_FORCE_FILES 34,1357
+#define MAX_OUTPUT_STREAMS 35,1383
+#define COMPRESSION_LVL_UNSET 38,1444
+#define COMPRESSION_LVL_DEFAULT 39,1477
+#define OUT_MULT_DEFAULT 42,1536
+#define OUT_ASCII_FORMAT_DEFAULT 43,1586
+#define SNOW_BAND_TRUE_BUT_UNSET 46,1656
+    UNSET_FILE_FORMAT,53,1888
+    ASCII,54,1911
+    BINARY,55,1922
+    NETCDF3_CLASSIC,56,1934
+    NETCDF3_64BIT_OFFSET,57,1955
+    NETCDF4_CLASSIC,58,1981
+    NETCDF459,2002
+    LITTLE,67,2210
+    BIG 68,2250
+    FROM_DEFAULT,76,2488
+    FROM_VEGLIB,77,2506
+    FROM_VEGPARAM,78,2523
+    FROM_VEGHIST79,2542
+    AIR_TEMP,87,2765
+    ALBEDO,88,2824
+    CATM,89,2875
+    CHANNEL_IN,90,2936
+    FCANOPY,91,2988
+    FDIR,92,3064
+    LAI_IN,93,3146
+    LWDOWN,94,3195
+    PAR,95,3255
+    PREC,96,3332
+    PRESSURE,97,3398
+    VP,98,3450
+    SWDOWN,99,3496
+    WIND,100,3547
+    SKIP,101,3589
+    N_FORCING_TYPES 104,3793
+    OUT_ASAT,114,4097
+    OUT_LAKE_AREA_FRAC,115,4155
+    OUT_LAKE_DEPTH,116,4252
+    OUT_LAKE_ICE,117,4346
+    OUT_LAKE_ICE_FRACT,118,4432
+    OUT_LAKE_ICE_HEIGHT,119,4509
+    OUT_LAKE_MOIST,120,4570
+    OUT_LAKE_SURF_AREA,121,4660
+    OUT_LAKE_SWE,122,4717
+    OUT_LAKE_SWE_V,123,4825
+    OUT_LAKE_VOLUME,124,4926
+    OUT_ROOTMOIST,125,4977
+    OUT_SMFROZFRAC,126,5041
+    OUT_SMLIQFRAC,127,5144
+    OUT_SNOW_CANOPY,128,5250
+    OUT_SNOW_COVER,129,5326
+    OUT_SNOW_DEPTH,130,5401
+    OUT_SOIL_ICE,131,5459
+    OUT_SOIL_LIQ,132,5536
+    OUT_SOIL_ICE_FRAC,133,5616
+    OUT_SOIL_LIQ_FRAC,134,5717
+    OUT_SOIL_MOIST,135,5821
+    OUT_SOIL_WET,136,5909
+    OUT_SURFSTOR,137,6043
+    OUT_SURF_FROST_FRAC,138,6146
+    OUT_SWE,139,6231
+    OUT_WDEW,140,6346
+    OUT_ZWT,141,6431
+    OUT_ZWT_LUMPED,142,6529
+    OUT_BASEFLOW,144,6691
+    OUT_DELINTERCEPT,145,6765
+    OUT_DELSOILMOIST,146,6843
+    OUT_DELSURFSTOR,147,6912
+    OUT_DELSWE,148,6991
+    OUT_EVAP,149,7063
+    OUT_EVAP_BARE,150,7124
+    OUT_EVAP_CANOP,151,7194
+    OUT_INFLOW,152,7274
+    OUT_LAKE_BF_IN,153,7354
+    OUT_LAKE_BF_IN_V,154,7431
+    OUT_LAKE_BF_OUT,155,7519
+    OUT_LAKE_BF_OUT_V,156,7586
+    OUT_LAKE_CHAN_IN,157,7664
+    OUT_LAKE_CHAN_IN_V,158,7728
+    OUT_LAKE_CHAN_OUT,159,7803
+    OUT_LAKE_CHAN_OUT_V,160,7868
+    OUT_LAKE_DSTOR,161,7944
+    OUT_LAKE_DSTOR_V,162,8039
+    OUT_LAKE_DSWE,163,8145
+    OUT_LAKE_DSWE_V,164,8217
+    OUT_LAKE_EVAP,165,8300
+    OUT_LAKE_EVAP_V,166,8373
+    OUT_LAKE_PREC_V,167,8457
+    OUT_LAKE_RCHRG,168,8539
+    OUT_LAKE_RCHRG_V,169,8620
+    OUT_LAKE_RO_IN,170,8712
+    OUT_LAKE_RO_IN_V,171,8787
+    OUT_LAKE_VAPFLX,172,8873
+    OUT_LAKE_VAPFLX_V,173,8962
+    OUT_PET,174,9062
+    OUT_PREC,175,9342
+    OUT_RAINF,176,9404
+    OUT_REFREEZE,177,9453
+    OUT_RUNOFF,178,9525
+    OUT_SNOW_MELT,179,9579
+    OUT_SNOWF,180,9629
+    OUT_SUB_BLOWING,181,9678
+    OUT_SUB_CANOP,182,9749
+    OUT_SUB_SNOW,183,9831
+    OUT_SUB_SURFACE,184,9929
+    OUT_TRANSP_VEG,185,10007
+    OUT_WATER_ERROR,186,10080
+    OUT_ALBEDO,188,10184
+    OUT_BARESOILT,189,10252
+    OUT_FDEPTH,190,10320
+    OUT_LAKE_ICE_TEMP,191,10384
+    OUT_LAKE_SURF_TEMP,192,10446
+    OUT_RAD_TEMP,193,10509
+    OUT_SALBEDO,194,10585
+    OUT_SNOW_PACK_TEMP,195,10647
+    OUT_SNOW_SURF_TEMP,196,10707
+    OUT_SNOWT_FBFLAG,197,10770
+    OUT_SOIL_TEMP,198,10843
+    OUT_SOIL_TNODE,199,10898
+    OUT_SOIL_TNODE_WL,200,10953
+    OUT_SOILT_FBFLAG,201,11008
+    OUT_SURF_TEMP,202,11091
+    OUT_SURFT_FBFLAG,203,11157
+    OUT_TCAN_FBFLAG,204,11216
+    OUT_TDEPTH,205,11263
+    OUT_TFOL_FBFLAG,206,11326
+    OUT_VEGT,207,11374
+    OUT_ADV_SENS,209,11487
+    OUT_ADVECTION,210,11568
+    OUT_DELTACC,211,11625
+    OUT_DELTAH,212,11710
+    OUT_ENERGY_ERROR,213,11782
+    OUT_FUSION,214,11843
+    OUT_GRND_FLUX,215,11929
+    OUT_IN_LONG,216,11996
+    OUT_LATENT,217,12085
+    OUT_LATENT_SUB,218,12154
+    OUT_MELT_ENERGY,219,12240
+    OUT_LWNET,220,12320
+    OUT_SWNET,221,12388
+    OUT_R_NET,222,12457
+    OUT_RFRZ_ENERGY,223,12526
+    OUT_SENSIBLE,224,12620
+    OUT_SNOW_FLUX,225,12691
+    OUT_AERO_COND,227,12789
+    OUT_AERO_COND1,228,12956
+    OUT_AERO_COND2,229,13028
+    OUT_AERO_RESIST,230,13102
+    OUT_AERO_RESIST1,231,13272
+    OUT_AERO_RESIST2,232,13343
+    OUT_AIR_TEMP,233,13416
+    OUT_CATM,234,13470
+    OUT_DENSITY,235,13539
+    OUT_FCANOPY,236,13613
+    OUT_FDIR,237,13698
+    OUT_LAI,238,13788
+    OUT_LWDOWN,239,13846
+    OUT_PAR,240,13905
+    OUT_PRESSURE,241,13991
+    OUT_QAIR,242,14065
+    OUT_REL_HUMID,243,14125
+    OUT_SWDOWN,244,14180
+    OUT_SURF_COND,245,14240
+    OUT_VP,246,14300
+    OUT_VPD,247,14368
+    OUT_WIND,248,14444
+    OUT_ADV_SENS_BAND,250,14540
+    OUT_ADVECTION_BAND,251,14626
+    OUT_ALBEDO_BAND,252,14683
+    OUT_DELTACC_BAND,253,14751
+    OUT_GRND_FLUX_BAND,254,14828
+    OUT_IN_LONG_BAND,255,14895
+    OUT_LATENT_BAND,256,14984
+    OUT_LATENT_SUB_BAND,257,15053
+    OUT_MELT_ENERGY_BAND,258,15141
+    OUT_LWNET_BAND,259,15221
+    OUT_SWNET_BAND,260,15289
+    OUT_RFRZ_ENERGY_BAND,261,15358
+    OUT_SENSIBLE_BAND,262,15452
+    OUT_SNOW_CANOPY_BAND,263,15523
+    OUT_SNOW_COVER_BAND,264,15598
+    OUT_SNOW_DEPTH_BAND,265,15673
+    OUT_SNOW_FLUX_BAND,266,15731
+    OUT_SNOW_MELT_BAND,267,15802
+    OUT_SNOW_PACKT_BAND,268,15851
+    OUT_SNOW_SURFT_BAND,269,15911
+    OUT_SWE_BAND,270,15974
+    OUT_APAR,272,16076
+    OUT_GPP,273,16130
+    OUT_RAUT,274,16201
+    OUT_NPP,275,16269
+    OUT_LITTERFALL,276,16338
+    OUT_RHET,277,16427
+    OUT_NEE,278,16516
+    OUT_CLITTER,279,16595
+    OUT_CINTER,280,16668
+    OUT_CSLOW,281,16747
+    OUT_RECHARGE,283,16837
+    OUT_GW_INFLOW,284,16922
+    OUT_BASEFLOW_AQ,285,17004
+    OUT_Z,286,17070
+    OUT_Q1,287,17138
+    OUT_Q2,288,17202
+    OUT_SY,289,17270
+    OUT_TIME_VICRUN_WALL,293,17370
+    OUT_TIME_VICRUN_CPU,294,17445
+    N_OUTVAR_TYPES 297,17662
+    STATE_SOIL_MOISTURE,305,17924
+    STATE_SOIL_ICE,306,17992
+    STATE_CANOPY_WATER,307,18052
+    STATE_ANNUALNPP,308,18147
+    STATE_ANNUALNPPPREV,309,18250
+    STATE_CLITTER,310,18355
+    STATE_CINTER,311,18452
+    STATE_CSLOW,312,18554
+    STATE_SNOW_AGE,313,18647
+    STATE_SNOW_MELT_STATE,314,18731
+    STATE_SNOW_COVERAGE,315,18823
+    STATE_SNOW_WATER_EQUIVALENT,316,18919
+    STATE_SNOW_SURF_TEMP,317,19010
+    STATE_SNOW_SURF_WATER,318,19110
+    STATE_SNOW_PACK_TEMP,319,19205
+    STATE_SNOW_PACK_WATER,320,19302
+    STATE_SNOW_DENSITY,321,19394
+    STATE_SNOW_COLD_CONTENT,322,19480
+    STATE_SNOW_CANOPY,323,19575
+    STATE_SOIL_NODE_TEMP,324,19672
+    STATE_FOLIAGE_TEMPERATURE,325,19770
+    STATE_ENERGY_LONGUNDEROUT,326,19866
+    STATE_ENERGY_SNOW_FLUX,327,19980
+    STATE_LAKE_SOIL_MOISTURE,328,20092
+    STATE_LAKE_SOIL_ICE,329,20160
+    STATE_LAKE_CLITTER,330,20220
+    STATE_LAKE_CINTER,331,20315
+    STATE_LAKE_CSLOW,332,20415
+    STATE_LAKE_SNOW_AGE,333,20506
+    STATE_LAKE_SNOW_MELT_STATE,334,20588
+    STATE_LAKE_SNOW_COVERAGE,335,20678
+    STATE_LAKE_SNOW_WATER_EQUIVALENT,336,20772
+    STATE_LAKE_SNOW_SURF_TEMP,337,20861
+    STATE_LAKE_SNOW_SURF_WATER,338,20959
+    STATE_LAKE_SNOW_PACK_TEMP,339,21052
+    STATE_LAKE_SNOW_PACK_WATER,340,21147
+    STATE_LAKE_SNOW_DENSITY,341,21237
+    STATE_LAKE_SNOW_COLD_CONTENT,342,21321
+    STATE_LAKE_SNOW_CANOPY,343,21414
+    STATE_LAKE_SOIL_NODE_TEMP,344,21509
+    STATE_LAKE_ACTIVE_LAYERS,345,21605
+    STATE_LAKE_LAYER_DZ,346,21692
+    STATE_LAKE_SURF_LAYER_DZ,347,21774
+    STATE_LAKE_DEPTH,348,21868
+    STATE_LAKE_LAYER_SURF_AREA,349,21944
+    STATE_LAKE_SURF_AREA,350,22041
+    STATE_LAKE_VOLUME,351,22123
+    STATE_LAKE_LAYER_TEMP,352,22200
+    STATE_LAKE_AVERAGE_TEMP,353,22293
+    STATE_LAKE_ICE_AREA_FRAC,354,22393
+    STATE_LAKE_ICE_AREA_FRAC_NEW,355,22480
+    STATE_LAKE_ICE_WATER_EQUIVALENT,356,22578
+    STATE_LAKE_ICE_HEIGHT,357,22675
+    STATE_LAKE_ICE_TEMP,358,22754
+    STATE_LAKE_ICE_SWE,359,22839
+    STATE_LAKE_ICE_SNOW_SURF_TEMP,360,22932
+    STATE_LAKE_ICE_SNOW_PACK_TEMP,361,23034
+    STATE_LAKE_ICE_SNOW_COLD_CONTENT,362,23133
+    STATE_LAKE_ICE_SNOW_SURF_WATER,363,23229
+    STATE_LAKE_ICE_SNOW_PACK_WATER,364,23326
+    STATE_LAKE_ICE_SNOW_ALBEDO,365,23420
+    STATE_LAKE_ICE_SNOW_DEPTH,366,23507
+    N_STATE_VARS 369,23734
+    OUT_TYPE_DEFAULT,378,24014
+    OUT_TYPE_CHAR,379,24063
+    OUT_TYPE_SINT,380,24099
+    OUT_TYPE_USINT,381,24140
+    OUT_TYPE_INT,382,24190
+    OUT_TYPE_FLOAT,383,24225
+    OUT_TYPE_DOUBLE 384,24288
+    AGG_TYPE_DEFAULT,392,24566
+    AGG_TYPE_AVG,393,24621
+    AGG_TYPE_BEG,394,24677
+    AGG_TYPE_END,395,24742
+    AGG_TYPE_MAX,396,24801
+    AGG_TYPE_MIN,397,24863
+    AGG_TYPE_SUM 398,24925
+    FREQ_NEVER,406,25201
+    FREQ_NSTEPS,407,25259
+    FREQ_NSECONDS,408,25324
+    FREQ_NMINUTES,409,25391
+    FREQ_NHOURS,410,25458
+    FREQ_NDAYS,411,25523
+    FREQ_NMONTHS,412,25587
+    FREQ_NYEARS,413,25653
+    FREQ_DATE,414,25718
+    FREQ_END 415,25789
+    DISP_VERSION,423,26092
+    DISP_COMPILE_TIME,424,26110
+    DISP_ALL425,26133
+enum calendars431,26349
+    CALENDAR_STANDARD,433,26366
+    CALENDAR_GREGORIAN,434,26389
+    CALENDAR_PROLEPTIC_GREGORIAN,435,26413
+    CALENDAR_NOLEAP,436,26447
+    CALENDAR_365_DAY,437,26468
+    CALENDAR_360_DAY,438,26490
+    CALENDAR_JULIAN,439,26512
+    CALENDAR_ALL_LEAP,440,26533
+    CALENDAR_366_DAY441,26556
+enum time_units447,26782
+    TIME_UNITS_SECONDS,449,26800
+    TIME_UNITS_MINUTES,450,26824
+    TIME_UNITS_HOURS,451,26848
+    TIME_UNITS_DAYS452,26870
+enum timers458,27083
+    TIMER_VIC_ALL,460,27097
+    TIMER_VIC_INIT,461,27116
+    TIMER_VIC_RUN,462,27136
+    TIMER_VIC_FINAL,463,27155
+    N_TIMERS464,27176
+    size_t N_ELEM;471,27422
+    bool SIGNED;473,27571
+    bool SUPPLIED;474,27588
+    double multiplier;475,27607
+    char varname[varname476,27630
+} force_type_struct;477,27659
+    force_type_struct TYPE[TYPE485,28073
+    double FORCE_DT[FORCE_DT486,28118
+    size_t force_steps_per_day[force_steps_per_day487,28176
+    unsigned short int FORCE_ENDIAN[FORCE_ENDIAN488,28253
+    int FORCE_FORMAT[FORCE_FORMAT490,28402
+    int FORCE_INDEX[FORCE_INDEX491,28462
+    size_t N_TYPES[N_TYPES492,28503
+} param_set_struct;493,28526
+    unsigned int count;499,28776
+    dmy_struct next_dmy;500,28829
+    int next_count;501,28889
+    unsigned int freq;502,28951
+    int n;503,29025
+    bool is_subdaily;504,29131
+} alarm_struct;505,29225
+    size_t nvars;511,29495
+    size_t ngridcells;512,29581
+    dmy_struct time_bounds[time_bounds513,29658
+    char prefix[prefix514,29729
+    char filename[filename515,29813
+    FILE *fh;fh516,29877
+    unsigned short int file_format;517,29933
+    short int compress;518,29997
+    unsigned short int *type;type519,30073
+    double *mult;mult524,30488
+    char **format;format525,30593
+    unsigned int *varid;varid526,30686
+    unsigned short int *aggtype;aggtype530,31067
+    double ****aggdata;aggdata531,31157
+    alarm_struct agg_alarm;532,31276
+    alarm_struct write_alarm;533,31351
+} stream_struct;534,31432
+    double total_moist_storage;541,31738
+    double total_soil_moist;542,31808
+    double surfstor;543,31882
+    double swe;544,31951
+    double wdew;545,32020
+} save_data_struct;546,32087
+    char varname[varname552,32353
+    char long_name[long_name553,32408
+    char standard_name[standard_name554,32465
+    char units[units555,32534
+    char description[description556,32588
+    size_t nelem;557,32655
+} metadata_struct;558,32712
+    force_data_struct *force;force565,33008
+    double dt;566,33038
+    energy_bal_struct *energy;energy567,33053
+    size_t rec;568,33084
+    double **out_data;out_data569,33100
+    stream_struct *output_streams;output_streams570,33123
+    snow_data_struct *snow;snow571,33158
+    soil_con_struct soil_con;572,33186
+    veg_con_struct *veg_con;veg_con573,33216
+    veg_var_struct *veg_var;veg_var574,33245
+} Error_struct;575,33274
+    double start_wall;581,33533
+    double start_cpu;582,33556
+    double stop_wall;583,33578
+    double stop_cpu;584,33600
+    double delta_wall;585,33621
+    double delta_cpu;586,33644
+} timer_struct;587,33666
+
+../shared_all/include/vic_version.h,811
+#define VIC_VERSION_H28,1208
+#define STR_HELPER(30,1231
+#define STR(31,1257
+#define VERSION 34,1303
+#define SHORT_VERSION 38,1374
+#define GIT_VERSION 42,1432
+#define USERNAME 46,1485
+#define HOSTNAME 50,1535
+#define BUILD_DATE 53,1568
+#define BUILD_TIME 54,1596
+# define COMPILER 59,1741
+# define COMPILER_VERSION 60,1767
+# define COMPILER 64,1927
+# define COMPILER_VERSION 65,1951
+# define COMPILER 69,2100
+# define COMPILER_VERSION 70,2124
+# define COMPILER 75,2315
+# define COMPILER_VERSION 76,2340
+# define COMPILER 80,2524
+# define COMPILER_VERSION 81,2549
+# define COMPILER 84,2641
+# define COMPILER_VERSION 85,2669
+# define CSTANDARD 90,2754
+# define CSTANDARD 93,2815
+# define PLATFORM 99,2885
+# define PLATFORM 101,2927
+# define PLATFORM 103,3001
+# define PLATFORM 106,3050
+
+../shared_image/include/vic_image_log.h,217
+#define __vic_image_log_h__42,1944
+#define clean_ncerrno(48,2038
+#define log_ncerr(52,2156
+#define log_ncerr(58,2477
+#define check_nc_status(66,2882
+#define log_mpi_err(71,3190
+#define check_mpi_status(78,3511
+
+../shared_image/include/vic_driver_shared_image.h,3116
+#define VIC_DRIVER_SHARED_IMAGE_H28,1234
+#define MAXDIMS 36,1374
+    NC_HISTORY_FILE,43,1591
+    NC_STATE_FILE,44,1612
+  bool run;55,2185
+  double latitude;56,2254
+  double longitude;57,2310
+  double area;58,2368
+  double frac;59,2409
+  size_t nveg;60,2469
+  size_t global_idx;61,2546
+  size_t io_idx;62,2623
+  size_t local_idx;63,2680
+  int A_nlat;64,2755
+  int A_nlon;65,2815
+  double Sy;66,2878
+  double z;67,2941
+  double Kaq;68,3024
+} location_struct;69,3078
+  char lat_var[lat_var75,3342
+  char lon_var[lon_var76,3419
+  char mask_var[mask_var77,3498
+  char area_var[area_var78,3572
+  char frac_var[frac_var79,3646
+  char y_dim[y_dim80,3724
+  char x_dim[x_dim81,3793
+  size_t n_coord_dims;82,3862
+} domain_info_struct;83,3919
+  size_t ncells_total;90,4272
+  size_t ncells_active;91,4340
+  size_t n_nx;92,4410
+  size_t n_ny;93,4450
+  location_struct *locations;locations94,4489
+  domain_info_struct info;95,4562
+} domain_struct;96,4632
+    int nc_varid;102,4882
+    int nc_type;103,4945
+    int nc_dimids[nc_dimids104,5010
+    size_t nc_counts[nc_counts105,5072
+    size_t nc_dims;106,5130
+} nc_var_struct;107,5195
+    char c_fillvalue;114,5527
+    int i_fillvalue;115,5549
+    double d_fillvalue;116,5570
+    float f_fillvalue;117,5594
+    short int s_fillvalue;118,5617
+    int nc_id;119,5644
+    int band_dimid;120,5659
+    int front_dimid;121,5679
+    int frost_dimid;122,5700
+    int lake_node_dimid;123,5721
+    int layer_dimid;124,5746
+    int ni_dimid;125,5767
+    int nj_dimid;126,5785
+    int node_dimid;127,5803
+    int root_zone_dimid;128,5823
+    int time_dimid;129,5848
+    int time_bounds_dimid;130,5868
+    int veg_dimid;131,5895
+    int time_varid;132,5914
+    int time_bounds_varid;133,5934
+    size_t band_size;134,5961
+    size_t front_size;135,5983
+    size_t frost_size;136,6006
+    size_t lake_node_size;137,6029
+    size_t layer_size;138,6056
+    size_t ni_size;139,6079
+    size_t nj_size;140,6099
+    size_t node_size;141,6119
+    size_t root_zone_size;142,6141
+    size_t time_size;143,6168
+    size_t veg_size;144,6190
+    bool open;145,6211
+    nc_var_struct *nc_vars;nc_vars146,6226
+} nc_file_struct;147,6254
+    size_t nv_types;154,6592
+    size_t nv_active;156,6710
+    int *vidx;vidx160,6991
+    double *Cv;Cv161,7063
+} veg_con_map_struct;162,7132
+    FILE *forcing[forcing168,7360
+    FILE *globalparam;globalparam169,7425
+    FILE *constants;constants170,7480
+    FILE *domain;domain171,7543
+    FILE *init_state;init_state172,7587
+    FILE *paramfile;paramfile173,7644
+    FILE *statefile;statefile174,7691
+    FILE *logfile;logfile175,7747
+} filep_struct;176,7788
+    char forcing[forcing182,8044
+    char f_path_pfx[f_path_pfx183,8137
+    char global[global184,8250
+    char domain[domain185,8318
+    char constants[constants186,8378
+    char params[params187,8447
+    char init_state[init_state188,8517
+    char result_dir[result_dir189,8590
+    char statefile[statefile190,8673
+    char log_path[log_path191,8759
+} filenames_struct;192,8832
+
+../shared_image/include/vic_mpi.h,56
+#define VIC_MPI_H28,1202
+#define VIC_MPI_ROOT 33,1260
+
+../../../../AMBHAS/netcdf.h,7456
+#define _NETCDF_13,303
+typedef int nc_type;28,628
+#define	NC_NAT 37,738
+#define	NC_BYTE 38,783
+#define	NC_CHAR 39,839
+#define	NC_SHORT 40,886
+#define	NC_INT 41,936
+#define NC_LONG 42,992
+#define	NC_FLOAT 43,1081
+#define	NC_DOUBLE 44,1148
+#define	NC_UBYTE 45,1216
+#define	NC_USHORT 46,1264
+#define	NC_UINT 47,1313
+#define	NC_INT64 48,1360
+#define	NC_UINT64 49,1407
+#define	NC_STRING 50,1457
+#define NC_MAX_ATOMIC_TYPE 52,1495
+#define	NC_VLEN 56,1663
+#define	NC_OPAQUE 57,1720
+#define	NC_ENUM 58,1763
+#define	NC_COMPOUND 59,1802
+#define NC_FIRSTUSERTYPEID 62,1912
+#define NC_FILL_BYTE	69,2195
+#define NC_FILL_CHAR	70,2236
+#define NC_FILL_SHORT	71,2267
+#define NC_FILL_INT	72,2305
+#define NC_FILL_FLOAT	73,2340
+#define NC_FILL_DOUBLE	74,2410
+#define NC_FILL_UBYTE 75,2458
+#define NC_FILL_USHORT 76,2488
+#define NC_FILL_UINT 77,2520
+#define NC_FILL_INT64 78,2558
+#define NC_FILL_UINT64 79,2618
+#define NC_FILL_STRING 80,2688
+#define NC_MAX_BYTE 91,3180
+#define NC_MIN_BYTE 92,3204
+#define NC_MAX_CHAR 93,3241
+#define NC_MAX_SHORT 94,3265
+#define NC_MIN_SHORT 95,3292
+#define NC_MAX_INT 96,3333
+#define NC_MIN_INT 97,3363
+#define NC_MAX_FLOAT 98,3400
+#define NC_MIN_FLOAT 99,3438
+#define NC_MAX_DOUBLE 100,3475
+#define NC_MIN_DOUBLE 101,3521
+#define NC_MAX_UBYTE 102,3560
+#define NC_MAX_USHORT 103,3593
+#define NC_MAX_UINT 104,3622
+#define NC_MAX_INT64 105,3654
+#define NC_MIN_INT64 106,3699
+#define NC_MAX_UINT64 107,3747
+#define X_INT64_MAX 108,3795
+#define X_INT64_MIN 109,3843
+#define X_UINT64_MAX 110,3886
+#define _FillValue	118,4230
+#define NC_FILL	119,4262
+#define NC_NOFILL	120,4334
+#define NC_NOWRITE	130,4563
+#define NC_WRITE 131,4634
+#define NC_CLOBBER	132,4708
+#define NC_NOCLOBBER 133,4793
+#define NC_DISKLESS 135,4890
+#define NC_MMAP 136,4990
+#define NC_64BIT_DATA 138,5101
+#define NC_CDF5 139,5202
+#define NC_CLASSIC_MODEL 141,5282
+#define NC_64BIT_OFFSET 142,5384
+#define NC_LOCK 148,5684
+#define NC_SHARE 152,5813
+#define NC_NETCDF4 154,5846
+#define NC_MPIIO 158,6024
+#define NC_MPIPOSIX 161,6145
+#define NC_INMEMORY 163,6220
+#define NC_PNETCDF 165,6320
+#define NC_FORMAT_CLASSIC 174,6743
+#define NC_FORMAT_64BIT_OFFSET 180,6964
+#define NC_FORMAT_64BIT 181,7002
+#define NC_FORMAT_NETCDF4 182,7186
+#define NC_FORMAT_NETCDF4_CLASSIC 183,7224
+#define NC_FORMAT_64BIT_DATA 184,7262
+#define NC_FORMAT_CDF5 187,7313
+#define NC_FORMATX_NC3 209,8187
+#define NC_FORMATX_NC_HDF5 210,8220
+#define NC_FORMATX_NC4 211,8285
+#define NC_FORMATX_NC_HDF4 212,8347
+#define NC_FORMATX_PNETCDF 213,8412
+#define NC_FORMATX_DAP2 214,8445
+#define NC_FORMATX_DAP4 215,8478
+#define NC_FORMATX_UNDEFINED 216,8511
+#define NC_FORMAT_NC3 223,8779
+#define NC_FORMAT_NC_HDF5 224,8874
+#define NC_FORMAT_NC4 225,8977
+#define NC_FORMAT_NC_HDF4 226,9072
+#define NC_FORMAT_PNETCDF 227,9172
+#define NC_FORMAT_DAP2 228,9275
+#define NC_FORMAT_DAP4 229,9372
+#define NC_FORMAT_UNDEFINED 230,9469
+#define NC_SIZEHINT_DEFAULT 235,9659
+#define NC_ALIGN_CHUNK 238,9740
+#define NC_UNLIMITED 241,9844
+#define NC_GLOBAL 244,9920
+#define NC_MAX_DIMS	265,10593
+#define NC_MAX_ATTRS	266,10618
+#define NC_MAX_VARS	267,10644
+#define NC_MAX_NAME	268,10669
+#define NC_MAX_VAR_DIMS	269,10693
+#define NC_MAX_HDF4_NAME 273,10851
+#define NC_ENDIAN_NATIVE 278,11006
+#define NC_ENDIAN_LITTLE 279,11033
+#define NC_ENDIAN_BIG 280,11060
+#define NC_CHUNKED 287,11261
+#define NC_CONTIGUOUS 288,11285
+#define NC_NOCHECKSUM 296,11535
+#define NC_FLETCHER32 297,11559
+#define NC_NOSHUFFLE 305,11872
+#define NC_SHUFFLE 306,11895
+#define NC_ISSYSERR(313,12091
+#define	NC_NOERR	315,12129
+#define NC2_ERR 316,12167
+#define	NC_EBADID	322,12341
+#define	NC_ENFILE	323,12365
+#define	NC_EEXIST	324,12422
+#define	NC_EINVAL	325,12492
+#define	NC_EPERM	326,12544
+#define NC_ENOTINDEFINE	331,12797
+#define	NC_EINDEFINE	340,13042
+#define	NC_EINVALCOORDS	347,13314
+#define	NC_EMAXDIMS	352,13492
+#define	NC_ENAMEINUSE	354,13519
+#define NC_ENOTATT	355,13586
+#define	NC_EMAXATTS	356,13642
+#define NC_EBADTYPE	357,13701
+#define NC_EBADDIM	358,13761
+#define NC_EUNLIMPOS	359,13826
+#define	NC_EMAXVARS	364,14043
+#define NC_ENOTVAR	369,14159
+#define NC_EGLOBAL	370,14184
+#define NC_ENOTNC	371,14257
+#define NC_ESTS 372,14310
+#define NC_EMAXNAME 373,14380
+#define NC_EUNLIMIT 374,14442
+#define NC_ENORECVARS 375,14516
+#define NC_ECHAR	376,14597
+#define NC_EEDGE	385,14983
+#define NC_ESTRIDE	386,15006
+#define NC_EBADNAME	387,15057
+#define NC_ERANGE	394,15328
+#define NC_ENOMEM	395,15352
+#define NC_EVARSIZE 396,15422
+#define NC_EDIMSIZE 397,15519
+#define NC_ETRUNC 398,15585
+#define NC_EAXISTYPE 399,15672
+#define NC_EDAP 402,15776
+#define NC_ECURL 403,15837
+#define NC_EIO 404,15902
+#define NC_ENODATA 405,15962
+#define NC_EDAPSVC 406,16045
+#define NC_EDAS	407,16105
+#define NC_EDDS	408,16171
+#define NC_EDATADDS	409,16237
+#define NC_EDAPURL	410,16310
+#define NC_EDAPCONSTRAINT 411,16366
+#define NC_ETRANSLATION 412,16433
+#define NC_EACCESS 413,16501
+#define NC_EAUTH 414,16559
+#define NC_ENOTFOUND 417,16655
+#define NC_ECANTREMOVE 418,16712
+#define NC4_FIRST_ERROR 423,16923
+#define NC_EHDFERR 426,16984
+#define NC_ECANTREAD 427,17016
+#define NC_ECANTWRITE 428,17071
+#define NC_ECANTCREATE 429,17127
+#define NC_EFILEMETA 430,17184
+#define NC_EDIMMETA 431,17255
+#define NC_EATTMETA 432,17331
+#define NC_EVARMETA 433,17407
+#define NC_ENOCOMPOUND 434,17482
+#define NC_EATTEXISTS 435,17546
+#define NC_ENOTNC4 436,17615
+#define NC_ESTRICTNC3 439,17773
+#define NC_ENOTNC3 440,17805
+#define NC_ENOPAR 441,17896
+#define NC_EPARINIT 442,17998
+#define NC_EBADGRPID 443,18081
+#define NC_EBADTYPID 444,18138
+#define NC_ETYPDEFINED 445,18194
+#define NC_EBADFIELD 446,18290
+#define NC_EBADCLASS 447,18347
+#define NC_EMAPTYPE 448,18401
+#define NC_ELATEFILL 449,18481
+#define NC_ELATEDEF 450,18579
+#define NC_EDIMSCALE 451,18684
+#define NC_ENOGRP 452,18756
+#define NC_ESTORAGE 453,18815
+#define NC_EBADCHUNK 454,18902
+#define NC_ENOTBUILT 455,18960
+#define NC_EDISKLESS 456,19072
+#define NC_ECANTEXTEND 457,19148
+#define NC_EMPI 458,19244
+#define NC4_LAST_ERROR 460,19310
+#define DIM_WITHOUT_VARIABLE 464,19423
+#define NC_HAVE_NEW_CHUNKING_API 468,19639
+#define NC_EURL	472,19741
+#define NC_ECONSTRAINT 473,19793
+#   define MSC_EXTRA 483,20072
+#   define MSC_EXTRA 485,20123
+#define MSC_EXTRA489,20197
+# define EXTERNL 492,20249
+EXTERNL int ncerr;495,20343
+EXTERNL int ncopts;496,20362
+    size_t len;667,25518
+    void *p;p668,25581
+} nc_vlen_t;669,25624
+#define NC_COMPOUND_OFFSET(675,25885
+#define ncvarcpy(1124,38725
+#define NC_TURN_OFF_LOGGING 1728,56567
+#define nc_set_log_level(1732,56626
+#define FILL_BYTE	1792,57960
+#define FILL_CHAR	1793,57991
+#define FILL_SHORT	1794,58022
+#define FILL_LONG	1795,58055
+#define FILL_FLOAT	1796,58085
+#define FILL_DOUBLE	1797,58118
+#define MAX_NC_DIMS	1799,58154
+#define MAX_NC_ATTRS	1800,58186
+#define MAX_NC_VARS	1801,58220
+#define MAX_NC_NAME	1802,58252
+#define MAX_VAR_DIMS	1803,58284
+EXTERNL int ncerr;1810,58361
+#define NC_ENTOOL 1812,58381
+#define	NC_EXDR	1813,58448
+#define	NC_SYSERR	1814,58477
+#define	NC_FATAL	1820,58585
+#define	NC_VERBOSE	1821,58604
+EXTERNL int ncopts;1823,58626
+typedef int nclong;1834,58938
+#define END_OF_MAIN(1962,61786
+#define NC_HAVE_RENAME_GRP 1969,61954
+#define NC_HAVE_INQ_FORMAT_EXTENDED 1973,62055
+#define NC_HAVE_META_H1976,62138
+
+../../../../AMBHAS/GW_global_vars.h,2439
+		int NROW;7,283
+		int NCOL;8,295
+		int NTIME;9,307
+		float DLAT;10,320
+		float DLON;11,334
+		float DT;12,348
+		int OUT_OPTION;13,361
+		int SIM_MODE;14,474
+		int RESTART;16,714
+		int NUMOBSBH;17,803
+		int KorTRANS;18,853
+		int CONFINED;19,920
+		int GRID;20,972
+		int PUMPING;21,1094
+		int PUMPING_INT;22,1156
+		int PUMPING_BREAK;23,1228
+		float *p_obslat;p_obslat24,1295
+		float *p_obslon;p_obslon25,1364
+		int *p_obslat_count;p_obslat_count26,1434
+		int *p_obslon_count;p_obslon_count27,1517
+		char hininame[hininame28,1600
+		char gwname[gwname29,1641
+		int VARIABLE_SY;30,1702
+		int MAX_RECHARGE_FRACTION;31,1771
+	} gw_global_data_struct;32,1944
+		int NROW;40,2208
+		int NCOL;41,2236
+		double *lattitude;lattitude42,2264
+		double *longitude;longitude43,2285
+		double **Sy_aq;Sy_aq44,2306
+		double **Trans;Trans45,2324
+		double **K;K46,2342
+		double **mask;mask47,2356
+		double **dem;dem48,2416
+		double ** C_eff;49,2432
+		double **C_in;C_in50,2503
+		double **C_leak_eff;C_leak_eff51,2572
+		double **C_leak_in;C_leak_in52,2630
+		double **headBC;headBC53,2687
+		double **recharge;recharge54,2745
+		double **gw_inflow;gw_inflow55,2773
+		double **pumping;pumping56,2947
+		double **river_area;river_area57,2975
+		double **zbase;zbase58,3002
+		double **zriver;zriver59,3038
+		double **driver;driver60,3086
+		double **c_n;c_n61,3134
+		double **c_e;c_e62,3203
+		double **e_n;e_n63,3272
+		double **e_e;e_e64,3325
+		double **area;area65,3377
+		double **aquiferMap;aquiferMap66,3408
+		double **z_soil;z_soil67,3477
+		double **Sy_soil;Sy_soil68,3517
+		int **V_ncell;V_ncell70,3585
+	} gw_data_struct;71,3643
+		double **Trans;Trans79,3924
+		double **Sy;Sy80,4020
+		double **h;h81,4066
+		double **hini;hini82,4084
+		double **baseflow;baseflow83,4141
+		double **baseflowTotal;baseflowTotal84,4181
+		double **leakage;leakage85,4226
+		double **leakageTotal;leakageTotal86,4265
+		double **error;error87,4309
+		double **hn;hn88,4353
+		double **hs;hs89,4395
+		double **he;he90,4437
+		double **hw;hw91,4478
+		double **qn;qn92,4519
+		double **qs;qs93,4561
+		double **qe;qe94,4603
+		double **qw;qw95,4644
+	} gw_param_struct;96,4685
+		double **h_obs;h_obs104,4961
+		double *total_baseflow;total_baseflow105,4979
+		double *total_leakage;total_leakage106,5005
+		double *balance;balance107,5031
+	}gw_ts_struct;gw_ts_struct108,5050
+
+../../../../AMBHAS/Link_AMBHAS_VIC.h,0

@@ -53,10 +53,10 @@ get_default_nstreams_nvars(size_t *nstreams,
 
     streamnum = 0;
     if (options.FULL_ENERGY || options.FROZEN_SOIL) {
-        nvars[streamnum] = 26;
+        nvars[streamnum] = 33;//26 orig
     }
     else {
-        nvars[streamnum] = 20;
+        nvars[streamnum] = 27;//20 orig
     }
 
     streamnum++;
@@ -125,8 +125,6 @@ set_output_defaults(stream_struct **streams,
                    OUT_TYPE_FLOAT, 1, AGG_TYPE_DEFAULT);
     set_output_var(&((*streams)[streamnum]), "OUT_BASEFLOW", varnum++, "%.4f",
                    OUT_TYPE_FLOAT, 1, AGG_TYPE_DEFAULT);
-    set_output_var(&((*streams)[streamnum]), "OUT_RECHARGE", varnum++, "%.4f",
-                   OUT_TYPE_FLOAT, 1, AGG_TYPE_DEFAULT);
     set_output_var(&((*streams)[streamnum]), "OUT_WDEW", varnum++, "%.4f",
                    OUT_TYPE_FLOAT, 1, AGG_TYPE_DEFAULT);
     set_output_var(&((*streams)[streamnum]), "OUT_SOIL_LIQ", varnum++, "%.4f",
@@ -177,6 +175,21 @@ set_output_defaults(stream_struct **streams,
                    OUT_TYPE_FLOAT, 1, AGG_TYPE_DEFAULT);
     set_output_var(&((*streams)[streamnum]), "OUT_WIND", varnum++, "%.4f",
                    OUT_TYPE_FLOAT, 1, AGG_TYPE_DEFAULT);
+   set_output_var(&((*streams)[streamnum]), "OUT_RECHARGE", varnum++, "%.4f",
+                   OUT_TYPE_FLOAT, 1, AGG_TYPE_DEFAULT);
+   set_output_var(&((*streams)[streamnum]), "OUT_GW_INFLOW", varnum++, "%.4f",
+                   OUT_TYPE_FLOAT, 1, AGG_TYPE_DEFAULT);
+   set_output_var(&((*streams)[streamnum]), "OUT_BASEFLOW_AQ", varnum++, "%.4f",
+                   OUT_TYPE_FLOAT, 1, AGG_TYPE_DEFAULT);
+   set_output_var(&((*streams)[streamnum]), "OUT_Z", varnum++, "%.4f",
+                   OUT_TYPE_FLOAT, 1, AGG_TYPE_DEFAULT);
+   set_output_var(&((*streams)[streamnum]), "OUT_Q1", varnum++, "%.4f",
+                   OUT_TYPE_FLOAT, 1, AGG_TYPE_DEFAULT);
+   set_output_var(&((*streams)[streamnum]), "OUT_Q2", varnum++, "%.4f",
+                   OUT_TYPE_FLOAT, 1, AGG_TYPE_DEFAULT);
+   set_output_var(&((*streams)[streamnum]), "OUT_SY", varnum++, "%.4f",
+                   OUT_TYPE_FLOAT, 1, AGG_TYPE_DEFAULT);
+
 
     // Variables in second file
     streamnum++;

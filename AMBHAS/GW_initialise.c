@@ -11,20 +11,21 @@
 * Function to be called before the time loop
 *****************************************************************************/
 
-int GW_initialise(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts, domain_struct *vic_domain){
+int GW_initialise(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts){
 	int count; int crow; int ccol; int ctime;
-	int debug=0;
+	int debug=1;
 	dmy_struct         *dmy = NULL;//to be passed into vic_image_run
 
-	//read observation points and global parameters
-	printf("Simulation mode %d \n", g->SIM_MODE);
-	printf("OUT_OPTION %d \n" ,g->OUT_OPTION);
-	printf("CONFINED %d \n" ,g->CONFINED);
-
-
-
 	if (debug==1){
-		printf("dem after gw_read:\n");
+		//read observation points and global parameters
+		printf("Simulation mode %d \n", g->SIM_MODE);
+		printf("OUT_OPTION %d \n" ,g->OUT_OPTION);
+		printf("CONFINED %d \n" ,g->CONFINED);
+
+
+
+
+		printf("dem in GW_initialise:\n");
 			for (crow=0; crow<g->NROW; crow++){
 				for (ccol=0; ccol<g->NCOL; ccol ++){
 					printf(" %.1f ",d->dem[crow][ccol]);
@@ -36,30 +37,36 @@ int GW_initialise(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *
 
 		printf("lats: \n");
 		for (crow=0; crow<g->NROW; crow++){
-			printf(" %.1f ",d->lattitude[crow]);
+			printf(" %.4f ",d->lattitude[crow]);
 		}
 		printf("\n");
 		printf("lons: \n");
 		for (ccol=0; ccol<g->NCOL; ccol ++){
-			printf(" %.1f ",d->longitude[ccol]);
+			printf(" %.4f ",d->longitude[ccol]);
 		}
 	}
 
-		
-
-
-
 	getObsDataCount(g, d);
-
-
-	calculateGwInit(g, d, p);
-
-	
-
-	if (debug==1){
-		
+ 	if (debug==1){
+		printf("getObsDataCount has been called:\n");
 	}
-
+	calculateGwInit(g, d, p);
+ 
+ 	if (debug==1){
+		printf("calculateGWInit has been called:\n");
+	}
+	
+   		if (debug==1){
+			printf("K:\n");
+			for (crow=0; crow<d->NROW; crow++){
+				for (ccol=0; ccol<d->NCOL; ccol ++){
+					printf(" %.1f ",d->K[crow][ccol]);
+				}
+				printf("\n");
+			}
+			printf("\n"); printf("\n");
+		}
+   
 	//If option RESTART=1 is specified in gw_global_parameters, then call GW_read_h_ini
 	if(g->RESTART==1){
 		printf("**restart = 1:\n");
@@ -75,6 +82,8 @@ int GW_initialise(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *
 			}
 			printf("\n"); printf("\n");
 		}
+   
+
 	}
 	count=0;
 
@@ -82,58 +91,39 @@ int GW_initialise(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *
 	if(g->RESTART==0){
 		for (crow=0; crow<d->NROW; crow++){
 			for (ccol=0; ccol<d->NCOL; ccol ++){
-				p->h[crow][ccol]=d->dem[crow][ccol]-10.0;
-			
-			}
-			
-		}
-	}
-
-	
-	for(ctime=0;ctime<1;ctime++){
-
-		/** Do VIC run for the first time step **/
-      	 	// read forcing data
-     		vic_force();
-
-		//stores the initial guess of the water table from AMBHAS into VIC
-		get_AMBHAS_Data_Into_VIC(d, p, &vic_domain, ctime);
-
-       		// run vic over the domain
-        	vic_image_run(&(dmy[ctime]));
-
-    		//write recharge calculated in VIC into AMBHAS
-    		get_VIC_Data_Into_AMBHAS(d, &vic_domain);
-
-		//read pumping data		
-		GW_read_Ts(g, d, ctime);
-
-		if (debug==1){
-			printf("recharge for time step 0:\n");
-			for (crow=0; crow<d->NROW; crow++){
-				for (ccol=0; ccol<d->NCOL; ccol ++){
-					printf(" %.3f ",d->recharge[crow][ccol]);
+				if (d->mask[crow][ccol]==1.0){
+					p->h[crow][ccol]=d->dem[crow][ccol]-10.0;
 				}
-				printf("\n");
 			}
-			printf("\n");printf("\n");
 		}
-
-		/*if simulation mode is 0 or 2, then calculate a steady state with the input of the first time step*/
-		if(g->SIM_MODE==0||g->SIM_MODE==2){
-
-
-			calculateGwSS(g, d, p, ts);
-		}
-
-		/*if simulation mode is 3 or 4, then calculate a dynamic steady state with the input of the PERIOD time steps*/
-		if(g->SIM_MODE==3||g->SIM_MODE==4){
-
-		calculateDynamicGwSS(g, d, p,ts);
-
-		}
-		GW_write_output(g, d, p,  ctime);
 	}
+
+	//update Sy
+	//if VARIABLE_SY==0, set Sy to Sy of the aquifer
+	if(g->VARIABLE_SY==0){
+		for (crow=0; crow<d->NROW; crow++){
+			for (ccol=0; ccol<d->NCOL; ccol ++){
+		p->Sy[crow][ccol]=d->Sy_aq[crow][ccol];      
+	  }
+	 }
+	}
+	//if VARIABLE_SY==1, update Sy for the initialised heads
+	if(g->VARIABLE_SY==1){
+		printf("VARIABLE_SY \n");
+		calculateSy( d, p);
+
+	}  
+  	if (debug==1){
+        printf("Sy for time step 0 for SY option %d:\n", g->VARIABLE_SY);
+		for (crow=0; crow<d->NROW; crow++){
+			for (ccol=0; ccol<d->NCOL; ccol ++){
+				printf(" %f ",p->Sy[crow][ccol]);
+			}
+			printf("\n");
+		}
+		printf("\n");printf("\n");
+      }
+ 
 	if (debug==1){
 		printf("Head at end of GW initialise:\n");
 		for (crow=0; crow<d->NROW; crow++){
@@ -144,5 +134,5 @@ int GW_initialise(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *
 		}
 		printf("\n"); printf("\n");
 	}
-
+	return 0;
 }

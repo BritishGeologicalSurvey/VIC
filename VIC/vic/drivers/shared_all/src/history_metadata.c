@@ -306,14 +306,6 @@ set_output_met_data_info()
     strcpy(out_metadata[OUT_BASEFLOW].description,
            "baseflow out of the bottom layer");
 
-    /* groundwater recharge out of the bottom layer [mm] */
-    strcpy(out_metadata[OUT_RECHARGE].varname, "OUT_RECHARGE");
-    strcpy(out_metadata[OUT_RECHARGE].long_name, "recharge");
-    strcpy(out_metadata[OUT_RECHARGE].standard_name, "recharge_amount");
-    strcpy(out_metadata[OUT_RECHARGE].units, "m/d");
-    strcpy(out_metadata[OUT_RECHARGE].description,
-           "recharge out of the bottom layer");
-
     /* change in canopy interception storage [mm] */
     strcpy(out_metadata[OUT_DELINTERCEPT].varname, "OUT_DELINTERCEPT");
     strcpy(out_metadata[OUT_DELINTERCEPT].long_name, "delintercept");
@@ -1466,6 +1458,62 @@ set_output_met_data_info()
     strcpy(out_metadata[OUT_SWE_BAND].units, out_metadata[OUT_SWE].units);
     strcpy(out_metadata[OUT_SWE_BAND].description,
            out_metadata[OUT_SWE].description);
+
+    /* groundwater recharge out of the bottom layer [mm] */
+    strcpy(out_metadata[OUT_RECHARGE].varname, "OUT_RECHARGE");
+    strcpy(out_metadata[OUT_RECHARGE].long_name, "recharge");
+    strcpy(out_metadata[OUT_RECHARGE].standard_name, "recharge_amount");
+    strcpy(out_metadata[OUT_RECHARGE].units, "mm");
+    strcpy(out_metadata[OUT_RECHARGE].description,
+           "recharge out of the bottom layer into the aquifer");
+
+    /* groundwater inflow out of the bottom layer [mm] */
+    strcpy(out_metadata[OUT_GW_INFLOW].varname, "OUT_GW_INFLOW");
+    strcpy(out_metadata[OUT_GW_INFLOW].long_name, "gw inflow into soil");
+    strcpy(out_metadata[OUT_GW_INFLOW].standard_name, "gw_inflow");
+    strcpy(out_metadata[OUT_GW_INFLOW].units, "mm");
+    strcpy(out_metadata[OUT_GW_INFLOW].description,
+           "gw inflow out of the aquifer into the soil column");
+
+    /* groundwater baseflow out of the the aquifer [mm] */
+    strcpy(out_metadata[OUT_BASEFLOW_AQ].varname, "OUT_BASEFLOW_AQ");
+    strcpy(out_metadata[OUT_BASEFLOW_AQ].long_name, "aquifer baseflow");
+    strcpy(out_metadata[OUT_BASEFLOW_AQ].standard_name, "baseflow_amount");
+    strcpy(out_metadata[OUT_BASEFLOW_AQ].units, "mm");
+    strcpy(out_metadata[OUT_BASEFLOW_AQ].description,
+           "baseflow from the aquifer");
+
+    /* groundwater level [mm] */
+    strcpy(out_metadata[OUT_Z].varname, "OUT_Z");
+    strcpy(out_metadata[OUT_Z].long_name, "depth to aquifer below ground surface");
+    strcpy(out_metadata[OUT_Z].standard_name, "aquifer depth");
+    strcpy(out_metadata[OUT_Z].units, "mm");
+    strcpy(out_metadata[OUT_Z].description,
+           "depth to aquifer");
+
+    /*Q1 [mm] */
+    strcpy(out_metadata[OUT_Q1].varname, "OUT_Q1");
+    strcpy(out_metadata[OUT_Q1].long_name, "Q1");
+    strcpy(out_metadata[OUT_Q1].standard_name, "Q1");
+    strcpy(out_metadata[OUT_Q1].units, "mm");
+    strcpy(out_metadata[OUT_Q1].description,
+           "flux out of layer 1");
+
+    /* Q2 [mm] */
+    strcpy(out_metadata[OUT_Q2].varname, "OUT_Q2");
+    strcpy(out_metadata[OUT_Q2].long_name, "Q2");
+    strcpy(out_metadata[OUT_Q2].standard_name, "Q2");
+    strcpy(out_metadata[OUT_Q2].units, "mm");
+    strcpy(out_metadata[OUT_Q2].description,
+           "flux out of layer 2");
+           
+    /* Specific yield [] */
+    strcpy(out_metadata[OUT_SY].varname, "OUT_SY");
+    strcpy(out_metadata[OUT_SY].long_name, "SY");
+    strcpy(out_metadata[OUT_SY].standard_name, "SY");
+    strcpy(out_metadata[OUT_SY].units, "");
+    strcpy(out_metadata[OUT_SY].description,
+           "specific yield of aquifer");
 
     /* Wall time spent inside vic_run [seconds] */
     strcpy(out_metadata[OUT_TIME_VICRUN_WALL].varname, "OUT_TIME_VICRUN_WALL");

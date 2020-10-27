@@ -12,7 +12,7 @@ int GW_read_Ts(const gw_global_data_struct *g, gw_data_struct *d, int ctime){
 
 
 	/* This is the name of the data file we will read. */
-	char file_name[20]= "gw_ts.nc";
+	char file_name[50]= "..//AMBHAS//gw_ts.nc";
 
 	/* We are reading 3D data, a  11 x 10 lvl-lat-lon grid, with 2
 	timesteps of data. */

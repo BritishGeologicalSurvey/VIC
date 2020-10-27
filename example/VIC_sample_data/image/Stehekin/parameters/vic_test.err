@@ -1,0 +1,130 @@
+global_param:
+	wind_h              : 10.0000
+	resolution          : 0.0000
+	dt                  : 3600.0000
+	snow_dt             : 3600.0000
+	runoff_dt           : 3600.0000
+	model_steps_per_day : 24
+	snow_steps_per_day  : 24
+	runoff_steps_per_day: 24
+	endday              : 10
+	endmonth            : 1
+	endyear             : 1949
+	forceday[0]       : 1
+	forcesec[0]       : 0
+	forcemonth[0]     : 1
+	forceoffset[0]    : 0
+	forceskip[0]      : 0
+	forceyear[0]      : 1949
+	forceday[1]       : 1
+	forcesec[1]       : 0
+	forcemonth[1]     : 1
+	forceoffset[1]    : 0
+	forceskip[1]      : 0
+	forceyear[1]      : 1949
+	nrecs               : 240
+	startday            : 1
+	startsec            : 0
+	startmonth          : 1
+	startyear           : 1949
+	stateday            : 0
+	statemonth          : 0
+	stateyear           : 0
+	statesec            : 0
+option:
+	AboveTreelineVeg     : -1
+	AERO_RESIST_CANSNOW  : 2
+	BLOWING              : 0
+	BLOWING_VAR_THRESHOLD: 1
+	BLOWING_CALC_PROB    : 1
+	BLOWING_SIMPLE       : 0
+	BLOWING_FETCH        : 1
+	BLOWING_SPATIAL_WIND : 1
+	CARBON               : 0
+	CLOSE_ENERGY         : 0
+	COMPUTE_TREELINE     : 0
+	CONTINUEONERROR      : 1
+	CORRPREC             : 0
+	EQUAL_AREA           : 0
+	EXP_TRANS            : 0
+	FROZEN_SOIL          : 0
+	FULL_ENERGY          : 0
+	GRND_FLUX_TYPE       : 1
+	IMPLICIT             : 0
+	JULY_TAVG_SUPPLIED   : 0
+	LAKES                : 0
+	Ncanopy              : 3
+	Nfrost               : 1
+	Nlakenode            : 0
+	Nlayer               : 3
+	Nnode                : 3
+	NOFLUX               : 0
+	NVEGTYPES            : 12
+	RC_MODE              : 0
+	ROOT_ZONES           : 3
+	QUICK_FLUX           : 1
+	QUICK_SOLVE          : 0
+	SHARE_LAYER_MOIST    : 1
+	SNOW_DENSITY         : 0
+	SNOW_BAND            : 5
+	SPATIAL_FROST        : 0
+	SPATIAL_SNOW         : 0
+	TFALLBACK            : 1
+	BASEFLOW             : 0
+	GRID_DECIMAL         : 2
+	VEGLIB_PHOTO         : 0
+	VEGLIB_FCAN          : 0
+	VEGPARAM_ALB         : 0
+	VEGPARAM_LAI         : 0
+	VEGPARAM_FCAN        : 0
+	ALB_SRC              : 1
+	LAI_SRC              : 2
+	FCAN_SRC             : 0
+	LAKE_PROFILE         : 0
+	ORGANIC_FRACT        : 0
+	STATE_FORMAT         : 0
+	INIT_STATE           : 0
+	SAVE_STATE           : 0
+	Noutstreams          : 1
+
+------------------------------ VIC TIMING PROFILE ------------------------------
+
+  Date                      : Tue Oct 13 12:14:34 2020
+  Compiler                  : gcc (6.1.0)
+  Machine                   : node08
+  VIC User                  : johsch
+  VIC Version               : 8528-dirty
+  VIC GIT Version           : 5.0.1 February 1, 2017
+  VIC_DRIVER                : Image
+
+  Global Param File         : /home/johsch/VIC_AMBHAS2/VIC_AMBHAS/example/VIC_sample_data/image/Stehekin/parameters/Stehekin_image_test.global.txt
+  Domain File               : /home/johsch/VIC_AMBHAS2/VIC_AMBHAS/example/VIC_sample_data/image/Stehekin/parameters/domain.stehekin.20151028.nc
+  Start Date                : 1949-01-01-00000
+  Stop Date                 : 1949-01-10
+  Nrecs                     : 240
+  Model Timestep (seconds)  : 3600
+  Snow Timestep (seconds)   : 3600
+  Runoff Timestep (seconds) : 3600
+  Atmos Timestep (seconds)  : 3600
+
+  Total pes active          : 1
+  pes per node              : 16
+
+  Overall Metrics
+  ---------------
+    Model Cost       : 0.152782 pe-hrs/simulated_year
+    Model Throughput : 157.086 simulated_years/day
+
+  Timing Table:
+|------------|----------------------|----------------------|----------------------|----------------------|
+| Timer      | Wall Time (secs)     | CPU Time (secs)      | Wall Time (secs/day) | CPU Time (secs/day)  |
+|------------|----------------------|----------------------|----------------------|----------------------|
+| Init Time  |              8.51819 |                 8.11 |             0.851819 |                0.811 |
+| Run Time   |              6.47994 |                 5.64 |             0.647994 |                0.564 |
+| Final Time |             0.070817 |                    0 |            0.0070817 |                    0 |
+| Total Time |              15.0689 |                13.75 |              1.50689 |                1.375 |
+|------------|----------------------|----------------------|----------------------|----------------------|
+
+
+------------------------------ END VIC TIMING PROFILE ------------------------------
+

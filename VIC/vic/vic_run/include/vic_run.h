@@ -28,57 +28,6 @@
 #define VIC_RUN_H
 
 #include <vic_def.h>
-//added by js as runoff includes location_struct
-/******************************************************************************
- * @brief    Structure to store location information for individual grid cells.
- * @details  The global and local indices show the position of the grid cell
- *           within the global and local (processor) domains. When the model is
- *           run on a single processor, the glonal and local domains are
- *           identical. The model is run over a list of cells.
- *****************************************************************************/
-typedef struct {
-    bool run; /**< TRUE: run grid cell. FALSE: do not run grid cell */
-    double latitude; /**< latitude of grid cell center */
-    double longitude; /**< longitude of grid cell center */
-    double area; /**< area of grid cell */
-    double frac; /**< fraction of grid cell that is active */
-    size_t nveg; /**< number of vegetation type according to parameter file */
-    size_t global_idx; /**< index of grid cell in global list of grid cells */
-    size_t io_idx; /**< index of cell in 1-D I/O arrays */
-    size_t local_idx; /**< index of grid cell in local list of grid cells */
-    size_t A_nlat; /**< counter in AMBHAS grid in lat or crow */
-    size_t  A_nlon; /**< counter in AMBHAS grid in lon or ccol */   
-    double Kaq;	/**< aquifer hydraulic conductivity [m/day] from AMBHAS **/
-    double z;	/**< depth to the water table: DEM-hydraulic head from AMBHAS **/
-} location_struct;
-
-/******************************************************************************
- * @brief    Structure to store information about the domain file.
- *****************************************************************************/
-typedef struct {
-    char lat_var[MAXSTRING]; /**< latitude variable name in the domain file */
-    char lon_var[MAXSTRING];  /**< longitude variable name in the domain file */
-    char mask_var[MAXSTRING]; /**< mask variable name in the domain file */
-    char area_var[MAXSTRING]; /**< area variable name in the domain file */
-    char frac_var[MAXSTRING]; /**< fraction variable name in the domain file */
-    char y_dim[MAXSTRING]; /**< y dimension name in the domain file */
-    char x_dim[MAXSTRING]; /**< x dimension name in the domain file */
-    size_t n_coord_dims; /**< number of x/y coordinates */
-} domain_info_struct;
-
-/******************************************************************************
- * @brief    Structure to store local and global domain information. If the
- *           model is run on a single processor, then the two are identical.
- *****************************************************************************/
-typedef struct {
-    size_t ncells_total; /**< total number of grid cells on domain */
-    size_t ncells_active; /**< number of active grid cells on domain */
-    size_t n_nx; /**< size of x-index; */
-    size_t n_ny; /**< size of y-index */
-    location_struct *locations; /**< locations structs for local domain */
-    domain_info_struct info; /**< structure storing domain file info */
-} domain_struct;
-//end added by js
 
 void advect_carbon_storage(double, double, lake_var_struct *,
                            cell_data_struct *);
@@ -278,7 +227,7 @@ void rhoinit(double *, double);
 double root_brent(double, double, double (*Function)(double, va_list), ...);
 double rtnewt(double x1, double x2, double xacc, double Ur, double Zr);
 int runoff(cell_data_struct *, energy_bal_struct *, soil_con_struct *, double,
-           double *, int, location_struct *);
+           double *, int, double Kaq, double z);
 void set_node_parameters(double *, double *, double *, double *, double *,
                          double *, double *, double *, double *, double *,
                          double *, int, int);
@@ -346,7 +295,7 @@ int surface_fluxes(bool, double, double, double, double, double *, double *,
                    unsigned short int, force_data_struct *, dmy_struct *,
                    energy_bal_struct *, global_param_struct *,
                    cell_data_struct *, snow_data_struct *, soil_con_struct *,
-                   veg_var_struct *, double, double, double, double *, location_struct *);
+                   veg_var_struct *, double, double, double, double *, double Kaq, double z);
 double svp(double);
 double svp_slope(double);
 void temp_area(double, double, double, double *, double *, double *, double *,
@@ -367,7 +316,7 @@ void tridia(int, double *, double *, double *, double *, double *);
 void tridiag(double *, double *, double *, double *, unsigned int);
 int vic_run(force_data_struct *, all_vars_struct *, dmy_struct *,
             global_param_struct *, lake_con_struct *, soil_con_struct *,
-            veg_con_struct *, veg_lib_struct *, location_struct*);
+            veg_con_struct *, veg_lib_struct *, double Kaq, double z);
 double volumetric_heat_capacity(double, double, double, double);
 int water_balance(lake_var_struct *, lake_con_struct, double, all_vars_struct *,
                   int, int, double, soil_con_struct, veg_con_struct);

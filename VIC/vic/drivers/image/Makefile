@@ -68,7 +68,7 @@ HOSTNAME := $(shell uname -n)
 # | WARNING   | < 30             |
 # | INFO      | < 20             |
 # | DEBUG     | < 10             |
-LOG_LVL = 5
+LOG_LVL = 50
 
 # set includes
 INCLUDES = -I ${DRIVERPATH}/include \
@@ -83,6 +83,7 @@ CFLAGS  =  ${INCLUDES} ${NC_CFLAGS}  -ggdb -O0 -Wall -Wextra -std=c99 \
 					 -DGIT_VERSION=\"$(GIT_VERSION)\" \
 					 -DUSERNAME=\"$(USER)\" \
 					 -DHOSTNAME=\"$(HOSTNAME)\"
+
 
 ifeq (true, ${TRAVIS})
 # Add extra debugging for builds on travis
@@ -133,7 +134,7 @@ clean::
 	\rm -rf ${COMPEXE}${EXT} ${COMPEXE}${EXT}.dSYM
 
 model: $(OBJS)
-	$(MPICC) -o ${COMPEXE}${EXT} $(OBJS) $(CFLAGS) $(LIBRARY)
+	$(MPICC) -g -o ${COMPEXE}${EXT} $(OBJS) $(CFLAGS) $(LIBRARY)
 
 # -------------------------------------------------------------
 # tags
