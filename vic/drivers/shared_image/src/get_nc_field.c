@@ -30,23 +30,32 @@
  * @brief    Read double precision netCDF field from file.
  *****************************************************************************/
 int
-get_nc_field_double(nameid_struct *nc_nameid,
-                    char          *var_name,
-                    size_t        *start,
-                    size_t        *count,
-                    double        *var)
+get_nc_field_double(char   *nc_name,
+                    char   *var_name,
+                    size_t *start,
+                    size_t *count,
+                    double *var)
 {
+    int nc_id;
     int status;
     int var_id;
 
-    /* get NetCDF variable */
-    status = nc_inq_varid(nc_nameid->nc_id, var_name, &var_id);
-    check_nc_status(status, "Error getting variable id for %s in %s", var_name,
-                    nc_nameid->nc_filename);
+    // open the netcdf file
+    status = nc_open(nc_name, NC_NOWRITE, &nc_id);
+    check_nc_status(status, "Error opening %s", nc_name);
 
-    status = nc_get_vara_double(nc_nameid->nc_id, var_id, start, count, var);
+    /* get NetCDF variable */
+    status = nc_inq_varid(nc_id, var_name, &var_id);
+    check_nc_status(status, "Error getting variable id for %s in %s", var_name,
+                    nc_name);
+
+    status = nc_get_vara_double(nc_id, var_id, start, count, var);
     check_nc_status(status, "Error getting values for %s in %s", var_name,
-                    nc_nameid->nc_filename);
+                    nc_name);
+
+    // close the netcdf file
+    status = nc_close(nc_id);
+    check_nc_status(status, "Error closing %s", nc_name);
 
     return status;
 }
@@ -55,23 +64,32 @@ get_nc_field_double(nameid_struct *nc_nameid,
  * @brief    Read single precision netCDF field from file.
  *****************************************************************************/
 int
-get_nc_field_float(nameid_struct *nc_nameid,
-                   char          *var_name,
-                   size_t        *start,
-                   size_t        *count,
-                   float         *var)
+get_nc_field_float(char   *nc_name,
+                   char   *var_name,
+                   size_t *start,
+                   size_t *count,
+                   float  *var)
 {
+    int nc_id;
     int status;
     int var_id;
 
-    /* get NetCDF variable */
-    status = nc_inq_varid(nc_nameid->nc_id, var_name, &var_id);
-    check_nc_status(status, "Error getting variable id for %s in %s", var_name,
-                    nc_nameid->nc_filename);
+    // open the netcdf file
+    status = nc_open(nc_name, NC_NOWRITE, &nc_id);
+    check_nc_status(status, "Error opening %s", nc_name);
 
-    status = nc_get_vara_float(nc_nameid->nc_id, var_id, start, count, var);
+    /* get NetCDF variable */
+    status = nc_inq_varid(nc_id, var_name, &var_id);
+    check_nc_status(status, "Error getting variable id for %s in %s", var_name,
+                    nc_name);
+
+    status = nc_get_vara_float(nc_id, var_id, start, count, var);
     check_nc_status(status, "Error getting values for %s in %s", var_name,
-                    nc_nameid->nc_filename);
+                    nc_name);
+
+    // close the netcdf file
+    status = nc_close(nc_id);
+    check_nc_status(status, "Error closing %s", nc_name);
 
     return status;
 }
@@ -80,23 +98,32 @@ get_nc_field_float(nameid_struct *nc_nameid,
  * @brief    Read integer netCDF field from file.
  *****************************************************************************/
 int
-get_nc_field_int(nameid_struct *nc_nameid,
-                 char          *var_name,
-                 size_t        *start,
-                 size_t        *count,
-                 int           *var)
+get_nc_field_int(char   *nc_name,
+                 char   *var_name,
+                 size_t *start,
+                 size_t *count,
+                 int    *var)
 {
+    int nc_id;
     int status;
     int var_id;
 
-    /* get NetCDF variable */
-    status = nc_inq_varid(nc_nameid->nc_id, var_name, &var_id);
-    check_nc_status(status, "Error getting variable id for %s in %s", var_name,
-                    nc_nameid->nc_filename);
+    // open the netcdf file
+    status = nc_open(nc_name, NC_NOWRITE, &nc_id);
+    check_nc_status(status, "Error opening %s", nc_name);
 
-    status = nc_get_vara_int(nc_nameid->nc_id, var_id, start, count, var);
+    /* get NetCDF variable */
+    status = nc_inq_varid(nc_id, var_name, &var_id);
+    check_nc_status(status, "Error getting variable id for %s in %s", var_name,
+                    nc_name);
+
+    status = nc_get_vara_int(nc_id, var_id, start, count, var);
     check_nc_status(status, "Error getting values for %s in %s", var_name,
-                    nc_nameid->nc_filename);
+                    nc_name);
+
+    // close the netcdf file
+    status = nc_close(nc_id);
+    check_nc_status(status, "Error closing %s", nc_name);
 
     return status;
 }

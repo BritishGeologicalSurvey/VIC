@@ -3,10 +3,6 @@
  *
  * Calculate snow pack energy balance
  *
- * Based on the SnowPackEnergyBalance function in DHSVM
- * Reference: Bras, R.A., Hydrology, an introduction to hydrologic science,
- * Addison Wesley, Inc., Reading, etc., 1990.
- *
  * @section LICENSE
  *
  * The Variable Infiltration Capacity (VIC) macroscale hydrological model
@@ -242,7 +238,7 @@ SnowPackEnergyBalance(double  TSurf,
        Equation 7.3.12 from H.B.H. for rain falling on melting snowpack */
 
     if (TMean == 0.) {
-        *AdvectedEnergy = (CONST_CPFW * CONST_RHOFW * (Tair) * Rain) / Dt;
+        *AdvectedEnergy = (CONST_CPFW * CONST_RHOFW * (Tair) * Rain) / (Dt);
     }
     else {
         *AdvectedEnergy = 0.;
@@ -250,12 +246,12 @@ SnowPackEnergyBalance(double  TSurf,
 
     /* Calculate change in cold content */
     *DeltaColdContent = CONST_VCPICE_WQ * SweSurfaceLayer *
-                        (TSurf - OldTSurf) / Dt;
+                        (TSurf - OldTSurf) / (Dt);
 
     /* Calculate Ground Heat Flux */
-    if (SnowDepth > param.SNOW_DEPTH_THRES) {
-        *GroundFlux = param.SNOW_CONDUCT * pow(SnowDensity, 2.) *
-                      (TGrnd - TMean) / SnowDepth / Dt;
+    if (SnowDepth > 0.) {
+        *GroundFlux = 2.9302e-6 * SnowDensity * SnowDensity *
+                      (TGrnd - TMean) / SnowDepth / (Dt);
     }
     else {
         *GroundFlux = 0;
@@ -267,7 +263,7 @@ SnowPackEnergyBalance(double  TSurf,
                *AdvectedEnergy + *GroundFlux - *DeltaColdContent +
                *AdvectedSensibleHeat;
 
-    *RefreezeEnergy = (SurfaceLiquidWater * CONST_LATICE * Density) / Dt;
+    *RefreezeEnergy = (SurfaceLiquidWater * CONST_LATICE * Density) / (Dt);
 
     if (TSurf == 0.0 && RestTerm > -(*RefreezeEnergy)) {
         *RefreezeEnergy = -RestTerm; /* available energy input over cold content

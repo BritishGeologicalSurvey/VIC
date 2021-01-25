@@ -30,22 +30,22 @@
  * @brief    Get global domain information.
  *****************************************************************************/
 size_t
-get_global_domain(nameid_struct *domain_nc_nameid,
-                  nameid_struct *param_nc_nameid,
+get_global_domain(char          *domain_nc_name,
+                  char          *param_nc_name,
                   domain_struct *global_domain)
 {
     int    *run = NULL;
     int    *mask = NULL;
-    int typeid;
+    int     typeid;
     double *var = NULL;
     size_t  i;
     size_t  j;
     size_t  d2count[2];
     size_t  d2start[2];
 
-    global_domain->n_nx = get_nc_dimension(domain_nc_nameid,
+    global_domain->n_nx = get_nc_dimension(domain_nc_name,
                                            global_domain->info.x_dim);
-    global_domain->n_ny = get_nc_dimension(domain_nc_nameid,
+    global_domain->n_ny = get_nc_dimension(domain_nc_name,
                                            global_domain->info.y_dim);
 
     d2start[0] = 0;
@@ -64,21 +64,20 @@ get_global_domain(nameid_struct *domain_nc_nameid,
 
     // Get mask variable from the domain file
     // (check whether mask variable is int type)
-    typeid = get_nc_var_type(domain_nc_nameid, global_domain->info.mask_var);
+    typeid = get_nc_var_type(domain_nc_name, global_domain->info.mask_var);
     if (typeid != NC_INT) {
         log_err("Mask variable in the domain file must be integer type.");
     }
-    get_nc_field_int(domain_nc_nameid, global_domain->info.mask_var, d2start,
-                     d2count,
+    get_nc_field_int(domain_nc_name, global_domain->info.mask_var, d2start, d2count,
                      mask);
 
     // Get run_cell variable from the parameter file
     // (check whether run_cell variable is int type)
-    typeid = get_nc_var_type(param_nc_nameid, "run_cell");
+    typeid = get_nc_var_type(param_nc_name, "run_cell");
     if (typeid != NC_INT) {
         log_err("Run_cell variable in the parameter file must be integer type.");
     }
-    get_nc_field_int(param_nc_nameid, "run_cell", d2start, d2count,
+    get_nc_field_int(param_nc_name, "run_cell", d2start, d2count,
                      run);
 
     // Check whether cells with run_cell == 1 are all within the mask domain
@@ -125,7 +124,7 @@ get_global_domain(nameid_struct *domain_nc_nameid,
 
     // get area
     // TBD: read var id from file
-    get_nc_field_double(domain_nc_nameid, global_domain->info.area_var,
+    get_nc_field_double(domain_nc_name, global_domain->info.area_var,
                         d2start, d2count, var);
     for (i = 0; i < global_domain->ncells_total; i++) {
         global_domain->locations[i].area = var[i];
@@ -133,33 +132,33 @@ get_global_domain(nameid_struct *domain_nc_nameid,
 
     // get fraction
     // TBD: read var id from file
-    get_nc_field_double(domain_nc_nameid, global_domain->info.frac_var,
+    get_nc_field_double(domain_nc_name, global_domain->info.frac_var,
                         d2start, d2count, var);
     for (i = 0; i < global_domain->ncells_total; i++) {
         global_domain->locations[i].frac = var[i];
     }
 
     // get lat and lon coordinates
-    get_nc_latlon(domain_nc_nameid, global_domain);
+    get_nc_latlon(domain_nc_name, global_domain);
 
     // check whether lat and lon coordinates in the parameter file match those
     // in the domain file
-    compare_ncdomain_with_global_domain(param_nc_nameid);
+    compare_ncdomain_with_global_domain(param_nc_name);
 
     // free memory
     free(var);
     free(run);
-    free(mask);
 
     return global_domain->ncells_active;
 }
+
 
 /******************************************************************************
  * @brief    Get lat and lon coordinates information from a netCDF file and
              store in nc_domain structure
  *****************************************************************************/
 void
-get_nc_latlon(nameid_struct *nc_nameid,
+get_nc_latlon(char          *nc_name,
               domain_struct *nc_domain)
 {
     double *var = NULL;
@@ -173,19 +172,19 @@ get_nc_latlon(nameid_struct *nc_nameid,
     size_t  d1start[1];
 
 
-    nc_domain->n_nx = get_nc_dimension(nc_nameid,
+    nc_domain->n_nx = get_nc_dimension(nc_name,
                                        nc_domain->info.x_dim);
-    nc_domain->n_ny = get_nc_dimension(nc_nameid,
+    nc_domain->n_ny = get_nc_dimension(nc_name,
                                        nc_domain->info.y_dim);
 
     // Get number of lat/lon dimensions.
-    nc_domain->info.n_coord_dims = get_nc_varndimensions(nc_nameid,
+    nc_domain->info.n_coord_dims = get_nc_varndimensions(nc_name,
                                                          nc_domain->info.lon_var);
     if (nc_domain->info.n_coord_dims !=
-        (size_t) get_nc_varndimensions(nc_nameid, nc_domain->info.lat_var)) {
+        (size_t) get_nc_varndimensions(nc_name, nc_domain->info.lat_var)) {
         log_err("Un even number of dimensions for %s and %s in: %s",
                 nc_domain->info.lon_var, nc_domain->info.lat_var,
-                nc_nameid->nc_filename);
+                nc_name);
     }
 
     if (nc_domain->info.n_coord_dims == 1) {
@@ -200,7 +199,7 @@ get_nc_latlon(nameid_struct *nc_nameid,
         d1count[0] = nc_domain->n_nx;
 
         // get longitude for unmasked grid
-        get_nc_field_double(nc_nameid, nc_domain->info.lon_var,
+        get_nc_field_double(nc_name, nc_domain->info.lon_var,
                             d1start, d1count, var_lon);
         for (j = 0; j < nc_domain->n_ny; j++) {
             for (i = 0; i < nc_domain->n_nx; i++) {
@@ -218,7 +217,7 @@ get_nc_latlon(nameid_struct *nc_nameid,
         d1count[0] = nc_domain->n_ny;
 
         // get latitude for unmasked grid
-        get_nc_field_double(nc_nameid, nc_domain->info.lat_var,
+        get_nc_field_double(nc_name, nc_domain->info.lat_var,
                             d1start, d1count, var_lat);
         for (i = 0; i < nc_domain->n_ny; i++) {
             for (j = 0; j < nc_domain->n_nx; j++) {
@@ -243,7 +242,7 @@ get_nc_latlon(nameid_struct *nc_nameid,
         d2count[1] = nc_domain->n_nx;
 
         // get longitude for unmasked grid
-        get_nc_field_double(nc_nameid, nc_domain->info.lon_var,
+        get_nc_field_double(nc_name, nc_domain->info.lon_var,
                             d2start, d2count, var);
         for (i = 0; i < nc_domain->ncells_total; i++) {
             // rescale to [-180., 180]. Note that the if statement is not strictly
@@ -255,7 +254,7 @@ get_nc_latlon(nameid_struct *nc_nameid,
         }
 
         // get latitude for unmasked grid
-        get_nc_field_double(nc_nameid, nc_domain->info.lat_var,
+        get_nc_field_double(nc_name, nc_domain->info.lat_var,
                             d2start, d2count, var);
         for (i = 0; i < nc_domain->ncells_total; i++) {
             nc_domain->locations[i].latitude = var[i];
@@ -266,7 +265,7 @@ get_nc_latlon(nameid_struct *nc_nameid,
     else {
         log_err("Number of dimensions for %s and %s should be 1 or 2 in: %s",
                 nc_domain->info.lon_var, nc_domain->info.lat_var,
-                nc_nameid->nc_filename);
+                nc_name);
     }
 }
 
@@ -274,8 +273,7 @@ get_nc_latlon(nameid_struct *nc_nameid,
  * @brief    Copy domain info from one domain structure to another
  *****************************************************************************/
 void
-copy_domain_info(domain_struct *domain_from,
-                 domain_struct *domain_to)
+copy_domain_info(domain_struct *domain_from, domain_struct *domain_to)
 {
     strcpy(domain_to->info.x_dim, domain_from->info.x_dim);
     strcpy(domain_to->info.y_dim, domain_from->info.y_dim);
@@ -337,7 +335,7 @@ initialize_location(location_struct *location)
  * @brief    Read the number of vegetation type per grid cell from file
  *****************************************************************************/
 void
-add_nveg_to_global_domain(nameid_struct *nc_nameid,
+add_nveg_to_global_domain(char          *nc_name,
                           domain_struct *global_domain)
 {
     size_t d2count[2];
@@ -352,7 +350,7 @@ add_nveg_to_global_domain(nameid_struct *nc_nameid,
     d2start[1] = 0;
     d2count[0] = global_domain->n_ny;
     d2count[1] = global_domain->n_nx;
-    get_nc_field_int(nc_nameid, "Nveg", d2start, d2count, ivar);
+    get_nc_field_int(nc_name, "Nveg", d2start, d2count, ivar);
 
     for (i = 0; i < global_domain->ncells_total; i++) {
         global_domain->locations[i].nveg = (size_t) ivar[i];

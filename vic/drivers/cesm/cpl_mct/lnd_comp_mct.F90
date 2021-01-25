@@ -415,7 +415,7 @@ CONTAINS
     CHARACTER(len=*), PARAMETER     :: subname = '(lnd_final_mct)'
 
     !--- clean up
-    errno = vic_cesm_final(vclock)
+    errno = vic_cesm_final()
 
     IF (errno /= 0) THEN
        CALL shr_sys_abort(subname//' ERROR: vic_cesm_final returned a errno /= 0')

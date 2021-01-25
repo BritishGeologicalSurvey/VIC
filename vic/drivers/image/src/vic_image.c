@@ -29,7 +29,6 @@
 /************************ end AMBHAS code ************************/
 
 #include <vic_driver_image.h>
-#include <rout.h>   // Routing routine (extension)
 
 
 size_t              NF, NR;
@@ -39,7 +38,6 @@ size_t             *mpi_map_mapping_array = NULL;
 all_vars_struct    *all_vars = NULL;
 force_data_struct  *force = NULL;
 dmy_struct         *dmy = NULL;
-dmy_struct          dmy_state;
 filenames_struct    filenames;
 filep_struct        filep;
 domain_struct       global_domain;
@@ -65,7 +63,7 @@ veg_con_map_struct *veg_con_map = NULL;
 veg_con_struct    **veg_con = NULL;
 veg_hist_struct   **veg_hist = NULL;
 veg_lib_struct    **veg_lib = NULL;
-metadata_struct     state_metadata[N_STATE_VARS + N_STATE_VARS_EXT];
+metadata_struct     state_metadata[N_STATE_VARS];
 metadata_struct     out_metadata[N_OUTVAR_TYPES];
 save_data_struct   *save_data;  // [ncells]
 double           ***out_data = NULL;  // [ncells, nvars, nelem]
@@ -75,9 +73,6 @@ double *temp_r; // [local_domain.ncells_active];
 double *temp_gw; // [local_domain.ncells_active];
 double *temp_baseflow; //[local_domain.ncells_active];
 double *temp_z; //[local_domain.ncells_active];
-
-// Extensions
-rout_struct         rout; // Routing routine (extension)
 
 double *out_recharge; //[global_domain.ncells_active];
 double *out_gw_inflow; //[global_domain.ncells_active];
@@ -161,27 +156,20 @@ main(int    argc,
     // allocate memory
     vic_alloc();
     printf("vic alloc \n");
-    // allocate memory for routing
-    rout_alloc();   // Routing routine (extension)
-
     // initialize model parameters from parameter files
     vic_image_init();
     printf("vic_image_init \n");
-    // initialize routing parameters from parameter files
-    rout_init();    // Routing routine (extension)
-
     // populate model state, either using a cold start or from a restart file
-    vic_populate_model_state(&(dmy[0]));
+    vic_populate_model_state();
     printf("vic_populate_model_state \n");
     // initialize output structures
     vic_init_output(&(dmy[0]));
     printf("vic_init_output \n");
     // Initialization is complete, print settings
     log_info(
-        "Initialization is complete, print global param, parameters and options structures");
+        "Initialization is complete, print global param and options structures");
     print_global_param(&global_param);
     print_option(&options);
-    print_parameters(&param);
 
     // stop init timer
     timer_stop(&(global_timers[TIMER_VIC_INIT]));
@@ -433,14 +421,7 @@ main(int    argc,
   	cts=-1; //counter for time series	
 	
     // loop over all timesteps
-    for (current = 0; current < global_param.nrecs; current++) {
-        // read forcing data
-        timer_continue(&(global_timers[TIMER_VIC_FORCE]));
-        vic_force();
-			if (debug == 1){
-				printf("vic_force has been called %d \n", mpi_rank);
-			}
-        timer_stop(&(global_timers[TIMER_VIC_FORCE]));
+	for (current = 0; current < global_param.nrecs; current++) {
 
 		printf("time step = %d \n", current);
 		if(current==1){
@@ -450,12 +431,10 @@ main(int    argc,
 		}
 		cts++;
 
-   // Write history files
-        timer_continue(&(global_timers[TIMER_VIC_WRITE]));
-        vic_write_output(&(dmy[current]));        timer_stop(&(global_timers[TIMER_VIC_WRITE]));
-
 	/************************ AMBHAS code ****************************/
     //for all local domains:
+     
+
 		printf("before get_AMBHAS_Data_Into_VIC %d \n", mpi_rank, current);
 		
 		get_AMBHAS_Data_Into_VIC(d, p, &local_domain,(int)current);
@@ -475,8 +454,11 @@ main(int    argc,
 		}         
 		/************************ end AMBHAS code ************************/
 		
-
-
+		// read forcing data
+		vic_force();
+			if (debug == 1){
+				printf("vic_force has been called %d \n", mpi_rank);
+			}
 
 		// run vic over the domain
 		vic_image_run(&(dmy[current]));
@@ -699,7 +681,8 @@ main(int    argc,
 		if(g->OUT_OPTION==1)
 		{
 			GW_write_output(g,d,p, current);
-		}    }
+		}
+    }
     MPI_Barrier(MPI_COMM_WORLD); 
 
     /************************ end AMBHAS code ************************/
@@ -709,9 +692,6 @@ main(int    argc,
     timer_start(&(global_timers[TIMER_VIC_FINAL]));
     // clean up
     vic_image_finalize();
-
-    // clean up routing
-    rout_finalize();    // Routing routine (extension)
 
     // finalize MPI
     status = MPI_Finalize();

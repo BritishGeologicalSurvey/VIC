@@ -36,7 +36,7 @@
  * @brief    This function handles tasks related to populating model state.
  *****************************************************************************/
 void
-vic_populate_model_state(dmy_struct *dmy_current)
+vic_populate_model_state(void)
 {
     extern all_vars_struct *all_vars;
     extern lake_con_struct *lake_con;
@@ -54,8 +54,7 @@ vic_populate_model_state(dmy_struct *dmy_current)
     else {
         // else generate a default state
         for (i = 0; i < local_domain.ncells_active; i++) {
-            generate_default_state(&(all_vars[i]), &(soil_con[i]), veg_con[i],
-                                   dmy_current);
+            generate_default_state(&(all_vars[i]), &(soil_con[i]), veg_con[i]);
             if (options.LAKES) {
                 generate_default_lake_state(&(all_vars[i]), &(soil_con[i]),
                                             lake_con[i]);

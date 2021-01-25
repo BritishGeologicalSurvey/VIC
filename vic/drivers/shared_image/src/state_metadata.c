@@ -25,7 +25,6 @@
  *****************************************************************************/
 
 #include <vic_driver_shared_image.h>
-#include <rout.h>
 
 /******************************************************************************
  * @brief    Set output met data information
@@ -36,12 +35,12 @@ set_state_meta_data_info()
     size_t                 v;
 
     extern option_struct   options;
-    extern metadata_struct state_metadata[N_STATE_VARS + N_STATE_VARS_EXT];
+    extern metadata_struct state_metadata[N_STATE_VARS];
 
     // Build the list of state variables
 
     // Set missing and/or default values
-    for (v = 0; v < (N_STATE_VARS + N_STATE_VARS_EXT); v++) {
+    for (v = 0; v < N_STATE_VARS; v++) {
         // Set default string values
         strcpy(state_metadata[v].varname, MISSING_S);
         strcpy(state_metadata[v].long_name, MISSING_S);
@@ -275,17 +274,6 @@ set_state_meta_data_info()
     strcpy(state_metadata[STATE_ENERGY_SNOW_FLUX].units, "W m-2");
     strcpy(state_metadata[STATE_ENERGY_SNOW_FLUX].description,
            "thermal flux through snowpack");
-
-    // STATE_GRIDCELL_AVG_ALBEDO
-    strcpy(state_metadata[STATE_AVG_ALBEDO].varname,
-           "STATE_AVG_ALBEDO");
-    strcpy(state_metadata[STATE_AVG_ALBEDO].long_name,
-           "state_avg_albedo");
-    strcpy(state_metadata[STATE_AVG_ALBEDO].standard_name,
-           "state_gridcell_avg_albedo");
-    strcpy(state_metadata[STATE_AVG_ALBEDO].units, "fraction");
-    strcpy(state_metadata[STATE_AVG_ALBEDO].description,
-           "gridcell averaged albedo");
 
     if (options.LAKES) {
         // STATE_LAKE_SOIL_MOISTURE
@@ -708,7 +696,4 @@ set_state_meta_data_info()
         strcpy(state_metadata[STATE_LAKE_ICE_SNOW_DEPTH].description,
                "depth of snow on lake ice");
     }
-
-    // STATE_ROUT_RING
-    state_metadata_rout_extension();
 }
