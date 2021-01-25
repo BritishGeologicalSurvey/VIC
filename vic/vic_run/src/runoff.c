@@ -319,11 +319,12 @@ runoff(cell_data_struct  *cell,
                     resid_moist[lindex]) {
                     tmp_liq = resid_moist[lindex];
                 }
-               kr[lindex]=pow(((tmp_liq -
-                                        resid_moist[lindex]) /
-                                       (soil_con->max_moist[lindex] -
-                                        resid_moist[lindex])),
-                                      soil_con->expt[lindex]);
+
+                if (tmp_liq > resid_moist[lindex]) {
+                    Q12[lindex] = calc_Q12(Ksat[lindex], tmp_liq,
+                                           resid_moist[lindex],
+                                           soil_con->max_moist[lindex],
+                                           soil_con->expt[lindex]);
 
           
                 if (liq[lindex] > resid_moist[lindex]) {
@@ -902,4 +903,24 @@ compute_runoff_and_asat(soil_con_struct *soil_con,
     if (*runoff < 0.) {
         *runoff = 0.;
     }
+}
+
+/******************************************************************************
+* @brief    Calculate drainage between two layers
+******************************************************************************/
+double
+calc_Q12(double Ksat,
+         double init_moist,
+         double resid_moist,
+         double max_moist,
+         double expt)
+{
+    double Q12;
+
+    Q12 = init_moist - pow(pow(init_moist - resid_moist, 1.0 - expt) -
+                           Ksat /
+                           pow(max_moist - resid_moist, expt) * (1.0 - expt),
+                           1.0 / (1.0 - expt)) - resid_moist;
+
+    return Q12;
 }

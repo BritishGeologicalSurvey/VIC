@@ -38,10 +38,20 @@ SHAREDIMAGEPATH = ../shared_image
 # VIC RUN PATH
 VICPATH = ../../vic_run
 
-# AMBHAS PATH
-AMBHASPATH=../../extensions/AMBHAS
+# VIC EXTENTIONS PATH
+EXTPATH = ../../extensions
 
-ifndef NC_LIBS
+# Set the routing model extension
+# | Level      | Value                              |
+# |----------  |---------------------------------   |
+# | rout_stub  | Stub routing model (no routing)    |
+# | rout_rvic  | Use RVIC routing scheme            |
+ROUT=rout_stub
+
+include ${EXTPATH}/${ROUT}/rout.mk
+
+# AMBHAS PATH
+AMBHASPATH=../../extensions/AMBHASifndef NC_LIBS
 NC_LIBS = $(shell nc-config --libs)
 endif
 $(info $$NC_LIBS is [${NC_LIBS}])
@@ -75,10 +85,11 @@ INCLUDES = -I ${DRIVERPATH}/include \
 		   -I ${VICPATH}/include \
 		   -I ${SHAREDPATH}/include \
 		   -I ${SHAREDIMAGEPATH}/include \
+		   -I ${EXTPATH}/${ROUT}/include \
 		   -I ${AMBHASPATH}		
-
 # Uncomment to include debugging information
-CFLAGS  =  ${INCLUDES} ${NC_CFLAGS}  -ggdb -O0 -Wall -Wextra -std=c99 \
+CFLAGS  =  ${INCLUDES} ${NC_CFLAGS} -ggdb -O0 -Wall -Wextra -std=c99 \
+					 -fopenmp \
 					 -DLOG_LVL=$(LOG_LVL) \
 					 -DGIT_VERSION=\"$(GIT_VERSION)\" \
 					 -DUSERNAME=\"$(USER)\" \
@@ -104,15 +115,15 @@ HDRS = \
 	$(wildcard ${DRIVERPATH}/include/*.h) \
 	$(wildcard ${SHAREDPATH}/include/*.h) \
 	$(wildcard ${SHAREDIMAGEPATH}/include/*.h) \
+	$(wildcard ${EXTPATH}/${ROUT}/include/*.h) \
 	$(wildcard ${AMBHASPATH}/*.h)
-
 SRCS = \
 	$(wildcard ${VICPATH}/src/*.c) \
 	$(wildcard ${DRIVERPATH}/src/*.c) \
 	$(wildcard ${SHAREDPATH}/src/*.c) \
 	$(wildcard ${SHAREDIMAGEPATH}/src/*.c) \
-	$(wildcard ${AMBHASPATH}/*.c)
-
+	$(wildcard ${EXTPATH}/${ROUT}/src/*.c) \
+	$(wildcard ${AMBHASPATH}/*.c
 OBJS = $(SRCS:%.o=%.c)
 
 all:
