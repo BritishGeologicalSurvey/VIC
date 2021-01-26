@@ -434,13 +434,6 @@ main(int    argc,
 	
     // loop over all timesteps
     for (current = 0; current < global_param.nrecs; current++) {
-        // read forcing data
-        timer_continue(&(global_timers[TIMER_VIC_FORCE]));
-        vic_force();
-			if (debug == 1){
-				printf("vic_force has been called %d \n", mpi_rank);
-			}
-        timer_stop(&(global_timers[TIMER_VIC_FORCE]));
 
 		printf("time step = %d \n", current);
 		if(current==1){
@@ -449,10 +442,6 @@ main(int    argc,
 			printf("After time step 0: %f s\n", total_t);
 		}
 		cts++;
-
-   // Write history files
-        timer_continue(&(global_timers[TIMER_VIC_WRITE]));
-        vic_write_output(&(dmy[current]));        timer_stop(&(global_timers[TIMER_VIC_WRITE]));
 
 	/************************ AMBHAS code ****************************/
     //for all local domains:
@@ -475,7 +464,13 @@ main(int    argc,
 		}         
 		/************************ end AMBHAS code ************************/
 		
-
+        // read forcing data
+        timer_continue(&(global_timers[TIMER_VIC_FORCE]));
+        vic_force();
+			if (debug == 1){
+				printf("vic_force has been called %d \n", mpi_rank);
+			}
+        timer_stop(&(global_timers[TIMER_VIC_FORCE]));
 
 
 		// run vic over the domain
@@ -672,6 +667,11 @@ main(int    argc,
 		 
 		MPI_Barrier(MPI_COMM_WORLD); 
 		/************************ end AMBHAS code ************************/
+   
+      // Write history files
+        timer_continue(&(global_timers[TIMER_VIC_WRITE]));
+        vic_write_output(&(dmy[current]));
+        timer_stop(&(global_timers[TIMER_VIC_WRITE]));
 			  
 			// Write history files
 			vic_write_output(&(dmy[current]));
