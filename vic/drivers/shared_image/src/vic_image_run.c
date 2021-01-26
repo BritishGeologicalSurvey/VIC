@@ -57,11 +57,12 @@ vic_image_run(dmy_struct *dmy_current)
     // Print the current timestep info before running vic_run
     sprint_dmy(dmy_str, dmy_current);
     debug("Running timestep %zu: %s", current, dmy_str);
+    
+    RUNOFF_PRINT_FLAG=0;
+    RUNOFF_PRINT_CELL=0;
 
     // If running with OpenMP, run this for loop using multiple threads
     #pragma omp parallel for default(shared) private(i, timer, vic_run_ref_str)
-   RUNOFF_PRINT_FLAG=0;
-   RUNOFF_PRINT_CELL=0;
     for (i = 0; i < local_domain.ncells_active; i++) {
    // printf("VIC_image_run grid cell %d", i);
         // Set global reference string (for debugging inside vic_run)
@@ -120,3 +121,9 @@ if(i==559){
     } */
 // run routing over the domain
     rout_run();     // Routing routine (extension)}
+
+//we do this in vic_image.c now, as we need to pass data with AMBHAS
+ /*for (i = 0; i < options.Noutstreams; i++) {
+        agg_stream_data(&(output_streams[i]), dmy_current, out_data);
+    }*/ 
+}

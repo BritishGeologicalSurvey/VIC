@@ -69,24 +69,6 @@ vic_force(void)
     dvar = malloc(local_domain.ncells_active * sizeof(*dvar));
     check_alloc_status(dvar, "Memory allocation error.");
 
-    printf("SIM_MODE %d \n", SIM_MODE);
-    //if SIM_MODE==1: time variant. use forcing file of each year
-    if (SIM_MODE==1){
-        // for now forcing file is determined by the year
-        sprintf(filenames.forcing[0], "%s%4d.nc", filenames.f_path_pfx[0],
-                dmy[current].year);
-        printf(" forcing file name %s \n", filenames.forcing[0]);
-    }
-    
-    //if SIM_MODE==0: steady state. use the forcing file of the first year for each year
-    if(SIM_MODE==0){
-    	 sprintf(filenames.forcing[0], "%s%4d.nc", filenames.f_path_pfx[0],
-    		    dmy[0].year);
-      printf(" forcing file name %s \n", filenames.forcing[0]);
-    
-    }
-
-
     // global_param.forceoffset[0] resets every year since the met file restarts
     // every year
     // global_param.forceskip[0] should also reset to 0 after the first year
@@ -103,8 +85,23 @@ vic_force(void)
             check_nc_status(status, "Error closing %s",
                             filenames.forcing[0].nc_filename);
             // open new forcing file
-            sprintf(filenames.forcing[0].nc_filename, "%s%4d.nc",
+            
+            printf("SIM_MODE %d \n", SIM_MODE);
+            
+            //if SIM_MODE==1: time variant. use forcing file of each year
+            if (SIM_MODE==1){
+              sprintf(filenames.forcing[0].nc_filename, "%s%4d.nc",
                     filenames.f_path_pfx[0], dmy[current].year);
+              printf(" forcing file name %s \n", filenames.forcing[0]);
+            }
+            
+            //if SIM_MODE==0: steady state. use the forcing file of the first year for each year
+            if(SIM_MODE==0){
+              sprintf(filenames.forcing[0].nc_filename, "%s%4d.nc",
+                    filenames.f_path_pfx[0], dmy[0].year);
+              printf(" forcing file name %s \n", filenames.forcing[0]);
+            }
+     
             status = nc_open(filenames.forcing[0].nc_filename, NC_NOWRITE,
                              &(filenames.forcing[0].nc_id));
             check_nc_status(status, "Error opening %s",

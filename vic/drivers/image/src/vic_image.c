@@ -680,7 +680,7 @@ main(int    argc,
 			}
 
 			// Write state file
-			if (check_save_state_flag(current)) {
+			if (check_save_state_flag(current, &dmy_state)) {
 				debug("writing state file for timestep %zu", current);
 				vic_store(&(dmy[current]), state_filename);
 				debug("finished storing state file: %s", state_filename)

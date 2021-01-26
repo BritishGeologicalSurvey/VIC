@@ -3,7 +3,7 @@
 *
 * Calculate infiltration and runoff from the surface, gravity driven drainage
 * between all soil layers, and generates baseflow from the bottom layer.
-* 
+*
 * This function has been modified by JS to calculate groundwater recharge using the SIMGM 
 * model by Niu et al. 2007, replacing VIC's baseflow formulation.
 *
@@ -46,7 +46,7 @@ runoff(cell_data_struct  *cell,
        double 		  Sy,
        double 		  z)
 {
-	extern option_struct       options;
+    extern option_struct       options;
     extern global_param_struct global_param;
     int debug=0;
     size_t                     lindex;
@@ -120,9 +120,9 @@ runoff(cell_data_struct  *cell,
     /** Set Residual Moisture **/
     for (lindex = 0; lindex < options.Nlayer; lindex++) {
         resid_moist[lindex] = soil_con->resid_moist[lindex] *
-                              soil_con->depth[lindex] * MM_PER_M;                     
+                              soil_con->depth[lindex] * MM_PER_M;
     }
-    
+
     /** Allocate and Set Values for Soil Sublayers **/
     layer = cell->layer;
     zwt = cell->zwt;
@@ -150,7 +150,7 @@ runoff(cell_data_struct  *cell,
 
     for (lindex = 0; lindex < options.Nlayer; lindex++) {
         evap[lindex][0] = layer[lindex].evap / (double) runoff_steps_per_dt;
-        org_moist[lindex] = layer[lindex].moist;       
+        org_moist[lindex] = layer[lindex].moist;
         layer[lindex].moist = 0;
         if (evap[lindex][0] > 0) { // if there is positive evaporation
             sum_liq = 0;
@@ -206,7 +206,6 @@ runoff(cell_data_struct  *cell,
             /** Set Layer Liquid Moisture Content **/
             liq[lindex] = org_moist[lindex] - layer[lindex].ice[fidx];
 
-
             /** Set Layer Frozen Moisture Content **/
             ice[lindex] = layer[lindex].ice[fidx];
 
@@ -237,7 +236,7 @@ runoff(cell_data_struct  *cell,
             }
                 if(debug==1){
                   printf("depth_sum %f node depth %f for layer %d z %f \n", depth_sum[lindex], node_depth[lindex], lindex, z);
-            }
+        }
 
             //find the soil layer in which the water table occurs
             if(z<=depth_sum[lindex]){ 
@@ -254,8 +253,8 @@ runoff(cell_data_struct  *cell,
 			if(debug==1){
 				printf("bubbling pressure %f layer %d\n",bubble[lindex], lindex);
 			}
-
-        }//end for Nlayer
+	//end for Nlayer
+        }
         
         zbot=depth_sum[options.Nlayer-1];	
 
@@ -295,9 +294,8 @@ runoff(cell_data_struct  *cell,
         Dsmax = soil_con->Dsmax / global_param.runoff_steps_per_day;
 
         for (time_step = 0; time_step < runoff_steps_per_dt; time_step++) {
-        
             inflow = dt_inflow;
-            
+
             //initialise gw parameters
             dt_gwinflow=0.0;
             dt_recharge=0.0;
@@ -308,12 +306,12 @@ runoff(cell_data_struct  *cell,
             *************************************/
             /**if the water level is below the soil column, use Q12 as represented in VIC **/
 
-            for (lindex = 0; lindex < options.Nlayer - 1; lindex++) { //for layers 0 and 1
+            /*************************************
+               Compute Drainage between Sublayers
+            *************************************/
+
+            for (lindex = 0; lindex < options.Nlayer - 1; lindex++) {
                 /** Brooks & Corey relation for hydraulic conductivity **/
-	              liq_init[lindex]=liq[lindex];//js added for balance calculation
-		            if(debug==1){
-	                  printf("liq_init %d %f \n", lindex, liq[lindex]);
-		            }
 
                 if ((tmp_liq = liq[lindex] - evap[lindex][fidx]) <
                     resid_moist[lindex]) {
@@ -325,14 +323,22 @@ runoff(cell_data_struct  *cell,
                                            resid_moist[lindex],
                                            soil_con->max_moist[lindex],
                                            soil_con->expt[lindex]);
-
-          
-                if (liq[lindex] > resid_moist[lindex]) {
-                    Q12[lindex] = Ksat[lindex] * kr[lindex]; //in mm
+                                           
+                    kr[lindex] = Q12[lindex] / Ksat[lindex];
+										   
+					          
+										   
                 }
                 else {
                     Q12[lindex] = 0.;
+					
+                    kr[lindex] = calc_Q12(Ksat[lindex], tmp_liq,
+                                           resid_moist[lindex],
+                                           soil_con->max_moist[lindex],
+                                           soil_con->expt[lindex]) / Ksat[lindex];
                 }
+				
+				
 				if(debug==1){
 					printf("layer %d, kr %f, Q12 %f, liq %f max_moist %f \n", lindex, kr[lindex],  Q12[lindex], liq[lindex], max_moist[lindex]);   
 				}
@@ -350,11 +356,10 @@ runoff(cell_data_struct  *cell,
                     resid_moist[lindex]) {
                     tmp_liq = resid_moist[lindex];
                 }
-                kr[lindex]=pow(((tmp_liq -
-                                        resid_moist[lindex]) /
-                                       (soil_con->max_moist[lindex] -
-                                        resid_moist[lindex])),
-                                      soil_con->expt[lindex]); 
+                kr[lindex] = calc_Q12(Ksat[lindex], tmp_liq,
+                                           resid_moist[lindex],
+                                           soil_con->max_moist[lindex],
+                                           soil_con->expt[lindex]) / Ksat[lindex]; 
 		   if(debug==1){
 					printf("layer %d, kr %f, liq %f, max_moist %f \n ", lindex, kr[lindex], liq[lindex], max_moist[lindex]); 
 			}
@@ -451,93 +456,89 @@ runoff(cell_data_struct  *cell,
               psi_m,  psi_sat, kr[lindex], kr[wtindex], Ksat[lindex],Ksat[wtindex],	node_depth_wt, z, dt_gwinflow, temp_recharge);
             
             }
-            
+
             
             
         }//end AMBHAS
-        /**************************************************
-        Solve for Current Soil Layer Moisture, and
-        Check Versus Maximum and Minimum Moisture Contents.
-        **************************************************/
-        
-        last_index = 0;
-        for (lindex = 0; lindex < options.Nlayer - 1; lindex++) {
-        if (lindex == 0) {
-            dt_runoff = tmp_dt_runoff[fidx];
-        }
-        else {
-            dt_runoff = 0;
-        }
-        
-        /* transport moisture for all sublayers **/
-        
-        tmp_inflow = 0.;
-        
-        /** Update soil layer moisture content **/
-        liq[lindex] = liq[lindex] +
-                      (inflow - dt_runoff) -
-                      (Q12[lindex] + evap[lindex][fidx]);
-        
-        /** Verify that soil layer moisture is less than maximum **/
-        if ((liq[lindex] + ice[lindex]) > max_moist[lindex]) {
-            tmp_inflow = (liq[lindex] + ice[lindex]) -
-                         max_moist[lindex];
-            liq[lindex] = max_moist[lindex] - ice[lindex];
-        
-           if (lindex == 0) {
-           
-    
-                Q12[lindex] += tmp_inflow;
-                tmp_inflow = 0;
-                
-             
-           }
-            else {
-                tmplayer = lindex;
-                while (tmp_inflow > 0) {
-                    tmplayer--;
-                    if (tmplayer < 0) {
-                        /** If top layer saturated, add to runoff **/
-                        runoff[fidx] += tmp_inflow;
+            /**************************************************
+               Solve for Current Soil Layer Moisture, and
+               Check Versus Maximum and Minimum Moisture Contents.
+            **************************************************/
+
+            last_index = 0;
+            for (lindex = 0; lindex < options.Nlayer - 1; lindex++) {
+                if (lindex == 0) {
+                    dt_runoff = tmp_dt_runoff[fidx];
+                }
+                else {
+                    dt_runoff = 0;
+                }
+
+                /* transport moisture for all sublayers **/
+
+                tmp_inflow = 0.;
+
+                /** Update soil layer moisture content **/
+                liq[lindex] = liq[lindex] +
+                              (inflow - dt_runoff) -
+                              (Q12[lindex] + evap[lindex][fidx]);
+
+                /** Verify that soil layer moisture is less than maximum **/
+                if ((liq[lindex] + ice[lindex]) > max_moist[lindex]) {
+                    tmp_inflow = (liq[lindex] + ice[lindex]) -
+                                 max_moist[lindex];
+                    liq[lindex] = max_moist[lindex] - ice[lindex];
+
+                    if (lindex == 0) {
+                        Q12[lindex] += tmp_inflow;
                         tmp_inflow = 0;
                     }
                     else {
-                        /** else add excess soil moisture to next higher layer **/
-                        liq[tmplayer] += tmp_inflow;
-                        if ((liq[tmplayer] + ice[tmplayer]) >
-                            max_moist[tmplayer]) {
-                            tmp_inflow =
-                                ((liq[tmplayer] +
-                                  ice[tmplayer]) - max_moist[tmplayer]);
-                            liq[tmplayer] = max_moist[tmplayer] -
-                                            ice[tmplayer];
+                        tmplayer = lindex;
+                        while (tmp_inflow > 0) {
+                            tmplayer--;
+                            if (tmplayer < 0) {
+                                /** If top layer saturated, add to runoff **/
+                                runoff[fidx] += tmp_inflow;
+                                tmp_inflow = 0;
+                            }
+                            else {
+                                /** else add excess soil moisture to next higher layer **/
+                                liq[tmplayer] += tmp_inflow;
+                                if ((liq[tmplayer] + ice[tmplayer]) >
+                                    max_moist[tmplayer]) {
+                                    tmp_inflow =
+                                        ((liq[tmplayer] +
+                                          ice[tmplayer]) - max_moist[tmplayer]);
+                                    liq[tmplayer] = max_moist[tmplayer] -
+                                                    ice[tmplayer];
+                                }
+                                else {
+                                    tmp_inflow = 0;
+                                }
+                            }
                         }
-                        else {
-                            tmp_inflow = 0;
-                        }
-                    }
+                    } /** end trapped excess moisture **/
+                } /** end check if excess moisture in top layer **/
+
+                /** verify that current layer moisture is greater than minimum **/
+                if (liq[lindex] < 0) {
+                    /** liquid cannot fall below 0 **/
+                    Q12[lindex] += liq[lindex];
+                    liq[lindex] = 0;
                 }
-            } /** end trapped excess moisture **/
-        } /** end check if excess moisture in top layer **/
-        
-        /** verify that current layer moisture is greater than minimum **/
-        if (liq[lindex] < 0) {
-            /** liquid cannot fall below 0 **/
-            Q12[lindex] += liq[lindex];
-            liq[lindex] = 0;
-        }
-        if ((liq[lindex] + ice[lindex]) < resid_moist[lindex]) {
-            /** moisture cannot fall below minimum **/
-            Q12[lindex] +=
-                (liq[lindex] + ice[lindex]) - resid_moist[lindex];
-            liq[lindex] = resid_moist[lindex] - ice[lindex];
-        }
-        
-        inflow = (Q12[lindex] + tmp_inflow);
-        Q12[lindex] += tmp_inflow;
-        
-        last_index++;
-    } /* end loop through soil layers */
+                if ((liq[lindex] + ice[lindex]) < resid_moist[lindex]) {
+                    /** moisture cannot fall below minimum **/
+                    Q12[lindex] +=
+                        (liq[lindex] + ice[lindex]) - resid_moist[lindex];
+                    liq[lindex] = resid_moist[lindex] - ice[lindex];
+                }
+
+                inflow = (Q12[lindex] + tmp_inflow);
+                Q12[lindex] += tmp_inflow;
+
+                last_index++;
+            } /* end loop through soil layers */
 
 
         /**************************************************
@@ -563,10 +564,11 @@ runoff(cell_data_struct  *cell,
                         resid_moist[lindex]) {
                         tmp_liq = resid_moist[lindex];
                     }
-        
-        kr[lindex]=pow(((tmp_liq - resid_moist[lindex]) /
-           (soil_con->max_moist[lindex] -resid_moist[lindex])),
-                                          soil_con->expt[lindex]);
+        									  
+        kr[lindex] = calc_Q12(Ksat[lindex], tmp_liq,
+                                           resid_moist[lindex],
+                                           soil_con->max_moist[lindex],
+                                           soil_con->expt[lindex]) / Ksat[lindex];								  
         
         dt_recharge=-kr[lindex]*Ksat[lindex] * ((-z-(psi_m-node_depth[lindex]))/
         	(z-node_depth[lindex]));
@@ -622,65 +624,64 @@ runoff(cell_data_struct  *cell,
     }
  
  
-    /**************************************************
-       Compute Baseflow
-    **************************************************/
-    
-    /** ARNO model for the bottom soil layer (based on bottom
-        soil layer moisture from previous time step) **/
-    
-    lindex = options.Nlayer - 1;
-    
-    /** Compute relative moisture **/
-    rel_moist =
-        (liq[lindex] -
-         resid_moist[lindex]) /
-        (soil_con->max_moist[lindex] - resid_moist[lindex]);
-    
+            /**************************************************
+               Compute Baseflow
+            **************************************************/
+
+            /** ARNO model for the bottom soil layer (based on bottom
+                soil layer moisture from previous time step) **/
+
+            lindex = options.Nlayer - 1;
+
+            /** Compute relative moisture **/
+            rel_moist =
+                (liq[lindex] -
+                 resid_moist[lindex]) /
+                (soil_con->max_moist[lindex] - resid_moist[lindex]);
+
     /** Baseflow is not needed with AMBHAS, so set dt baseflow to 0 **/
     dt_baseflow=0;
     
-    /** Compute baseflow as function of relative moisture **/
+            /** Compute baseflow as function of relative moisture **/
     
     /*         frac = Dsmax * soil_con->Ds / soil_con->Ws;
-    dt_baseflow = frac * rel_moist;
-    if (rel_moist > soil_con->Ws) {
-        frac = (rel_moist - soil_con->Ws) / (1 - soil_con->Ws);
-        dt_baseflow += Dsmax * (1 - soil_con->Ds / soil_con->Ws) * pow(
-            frac, soil_con->c);
-    }
+            dt_baseflow = frac * rel_moist;
+            if (rel_moist > soil_con->Ws) {
+                frac = (rel_moist - soil_con->Ws) / (1 - soil_con->Ws);
+                dt_baseflow += Dsmax * (1 - soil_con->Ds / soil_con->Ws) * pow(
+                    frac, soil_con->c);
+            }
     */
     // Make sure baseflow isn't negative /
-    if (dt_baseflow < 0) {
-        dt_baseflow = 0;
-    }
-    
-    
-    /** Extract baseflow from the bottom soil layer **/
-    
+            if (dt_baseflow < 0) {
+                dt_baseflow = 0;
+            }
+
+            /** Extract baseflow from the bottom soil layer **/
+
     /*  liq[lindex] +=
-        Q12[lindex - 1] - (evap[lindex][fidx] + dt_baseflow);
+                Q12[lindex - 1] - (evap[lindex][fidx] + dt_baseflow);
      */   
         
     /** Extract recharge from the bottom soil layer **/
     
     liq[lindex] +=
         Q12[lindex - 1] - (evap[lindex][fidx] + dt_recharge);
-    
-    /** Check Lower Sub-Layer Moistures **/
-    tmp_moist = 0;
-    
-    /* If soil moisture has gone below minimum, take water out
-     * of baseflow and add back to soil to make up the difference
-     * Note: this may lead to negative baseflow, in which case we will
-     * reduce evap to make up for it */
+
+            /** Check Lower Sub-Layer Moistures **/
+            tmp_moist = 0;
+
+            /* If soil moisture has gone below minimum, take water out
+             * of baseflow and add back to soil to make up the difference
+             * Note: this may lead to negative baseflow, in which case we will
+             * reduce evap to make up for it */
     /*    if ((liq[lindex] + ice[lindex]) < resid_moist[lindex]) {
-        dt_baseflow +=
-            (liq[lindex] + ice[lindex]) - resid_moist[lindex];
-        liq[lindex] = resid_moist[lindex] - ice[lindex];
-    }
-    
-    if ((liq[lindex] + ice[lindex]) > max_moist[lindex]) {
+                dt_baseflow +=
+                    (liq[lindex] + ice[lindex]) - resid_moist[lindex];
+                liq[lindex] = resid_moist[lindex] - ice[lindex];
+            }
+
+            if ((liq[lindex] + ice[lindex]) > max_moist[lindex]) {
         // soil moisture above maximum 
         tmp_moist = ((liq[lindex] + ice[lindex]) - max_moist[lindex]);
         liq[lindex] = max_moist[lindex] - ice[lindex];
@@ -721,33 +722,33 @@ runoff(cell_data_struct  *cell,
     }
     
     if ((liq[lindex] + ice[lindex]) > max_moist[lindex]) {
-        /* soil moisture above maximum */
-        tmp_moist = ((liq[lindex] + ice[lindex]) - max_moist[lindex]);
-        liq[lindex] = max_moist[lindex] - ice[lindex];
-        tmplayer = lindex;
-        while (tmp_moist > 0) {
-            tmplayer--;
-            if (tmplayer < 0) {
-                /** If top layer saturated, add to runoff **/
-                runoff[fidx] += tmp_moist;
-                tmp_moist = 0;
-            }
-            else {
-                /** else if sublayer exists, add excess soil moisture **/
-                liq[tmplayer] += tmp_moist;
-                if ((liq[tmplayer] + ice[tmplayer]) >
-                    max_moist[tmplayer]) {
-                    tmp_moist =
-                        ((liq[tmplayer] +
-                          ice[tmplayer]) - max_moist[tmplayer]);
-                    liq[tmplayer] = max_moist[tmplayer] - ice[tmplayer];
+                /* soil moisture above maximum */
+                tmp_moist = ((liq[lindex] + ice[lindex]) - max_moist[lindex]);
+                liq[lindex] = max_moist[lindex] - ice[lindex];
+                tmplayer = lindex;
+                while (tmp_moist > 0) {
+                    tmplayer--;
+                    if (tmplayer < 0) {
+                        /** If top layer saturated, add to runoff **/
+                        runoff[fidx] += tmp_moist;
+                        tmp_moist = 0;
+                    }
+                    else {
+                        /** else if sublayer exists, add excess soil moisture **/
+                        liq[tmplayer] += tmp_moist;
+                        if ((liq[tmplayer] + ice[tmplayer]) >
+                            max_moist[tmplayer]) {
+                            tmp_moist =
+                                ((liq[tmplayer] +
+                                  ice[tmplayer]) - max_moist[tmplayer]);
+                            liq[tmplayer] = max_moist[tmplayer] - ice[tmplayer];
+                        }
+                        else {
+                            tmp_moist = 0;
+                        }
+                    }
                 }
-                else {
-                    tmp_moist = 0;
-                }
             }
-        }
-    }
     if(debug==1){   
     	  printf("dt_recharge %f, dt_gwinflow %f, temp_recharge %f, \n", dt_recharge, dt_gwinflow, temp_recharge);
     }
@@ -758,34 +759,33 @@ runoff(cell_data_struct  *cell,
     Q1[fidx] += Q12[0];
     Q2[fidx] += Q12[1];
 
-  } /* end of sub-dt time step loop */
+        } /* end of sub-dt time step loop */
 
-  /** If negative baseflow, reduce evap accordingly **/
-  if (baseflow[fidx] < 0) {
-      layer[lindex].evap += baseflow[fidx];
-      baseflow[fidx] = 0;
-  }
- 
-  /** Recompute Asat based on final moisture level of upper layers **/
-  for (lindex = 0; lindex < options.Nlayer; lindex++) {
-        tmp_moist_for_runoff[lindex] = (liq[lindex] + ice[lindex]);
+        /** If negative baseflow, reduce evap accordingly **/
+        if (baseflow[fidx] < 0) {
+            layer[lindex].evap += baseflow[fidx];
+            baseflow[fidx] = 0;
+        }
+
+        /** Recompute Asat based on final moisture level of upper layers **/
+        for (lindex = 0; lindex < options.Nlayer; lindex++) {
+            tmp_moist_for_runoff[lindex] = (liq[lindex] + ice[lindex]);
         //debug=1;
         if(debug==1){
               printf("liq at end of time step: layer %d,  liq %f depth %f \n", lindex, liq[lindex], soil_con->depth[lindex] );     
             }
-  }
-  compute_runoff_and_asat(soil_con, tmp_moist_for_runoff, 0, &A,
-                          &tmp_runoff);
+        }
+        compute_runoff_and_asat(soil_con, tmp_moist_for_runoff, 0, &A,
+                                &tmp_runoff);
 
-  /** Store tile-wide values **/
-
-  for (lindex = 0; lindex < options.Nlayer; lindex++) {
-      layer[lindex].moist +=
-          ((liq[lindex] + ice[lindex]) * frost_fract[fidx]);
-  }
-  cell->asat += A * frost_fract[fidx];
-  cell->runoff += runoff[fidx] * frost_fract[fidx];
-  cell->baseflow += baseflow[fidx] * frost_fract[fidx];
+        /** Store tile-wide values **/
+        for (lindex = 0; lindex < options.Nlayer; lindex++) {
+            layer[lindex].moist +=
+                ((liq[lindex] + ice[lindex]) * frost_fract[fidx]);
+        }
+        cell->asat += A * frost_fract[fidx];
+        cell->runoff += runoff[fidx] * frost_fract[fidx];
+        cell->baseflow += baseflow[fidx] * frost_fract[fidx];
   cell->recharge += recharge[fidx] * frost_fract[fidx]+gw_inflow[fidx] * frost_fract[fidx];
   cell->gw_inflow+=0.0;
   cell->Q1+=Q1[fidx] * frost_fract[fidx];
@@ -800,8 +800,8 @@ runoff(cell_data_struct  *cell,
         printf("balance: inflow -runoff-recharge-baseflow-evap+soil mooisture change %f \n", 
         (cell->inflow-cell->runoff- cell->recharge- cell->baseflow -(layer[0].evap+layer[1].evap+layer[2].evap)+
         (liq_init[0]+liq_init[1]+liq_init[2]-liq[0]-liq[1]-liq[2])));
-        }
-        
+    }
+
      if (RUNOFF_PRINT_FLAG==1){
         printf("z %f , inflow %f, runoff, %f,  recharge, %f  baseflow, %f, evap, %f, D_moist %f,rel_moist_0-3 %f, %f, %f , max_moist_0-2 %f, %f, %f, evap_0-2 %f, %f, %f, q1,2 %f,  %f, layer_depth1-3, %f, %f, %f Sy %f \n ", z,
          cell->inflow,  cell->runoff, cell->recharge,  cell->baseflow , layer[0].evap+layer[1].evap+layer[2].evap,  
@@ -811,39 +811,39 @@ runoff(cell_data_struct  *cell,
         }
         
         
-/** Compute water table depth **/
-wrap_compute_zwt(soil_con, cell);
+    /** Compute water table depth **/
+    wrap_compute_zwt(soil_con, cell);
 
-/** Recompute Thermal Parameters Based on New Moisture Distribution **/
-if (options.FULL_ENERGY || options.FROZEN_SOIL) {
-  for (lindex = 0; lindex < options.Nlayer; lindex++) {
-      tmp_layer = cell->layer[lindex];
-      moist[lindex] = tmp_layer.moist;
-  }
+    /** Recompute Thermal Parameters Based on New Moisture Distribution **/
+    if (options.FULL_ENERGY || options.FROZEN_SOIL) {
+        for (lindex = 0; lindex < options.Nlayer; lindex++) {
+            tmp_layer = cell->layer[lindex];
+            moist[lindex] = tmp_layer.moist;
+        }
 
-  ErrorFlag = distribute_node_moisture_properties(energy->moist,
-                                                  energy->ice,
-                                                  energy->kappa_node,
-                                                  energy->Cs_node,
-                                                  soil_con->Zsum_node,
-                                                  energy->T,
-                                                  soil_con->max_moist_node,
-                                                  soil_con->expt_node,
-                                                  soil_con->bubble_node,
-                                                  moist, soil_con->depth,
-                                                  soil_con->soil_dens_min,
-                                                  soil_con->bulk_dens_min,
-                                                  soil_con->quartz,
-                                                  soil_con->soil_density,
-                                                  soil_con->bulk_density,
-                                                  soil_con->organic, Nnodes,
-                                                  options.Nlayer,
-                                                  soil_con->FS_ACTIVE);
-  if (ErrorFlag == ERROR) {
-      return (ERROR);
-  }
-}
-return (0);
+        ErrorFlag = distribute_node_moisture_properties(energy->moist,
+                                                        energy->ice,
+                                                        energy->kappa_node,
+                                                        energy->Cs_node,
+                                                        soil_con->Zsum_node,
+                                                        energy->T,
+                                                        soil_con->max_moist_node,
+                                                        soil_con->expt_node,
+                                                        soil_con->bubble_node,
+                                                        moist, soil_con->depth,
+                                                        soil_con->soil_dens_min,
+                                                        soil_con->bulk_dens_min,
+                                                        soil_con->quartz,
+                                                        soil_con->soil_density,
+                                                        soil_con->bulk_density,
+                                                        soil_con->organic, Nnodes,
+                                                        options.Nlayer,
+                                                        soil_con->FS_ACTIVE);
+        if (ErrorFlag == ERROR) {
+            return (ERROR);
+        }
+    }
+    return (0);
 }
 
 /******************************************************************************

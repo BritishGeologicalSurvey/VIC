@@ -51,7 +51,9 @@ ROUT=rout_stub
 include ${EXTPATH}/${ROUT}/rout.mk
 
 # AMBHAS PATH
-AMBHASPATH=../../extensions/AMBHASifndef NC_LIBS
+AMBHASPATH=../../extensions/AMBHAS
+
+ifndef NC_LIBS
 NC_LIBS = $(shell nc-config --libs)
 endif
 $(info $$NC_LIBS is [${NC_LIBS}])
@@ -117,13 +119,15 @@ HDRS = \
 	$(wildcard ${SHAREDIMAGEPATH}/include/*.h) \
 	$(wildcard ${EXTPATH}/${ROUT}/include/*.h) \
 	$(wildcard ${AMBHASPATH}/*.h)
+ 
 SRCS = \
 	$(wildcard ${VICPATH}/src/*.c) \
 	$(wildcard ${DRIVERPATH}/src/*.c) \
 	$(wildcard ${SHAREDPATH}/src/*.c) \
 	$(wildcard ${SHAREDIMAGEPATH}/src/*.c) \
 	$(wildcard ${EXTPATH}/${ROUT}/src/*.c) \
-	$(wildcard ${AMBHASPATH}/*.c
+	$(wildcard ${AMBHASPATH}/*.c)
+ 
 OBJS = $(SRCS:%.o=%.c)
 
 all:
