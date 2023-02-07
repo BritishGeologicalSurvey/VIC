@@ -11,7 +11,7 @@
 #include <string.h>
 #include <math.h>
 #define ERR(e) {printf("Error: %s\n", nc_strerror(e)); return 2;}//error statement for netcdf data
-int GW_read_1pumping(const gw_global_data_struct *g, gw_data_struct *d, int year, int month, int day, int dayseconds){
+int GW_read_1pumping(const gw_global_data_struct *g, gw_data_struct *d, int year, int month, int day){
 
 	//printf("*** GW_read_1pumping is called \n");
 
@@ -20,7 +20,7 @@ int GW_read_1pumping(const gw_global_data_struct *g, gw_data_struct *d, int year
 
 	//printf("today is: %d. %d. %d\n", g->DAY,g->MONTH,g->YEAR);
 	sprintf(file_name, "..//AMBHAS//gw_pumping_%d_%d.nc",  year,  month);
- 	//sprintf(file_name, "..//AMBHAS//gw_pumping_%d_%d_%d_%d.nc",  year,  month, day, dayseconds);
+
 	printf("***pumping name %s \n", file_name);
 
 

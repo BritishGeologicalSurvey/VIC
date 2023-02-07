@@ -42,7 +42,7 @@ VICPATH = ../../vic_run
 EXTPATH = ../../extensions
 
 # AMBHAS PATH
-AMBHASPATH = ../../extensions/AMBHAS
+AMBHASPATH=../../extensions/AMBHAS
 
 # Set the routing model extension
 # | Level      | Value                              |
@@ -89,7 +89,6 @@ INCLUDES = -I ${DRIVERPATH}/include \
 		   -I ${SHAREDIMAGEPATH}/include \
 		   -I ${EXTPATH}/${ROUT}/include \
 		   -I ${AMBHASPATH}		
-
 # Uncomment to include debugging information
 CFLAGS  =  ${INCLUDES} ${NC_CFLAGS} -ggdb -O0 -Wall -Wextra -std=c99 \
 					 -fopenmp \
@@ -120,15 +119,15 @@ HDRS = \
 	$(wildcard ${SHAREDIMAGEPATH}/include/*.h) \
 	$(wildcard ${EXTPATH}/${ROUT}/include/*.h) \
 	$(wildcard ${AMBHASPATH}/*.h)
-
+ 
 SRCS = \
 	$(wildcard ${VICPATH}/src/*.c) \
 	$(wildcard ${DRIVERPATH}/src/*.c) \
 	$(wildcard ${SHAREDPATH}/src/*.c) \
-	$(wildcard ${SHAREDIMAGEPATH}/src/*.c) \ 
+	$(wildcard ${SHAREDIMAGEPATH}/src/*.c) \
 	$(wildcard ${EXTPATH}/${ROUT}/src/*.c) \
 	$(wildcard ${AMBHASPATH}/*.c)
-
+ 
 OBJS = $(SRCS:%.o=%.c)
 
 all:

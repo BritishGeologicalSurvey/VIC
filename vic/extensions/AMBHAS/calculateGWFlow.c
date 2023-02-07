@@ -470,9 +470,9 @@ float calculateGwFlow(const gw_global_data_struct *g, const gw_data_struct *d, g
 		i=g->NUMOBSBH*n_time_step+count;
 		ts->h_obs[count][n_time_step]=p->h[*(g->p_obslat_count+count)][*(g->p_obslon_count+count)];
 		//printf("obs head %f for obslat %f and obslon %f \n", p->h[*(g->p_obslat_count+count)][*(g->p_obslon_count+count)],*(g->p_obslat_count+count), *(g->p_obslon_count+count));
-		ts->balance[n_time_step]=dtAquiferStorage;
-		ts->total_baseflow[n_time_step]=sumBaseflow;
-		ts->total_leakage[n_time_step]=sumLeakage;
+		ts->balance[n_time_step]=dtAquiferStorage*g->DT;
+		ts->total_baseflow[n_time_step]=sumBaseflow*g->DT;
+		ts->total_leakage[n_time_step]=sumLeakage*g->DT;
 
 	}
 

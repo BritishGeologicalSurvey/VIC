@@ -120,7 +120,7 @@
  	int GW_initialise(gw_global_data_struct *g, gw_data_struct *d, gw_param_struct *p, gw_ts_struct *ts);
 	int GW_read_data(const gw_global_data_struct *g, gw_data_struct *d);
 	int GW_read_h_ini(const gw_global_data_struct *g, gw_param_struct *p);
-	int GW_read_1pumping(const gw_global_data_struct *g, gw_data_struct *d, int year, int month, int day, int seconds);
+	int GW_read_1pumping(const gw_global_data_struct *g, gw_data_struct *d, int year, int month, int day);
 	int GW_read_Ts(const gw_global_data_struct *g, gw_data_struct *d, int ctime);
 	int GW_write_output(const gw_global_data_struct *g, const gw_data_struct *d, const gw_param_struct *p, int ctime);
 	int readGlobalData(gw_global_data_struct *g, gw_data_struct *d);

@@ -556,7 +556,7 @@ main(int    argc,
 				//read in time series for pumping	
 				if(g->PUMPING == 1){
 
-					GW_read_1pumping(g, d, dmy[current].year,dmy[current].month, dmy[current].day,dmy[current].dayseconds);
+					GW_read_1pumping(g, d, dmy[current].year,dmy[current].month, dmy[current].day);
 
 					if (debug == 1){
 						printf("GW_read_1pumping has been called \n");
@@ -570,7 +570,7 @@ main(int    argc,
 				//read in time series for pumping	
 				if(g->PUMPING == 1){
 
-					GW_read_1pumping(g, d, dmy[0].year,dmy[0].month);
+					GW_read_1pumping(g, d, dmy[0].year,dmy[0].month, dmy[current].day);
 					//GW_read_1pumping(g, d, dmy[0].year,dmy[0].month, dmy[0].day,dmy[0].dayseconds);
 					if (debug == 1){
 						printf("GW_read_1pumping has been called \n");
@@ -585,7 +585,7 @@ main(int    argc,
 				//read in time series for pumping	
 				if(g->PUMPING == 1){
 
-					GW_read_1pumping(g, d, dmy[current].year,dmy[0].month, dmy[current].day,dmy[current].dayseconds);
+					GW_read_1pumping(g, d, dmy[current].year,dmy[0].month, dmy[current].day);
 					if (debug == 1){
 						printf("GW_read_1pumping has been called \n");
 					}
