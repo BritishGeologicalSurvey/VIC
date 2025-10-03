@@ -27,6 +27,9 @@
 /************************ AMBHAS code ************************/
 #include "Link_AMBHAS_VIC.h"
 /************************ end AMBHAS code ************************/
+/************************ GRID code ************************/
+#include "Grid_global_vars.h"
+/************************ end GRID code ************************/
 
 #include <vic_driver_image.h>
 #include <rout.h>   // Routing routine (extension)
@@ -110,6 +113,9 @@ int RUNOFF_PRINT_FLAG=0; // flag wether to print water balance of a cell
 int RUNOFF_PRINT_CELL=0;//cell to write out water balance for each time step
 float MAX_RECHARGE_FRACTION=0.0; //fraction of total available moisture in the soil layer the water table is in interaction with that can recharge the aquifer in one time step.
 int SIM_MODE=0;
+//define structures containing global grid data
+grid_data_struct grid_data;
+int GRID_FLAG=0;
 /******************************************************************************
  * @brief   Stand-alone image mode driver of the VIC model
  * @details The image mode driver runs VIC for a single timestep for all grid
@@ -432,6 +438,123 @@ main(int    argc,
   	printf("VIC_AMBHAS Initialised after: %f s\n", total_t);
 
     /************************ end AMBHAS code ************************/
+    
+    /************************ start GRID code ************************/
+   	//define structures containing global grid data
+   //	grid_data_struct grid_data;
+   	//grid_data_struct *grid;
+   	//grid=&grid_data;
+    GRID_FLAG = g->GRID_FLAG;
+    grid_data_struct *grid;
+    grid=&grid_data;
+    
+    if(g->GRID_FLAG==1){
+    printf("GRID code starting \n");
+
+
+  debug = 1;
+
+
+	if (debug==1){
+		printf("I have created the grid data structure \n");
+	}
+
+	//read the global data that tells us model dimensions and modes
+	readGridData(grid);
+
+	if (debug==1){
+		printf("I have read in the global data \n");
+	}
+ 
+     //allocate the arrays in the structure
+     	grid->cell_no_VIC = allocate2DArray(grid->NROW_VIC, grid->NCOL_VIC);
+     	grid->cell_no_FORCE = allocate2DArray(grid->NROW_FORCE, grid->NCOL_FORCE);
+     	grid->prec_FORCE = allocate2DArray(grid->NROW_FORCE, grid->NCOL_FORCE);
+      grid->prec_VIC = allocate2DArray(grid->NROW_VIC, grid->NCOL_VIC);
+    
+    	grid->lat_VIC=(double*) malloc(grid->NROW_VIC* sizeof(double));
+    	grid->lon_VIC=(double*) malloc(grid->NCOL_VIC* sizeof(double));
+     	grid->lat_VIC_Force=(double*) malloc(grid->NROW_VIC* sizeof(double));
+    	grid->lon_VIC_Force=(double*) malloc(grid->NCOL_VIC* sizeof(double));
+     
+     	grid->lat_FORCE=(double*) malloc(grid->NROW_VIC* sizeof(double));
+    	grid->lon_FORCE=(double*) malloc(grid->NCOL_VIC* sizeof(double));
+     
+     	if (debug==1){
+    		printf("I have allocated the structures \n");
+    	}
+
+      // check the content of grid is what we expect to be
+    	printf("NROW_VIC %d, NCOL_VIC %d, NROW_FORCE %d, NCOL_FORCE %d \n", grid->NROW_VIC, grid->NCOL_VIC, grid->NROW_FORCE, grid->NCOL_FORCE);
+       
+     
+     //read in the Force cell data
+    	grid_read_FORCE_Domain(grid);
+     
+     //read in the VIC cell data
+    	grid_read_VIC_Domain(grid);
+       
+
+        
+      //read in the Force data
+    	//grid_read_FORCE_Data(grid);
+    	double count;
+      int crow, ccol;
+        
+     //create VIC lats
+    	printf("\n*** Lats VIC main!\n");
+    	for (crow=0; crow<grid->NROW_VIC; crow++){
+          grid->lat_VIC[crow] = grid->y_origin_VIC+(grid->NROW_VIC-1)*grid->DLAT_VIC -grid->DLAT_VIC*crow ;
+      
+         // printf(" %f ", grid->lat_VIC[crow]);   
+      }
+        
+      //create VIC lons
+     	printf("\n*** Lons VIC main!\n");
+     	for (ccol=0; ccol<grid->NCOL_VIC; ccol++){
+          grid->lon_VIC[ccol] = grid->x_origin_VIC+grid->DLON_VIC*ccol;
+         // printf(" %f ",grid->lon_VIC[ccol]);
+      }
+        
+      //create FORCE lats
+     	printf("\n*** Lats FORCE main!\n");
+     	for (crow=0; crow<grid->NROW_FORCE; crow++){
+          grid->lat_FORCE[crow] = grid->y_origin_FORCE+(grid->NROW_FORCE-1)*grid->DLAT_FORCE -grid->DLAT_FORCE*crow;
+         // printf(" %f ",grid->lat_FORCE[crow]);
+      }
+        
+        //create FORCE lons
+     	printf("\n*** Lons FORCE main!\n");
+     	for (ccol=0; ccol<grid->NCOL_FORCE; ccol++){
+          grid->lon_FORCE[ccol] = grid->x_origin_FORCE+grid->DLON_FORCE*ccol;
+          //printf(" %f ",grid->lon_FORCE[ccol]);
+      }
+        
+        
+      
+       //find row index within VIC domain to match with each FORCE cell
+     	for (crow=0; crow<grid->NROW_VIC; crow++){
+          for(int frow=0; frow<(grid->NROW_FORCE - 1); frow++){
+      		    if((grid->lat_VIC[crow]>=grid->lat_FORCE[frow+1]) && (grid->lat_VIC[crow]<grid->lat_FORCE[(frow)])){
+                  grid->lat_VIC_Force[crow] =  (double)frow;//grid->lat_FORCE[frow];
+                  //printf("lat VIC %f, lat FORCE +1 %f, lat FORCE %f lat_VIC_Force %d \n", grid->lat_VIC[crow], grid->lat_FORCE[frow+1], grid->lat_FORCE[(frow)], frow);
+               }
+          }
+       }
+        //find col index within VIC domain to match with each FORCE cell
+       	for (ccol=0; ccol<grid->NCOL_VIC; ccol++){
+            for(int fcol=0; fcol<(grid->NCOL_FORCE - 1); fcol++){
+      		    if((grid->lon_VIC[ccol]>=grid->lon_FORCE[fcol]) && (grid->lon_VIC[ccol]<grid->lon_FORCE[(fcol+1)])){
+                grid->lon_VIC_Force[ccol] =  (double)fcol; //grid->lon_FORCE[fcol];
+                //printf("lon VIC %f, lon FORCE +1 %f, lon FORCE %f lon_VIC_Force %d \n", grid->lon_VIC[ccol], grid->lon_FORCE[fcol+1], grid->lon_FORCE[(fcol)], fcol);
+             }
+           }
+       }
+
+    }
+    debug = 0;
+    
+    /************************ end GRID code ************************/
   	cts=-1; //counter for time series	
 	
     // loop over all timesteps
@@ -470,6 +593,7 @@ main(int    argc,
 		
 		// read forcing data
 	        timer_continue(&(global_timers[TIMER_VIC_FORCE]));
+   printf("before vic force is called \n");
 		vic_force();
 		if (debug == 1){
 			printf("vic_force has been called %d \n", mpi_rank);

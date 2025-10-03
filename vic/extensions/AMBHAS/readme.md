@@ -1,17 +1,18 @@
-# VIC-AMBHAS User Manual
+VIC-AMBHAS-GRID User Manual
 
 ## Introduction
 
-This documents describes the input files for the coupled VIC-AMBHAS model. AMBHAS is a 2D lateral groundwater model and is built into the image version of VIC 5.0.1. VIC calculates a groundwater recharge as a function of soil moisture and water table depth and passes this into AMBHAS. AMBHAS calculates lateral groundwater flow, groundwater baseflow and interacts with the land surface. AMBHAS feeds back the water table depth and groundwater baseflow to VIC. There is also an option of abstracting groundwater from the aquifer, specified through model input. The model can be run in a dynamic steady state, using one year of forcing data or as time-variant. 
-This version of VIC will only work as the coupled version of VIC-AMBHAS, and only with the image version of VIC.
+This documents describes the input files for the coupled VIC-AMBHAS-GRID model. AMBHAS is a 2D lateral groundwater model and is built into the image version of VIC 5.0.1. VIC calculates a groundwater recharge as a function of soil moisture and water table depth and passes this into AMBHAS. AMBHAS calculates lateral groundwater flow, groundwater baseflow and interacts with the land surface. AMBHAS feeds back the water table depth and groundwater baseflow to VIC. There is also an option of abstracting groundwater from the aquifer, specified through model input. The model can be run in a dynamic steady state, using one year of forcing data or as time-variant. 
+This version of VIC will only work as the coupled version of VIC-AMBHAS-GRID, and only with the image version of VIC.
 To run the standard version of VIC without the addition of groundwater, please use the version directly from the VIC repository: https://github.com/UW-Hydro/VIC.
 If you make use of this model, please acknowledge Scheidegger et al., 2021 (https://doi.org/10.3390/w13050663), and the VIC papers: Hamman et al., 2018 (DOI:10.5194/gmd-11-3481-2018) and Liang et al., 1994 (http://dx.doi.org/10.1029/94jd00483).
+This version of VIC-AMBHAS-GRID can be used with a different resolution for the meteorological forcing data than the model files. For large models with a fine grid resolution, the forcing data can become very large. Since climate data are often at a lower resolution, e.g. 0.25 degrees, with the GRID version, the resolution of these can remain unchanged. For each model cell, the addition of the GRID module will find the coresponding cell in the forcing files.
 
 ## Preparation of input files
 
 ### VIC input files
 
-The VIC model inputs consists of a global parameter file, meteorological forcing files, a parameter file and a domain file.  The global parameter file is the main input file and points to the location of the parameter, forcing and domain files, as well as setting model timings and output options. The meteorological forcing file, parameter file and domain file are spatially distributed files in netcdf format. Description, structure and format of each of them is described in the VIC image driver documentation (https://vic.readthedocs.io/en/master/Documentation/Drivers/Image/Inputs/). 
+The VIC model inputs consists of a global parameter file, meteorological forcing files, a parameter file and a domain file.  The global parameter file is the main input file and points to the location of the parameter, forcing and domain files, as well as setting model timings and output options. The meteorological forcing file, parameter file and domain file are spatially distributed files in netcdf format. With the GRID module, the forcing files can have a different spatial resolution than the model. Description, structure and format of each of them is described in the VIC image driver documentation (https://vic.readthedocs.io/en/master/Documentation/Drivers/Image/Inputs/). 
 The input files for the coupled VIC-AMBHAS describing the land surface, model domain, and forcing are unaltered from the original VIC input files. However, since the baseflow formulation in VIC is replaced with the groundwater recharge calculation, the parameters Ds, Dsmax, Ws and c are not used in the model, but dummy values need to be set.
 
 ### AMBHAS input files
@@ -95,6 +96,9 @@ The first string of the input file of each line specifies the parameter, followe
   
 16. The maximum recharge from the soil to the aquifer is limited to a fraction of total available water in the layer the water table is interaction with for one time step. This improves stability within the model when the water table is close to the soil layer. Usually, values between 0.01 and 0.1 work.
 
+17. GRID_FLAG to define if the climate forcing has a different resolution than the model files
+
+
 
 
 Example file: gw_global_parameters.dat
@@ -133,6 +137,8 @@ VARIABLE_SY 1
 
 MAX_RECHARGE_FRACTION 0.01
 
+GRID_FLAG 1
+
 
 ---Comment below here---
 
@@ -153,6 +159,7 @@ MAX_RECHARGE_FRACTION 0.01
 14. Stress period for which one pumping is valid, has to be a multiple of DT
 15. 1: Sy has one value in the soil and one in the aquifer. Depth of the soil and Sy_soil are read in in the gw_data.nc file
 16. The maximum recharge from the soil to the aquifer is limited to a fraction of total available water in the layer the water table is interaction with for one time step. This improves stability within the model.
+17.0 GRID_FLAG  0: the forcing file is same as model domain, 1: the forcing files have a different grid to the domain
 
 
 #### Observation boreholes
@@ -263,5 +270,74 @@ It is important that the folder structure relative to the folder from which VIC 
 -	../AMBHAS_OUT: AMBHAS head files and observational data are written into here
 
 
+### GRID input files
 
+The input files for the grid module consist of:
+- grid global parameter file
 
+- Forcing cell numbers
+
+- VIC cell numbers
+
+### Grid global parameter file
+This file specifies the filenames of the VIC cell dimensions and the FORCING cell dimensions, the number of rows and columns of each, the cell size, the x origin and y origin.
+
+The file is structured as follows, line by line:
+
+1. file name of VIC cells
+2. file name of Forcing cells
+3. Number of rows of VIC cells
+4. Number of cols of VIC cells
+5. cell size in lat of VIC cells
+6. cell size in lon of VIC cells
+7. x origin of VIC cells
+8. y origin of VIC cells
+9. Number of rows of FORCE cells
+10. Number of cols of FORCE cells
+11. cell size in lat of FORCE cells
+12. cell size in lon of FORCE cells
+13. x origin of FORCE cells
+14. y origin of FORCE cells
+
+example file grid_global_params.dat
+VIC_DOMAIN_NAME VIC_CellNoIndus_2kmPlain.nc
+FORCE_DOMAIN_NAME Force_CellIndus_2kmPlain.nc
+FORCE_DATA Force_CellIndus_2kmPlain.nc
+NROW_VIC 581
+NCOL_VIC  638
+DLAT_VIC  0.01666667
+DLON_VIC  0.01666667
+x_origin_VIC 67.04167 
+y_origin_VIC 23.475 
+NROW_FORCE 57
+NCOL_FORCE 81
+DLAT_FORCE 0.25
+DLON_FORCE 0.25
+x_origin_FORCE 63.875
+y_origin_FORCE 22.875
+
+---Comment below here---
+1. file name of VIC cells
+2. file name of Forcing cells
+3. Number of rows of VIC cells
+4. Number of cols of VIC cells
+5. cell size in lat of VIC cells
+6. cell size in lon of VIC cells
+7. x origin of VIC cells
+8. y origin of VIC cells
+9. Number of rows of FORCE cells
+10. Number of cols of FORCE cells
+11. cell size in lat of FORCE cells
+12. cell size in lon of FORCE cells
+13. x origin of FORCE cells
+14. y origin of FORCE cells
+
+### Forcing cell numbers
+This is a netcdf file that numbers each cell of the forcing grid from 1:ncellForce, where ncellForce is the number of grid cells in the climate forcing data. The dimensions are "Lat" and "Lon".
+The data for each cell required is:
+- cell [-]: numbering from 1:ncellForce 
+
+### VIC cell numbers
+This is a netcdf file that maps the forcing cell number onto the VIC grid. The forcing cells are resampled onto the VIC grid using the nearest neighbour method. The dimensions are "Lat" and "Lon".
+The data for each cell required is:
+- cell [-]: numbering from 1:ncellForce 

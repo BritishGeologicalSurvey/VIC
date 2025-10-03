@@ -25,7 +25,7 @@
  *****************************************************************************/
 
 #include <vic_driver_shared_image.h>
-
+#include <Grid_global_vars.h>
 
 /******************************************************************************
 * @brief   Print MPI Error String to LOG_DEST, this function is used by loggers
@@ -2166,17 +2166,105 @@ get_scatter_nc_field_double(nameid_struct *nc_nameid,
     extern domain_struct global_domain;
     extern int           mpi_rank;
     double              *dvar = NULL;
+    double              *dvarForce = NULL;
+    extern int GRID_FLAG;
+    extern grid_data_struct grid_data;
+    int count_VIC, crow, ccol, countForce;
+
+    
+
 
     // Read variable from netcdf
     if (mpi_rank == VIC_MPI_ROOT) {
-        dvar = malloc(global_domain.ncells_total * sizeof(*dvar));
-        check_alloc_status(dvar, "Memory allocation error.");
+        if (GRID_FLAG==0){
+            dvar = malloc(global_domain.ncells_total * sizeof(*dvar));
+            check_alloc_status(dvar, "Memory allocation error.");
+            get_nc_field_double(nc_nameid, var_name, start, count, dvar);
+        }
+        if (GRID_FLAG==1){
+   	        size_t     d3countFORCE[3];
+            size_t     d3startFORCE[3];
+            
+            d3countFORCE[0] = 1;
+            d3countFORCE[1] = grid_data.NROW_FORCE; //check
+            d3countFORCE[2] = grid_data.NCOL_FORCE;
+            
+           // d3startFORCE[1] = 0;
+            //d3startFORCE[2] = 0;
+            //d3startFORCE[0] = start[0]*grid_data.NROW_FORCE*grid_data.NCOL_FORCE/global_domain.ncells_total;
+            
+            //the above might be wrong - check this here!!!!
+            d3startFORCE[0] = start[0]/4; //divide by 4 when using daily forcing data - read this in !!
+            d3startFORCE[1] = start[1];
+            d3startFORCE[2] = start[2];
+            
+            printf("startVIC [0] %d [1] %d [2] %d \n", start[0], start[1], start[2]);
+            printf("startFORCE [0] %d [1] %d [2] %d \n", d3startFORCE[0], d3startFORCE[1], d3startFORCE[2]);
+            printf("countVIC [0] %d [1] %d [2] %d \n", count[0], count[1], count[2]);
+            printf("countFORCE [0] %d [1] %d [2] %d \n", d3countFORCE[0], d3countFORCE[1], d3countFORCE[2]);
+            
+            printf("start %d count %d ncell VIC %d, ncell FORCE %d \n", *start, *count, global_domain.ncells_total,grid_data.NROW_FORCE*grid_data.NCOL_FORCE );
+            printf("starting grid in get_scatter_nc_field_double \n");
+            printf("grid_data NROW_FORCE %d , NCOL_FORCE %d \n", grid_data.NROW_FORCE, grid_data.NCOL_FORCE);
+            printf("grid_data NROW_VIC %d , NCOL_VIC %d \n", grid_data.NROW_VIC, grid_data.NCOL_VIC);
+            dvarForce = malloc(grid_data.NROW_FORCE*grid_data.NCOL_FORCE * sizeof(*dvarForce));
+            printf("allocated memory for dvarForce in get_scatter_nc_field_double \n");
+            check_alloc_status(dvarForce, "Memory allocation error.");
+            dvar = malloc(grid_data.NROW_VIC*grid_data.NCOL_VIC * sizeof(*dvar));
+            printf("allocated dvar and dvarForce in get_scatter_nc_field_double \n");
+            check_alloc_status(dvar, "Memory allocation error.");
 
-        get_nc_field_double(nc_nameid, var_name, start, count, dvar);
+            
+
+
+            get_nc_field_double(nc_nameid, var_name, d3startFORCE, d3countFORCE, dvarForce);
+            printf("called get_nc_field_double \n");
+            
+            /*for (countForce = 0; countForce < grid_data.NROW_FORCE*grid_data.NCOL_FORCE; countForce ++){
+                printf("countForce %d, dvarForce %f \n", countForce, dvarForce[countForce]);
+            }*/
+            
+            //do the grid thing to get force grid onto model grid - this is too early, there is nothing in dvar yet
+
+
+           /* for (count_VIC = 0; count_VIC < global_domain.ncells_total; count_VIC ++){
+                //crow = (int)count_VIC/grid_data.NCOL_VIC;
+                //ccol = (int)count_VIC%grid_data.NCOL_VIC; 
+                
+                crow =  (int)count_VIC/grid_data.NROW_VIC;//grid_data.NROW_VIC -
+                ccol = (int)count_VIC%grid_data.NROW_VIC; 
+                
+                //countForce = (int)grid_data.cell_no_VIC[count_VIC] - 1;//is wront!!
+                
+                //dvar[count_VIC] = dvarForce[(int)grid_data.cell_no_VIC[crow][ccol]-1]; //not sure this works - need to check this
+                dvar[count_VIC]=1.0;
+                printf("count_VIC %d, nrow %d ncol %d dvarForce %f count_FORCE %d  lat_force %d lon_force %d\n", count_VIC, crow, ccol, dvar[count_VIC], (int)grid_data.cell_no_VIC[crow][ccol]-1,  (int)grid_data.lat_VIC_Force[crow], (int)grid_data.lon_VIC_Force[ccol]);
+
+            }*/
+           
+
+
+                for(crow = 0; crow < grid_data.NROW_VIC; crow++){  
+                    for(ccol = 0; ccol < grid_data.NCOL_VIC; ccol++){              
+                        count_VIC = crow * grid_data.NCOL_VIC + ccol;
+                        countForce = grid_data.lat_VIC_Force[crow]*grid_data.NCOL_FORCE + grid_data.lon_VIC_Force[ccol];
+                        dvar[(int)count_VIC] = dvarForce[(int)countForce];
+                    
+                        //printf("crow VIC %d, ccol VIC %d, count VIC %d, count Force %d, dvar %f prev crow %d, prev ccol %d \n", crow, ccol, count_VIC, countForce,dvar[(int)count_VIC], (int)count_VIC/grid_data.NROW_VIC, (int)count_VIC%grid_data.NROW_VIC);
+                
+                
+                }
+            }
+            printf("looped over each VIC cell to assign dvar from dvarForce in get_scatter_nc_field_double \n");
+        }
+
+
+        
     }
 
     // Scatter results to nodes
     scatter_field_double(dvar, var);
+    printf("called scatter_field_double");
 }
 
 /******************************************************************************

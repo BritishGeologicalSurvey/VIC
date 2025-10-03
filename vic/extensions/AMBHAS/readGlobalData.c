@@ -68,6 +68,7 @@ int readGlobalData(gw_global_data_struct *g, gw_data_struct *d){
 
  	fscanf(fp, " %s %d",name, (&g->VARIABLE_SY));
  	fscanf(fp, " %s %f",name, (&g->MAX_RECHARGE_FRACTION));
+  fscanf(fp, " %s %d",name, (&g->GRID_FLAG));
 
 	fclose(fp);
 

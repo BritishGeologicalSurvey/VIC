@@ -44,6 +44,9 @@ EXTPATH = ../../extensions
 # AMBHAS PATH
 AMBHASPATH=../../extensions/AMBHAS
 
+# GRID PATH
+GRIDPATH=../../extensions/GRID
+
 # Set the routing model extension
 # | Level      | Value                              |
 # |----------  |---------------------------------   |
@@ -88,6 +91,7 @@ INCLUDES = -I ${DRIVERPATH}/include \
 		   -I ${SHAREDPATH}/include \
 		   -I ${SHAREDIMAGEPATH}/include \
 		   -I ${EXTPATH}/${ROUT}/include \
+		   -I ${GRIDPATH}\
 		   -I ${AMBHASPATH}		
 # Uncomment to include debugging information
 CFLAGS  =  ${INCLUDES} ${NC_CFLAGS}  -ggdb -O0 -Wall -Wextra -std=c99 -Wl,--allow-multiple-definition\
@@ -118,6 +122,7 @@ HDRS = \
 	$(wildcard ${SHAREDPATH}/include/*.h) \
 	$(wildcard ${SHAREDIMAGEPATH}/include/*.h) \
 	$(wildcard ${EXTPATH}/${ROUT}/include/*.h) \
+ 	$(wildcard ${GRIDPATH}/*.h) \
 	$(wildcard ${AMBHASPATH}/*.h)
  
 SRCS = \
@@ -126,6 +131,7 @@ SRCS = \
 	$(wildcard ${SHAREDPATH}/src/*.c) \
 	$(wildcard ${SHAREDIMAGEPATH}/src/*.c) \
 	$(wildcard ${EXTPATH}/${ROUT}/src/*.c) \
+  $(wildcard ${GRIDPATH}/*.c)\
 	$(wildcard ${AMBHASPATH}/*.c)
  
 OBJS = $(SRCS:%.o=%.c)

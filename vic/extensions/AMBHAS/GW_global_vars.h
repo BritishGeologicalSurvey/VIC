@@ -29,6 +29,7 @@
 		char gwname[100]; //Filename of groundwater parameter file
 		int VARIABLE_SY;//flag wether Sy has a different value in the soil
 		float MAX_RECHARGE_FRACTION; //fraction of total available moisture in the soil layer the water table is in interaction with that can recharge the aquifer in one time step 
+    int GRID_FLAG; // flag to indicate if a different grid is read in or not. 0: no different grid, 1: different grid for forcing files
 	} gw_global_data_struct;
 
 
