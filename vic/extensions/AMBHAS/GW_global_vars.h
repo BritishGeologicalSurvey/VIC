@@ -80,7 +80,7 @@
 		double **Sy;//updated sy for each time step
 		double **h; //m
 		double **hini; //m h at the beginning of the time step
-		double **baseflow; //m3 per iteration
+		double **baseflow; //m3 per day
 		double **baseflowTotal; //m3 per time step
 		double **leakage; //m3 per iteration
 		double **leakageTotal; //m3 per time step

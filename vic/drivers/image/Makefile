@@ -90,7 +90,7 @@ INCLUDES = -I ${DRIVERPATH}/include \
 		   -I ${EXTPATH}/${ROUT}/include \
 		   -I ${AMBHASPATH}		
 # Uncomment to include debugging information
-CFLAGS  =  ${INCLUDES} ${NC_CFLAGS} -ggdb -O0 -Wall -Wextra -std=c99 \
+CFLAGS  =  ${INCLUDES} ${NC_CFLAGS}  -ggdb -O0 -Wall -Wextra -std=c99 -Wl,--allow-multiple-definition\
 					 -fopenmp \
 					 -DLOG_LVL=$(LOG_LVL) \
 					 -DGIT_VERSION=\"$(GIT_VERSION)\" \

@@ -209,19 +209,22 @@ float calculateGwFlow(const gw_global_data_struct *g, const gw_data_struct *d, g
 
 					//aquifer to river: influent h>zriver
 					if(p->h[crow][ccol]>=d->zriver[crow][ccol]) {
-							p->baseflow[crow][ccol]=p->Sy[crow][ccol]*d->C_in[crow][ccol]*
+							//p->baseflow[crow][ccol]=p->Sy[crow][ccol]*d->C_in[crow][ccol]*
+             p->baseflow[crow][ccol]=d->C_in[crow][ccol]*
 						d->river_area[crow][ccol]*(p->h[crow][ccol]-d->zriver[crow][ccol]); 
 					}
 					//river to aquifer: effluent h<zriver-driver
 					else if(p->h[crow][ccol]<=(d->zriver[crow][ccol]-d->driver[crow][ccol])){
-							p->baseflow[crow][ccol]=p->Sy[crow][ccol]*d->C_eff[crow][ccol]*
+							//p->baseflow[crow][ccol]=p->Sy[crow][ccol]*d->C_eff[crow][ccol]*
+							p->baseflow[crow][ccol]=d->C_eff[crow][ccol]*
 						d->river_area[crow][ccol]*(-d->driver[crow][ccol]);
 					}
 
 					//river to aquifer: effluent h>base of river bed (zriver-driver) and h <zriver
 					else if((p->h[crow][ccol]>(d->zriver[crow][ccol]-d->driver[crow][ccol]))&&
 						(p->h[crow][ccol]<d->zriver[crow][ccol])){
-							p->baseflow[crow][ccol]=p->Sy[crow][ccol]*d->C_eff[crow][ccol]*
+							//p->baseflow[crow][ccol]=p->Sy[crow][ccol]*d->C_eff[crow][ccol]*
+              p->baseflow[crow][ccol]=d->C_eff[crow][ccol]*
 						d->river_area[crow][ccol]*( p->h[crow][ccol]-d->zriver[crow][ccol]);
 					}
 				}
